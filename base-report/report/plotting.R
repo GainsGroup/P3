@@ -1,7 +1,6 @@
 library(ggplot2)
 library(ggrepel)
 library(dplyr)
-library(civis.deckR)
 library(extrafont)
 library(reshape2)
 library(png)
