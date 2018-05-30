@@ -1,6 +1,5 @@
 library(ggplot2)
 library(dplyr)
-library(civis.deckR)
 library(extrafont)
 
 loadfonts()
