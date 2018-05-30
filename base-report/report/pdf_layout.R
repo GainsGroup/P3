@@ -1,7 +1,6 @@
 
 library(ggplot2)
 library(dplyr)
-library(civis.deckR)
 library(civis)
 library(extrafont)
 library(gridExtra)
