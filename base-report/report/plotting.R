@@ -41,10 +41,10 @@ get_athl_cluster_data <- function(playername,date) {
     ,avg(ecc_rel_ff) as ecc_rel_ff
     ,avg(conc_rel_ff) as conc_rel_ff
     ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-    ,avg(slaveragelateralrfd) as slaveragelateralrfd
+    ,avg(lateralforceleftbw) as slaveragelateralrfd
     ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
     ,avg(slmaxhipabduction) as slmaxhipabduction
-    ,avg(sraveragelateralrfd) as sraveragelateralrfd
+    ,avg(lateralforcerightbw) as sraveragelateralrfd
     ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
     ,avg(srmaxhipabduction) as srmaxhipabduction
     from public.spider_plot_data
@@ -58,10 +58,10 @@ get_athl_cluster_data <- function(playername,date) {
       ,avg(ecc_rel_ff) as ecc_rel_ff
       ,avg(conc_rel_ff) as conc_rel_ff
       ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-      ,avg(slaveragelateralrfd) as slaveragelateralrfd
+      ,avg(lateralforceleftbw) as slaveragelateralrfd
       ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
       ,avg(slmaxhipabduction) as slmaxhipabduction
-      ,avg(sraveragelateralrfd) as sraveragelateralrfd
+      ,avg(lateralforcerightbw) as sraveragelateralrfd
       ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
       ,avg(srmaxhipabduction) as srmaxhipabduction
     from public.spider_plot_data
