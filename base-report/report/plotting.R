@@ -685,7 +685,7 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
                  size=0.1) +   # Draw dashed lines
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
-         subtitle="Percent Rank (NBA Players)") +
+         subtitle="Percent Rank(NBA)") +
     scale_colour_manual(values=c("FALSE"=dkred,"TRUE"=dkgrey)) +
     theme_p3() +
     coord_flip() +
