@@ -44,7 +44,7 @@ accel_subtitle_2 <- "The graph below contains a series of metrics related to the
 intro <- Sys.getenv("INTRO")
 page_2_detail <- Sys.getenv("PAGE_2_DETAIL")
 training_recs <- Sys.getenv("TRAINING_RECS")
-covertitle <- paste("P3 - NBA Combine Report - ", playername, sep = "")
+covertitle <- "P3 - NBA Combine Report"
 
 ################
 ## LOAD DATA  ##
