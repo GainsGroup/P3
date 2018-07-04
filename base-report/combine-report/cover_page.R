@@ -80,3 +80,18 @@ preamble_text2 <-
 preamble_text3 <- 
   "This information from the 2018 NBA Draft Combine is not shared with NBA teams or third parties, but instead is distributed only to the NBA League Office and to the players, who are then free to share this information with their team, agents, or other support staff as they see fit"
 
+############################
+##### FOR THE GLOSSARY######
+############################
+get_glossary <- function(){
+  being_img <-
+    rasterGrob(readPNG("pdfimg.png"))
+  
+  fig <- ggplot() +
+    annotation_custom(being_img)+
+    scale_colour_manual(values = c(dkred, blue)) +
+    guides(colour = FALSE, size = FALSE) +
+    theme_p3_fig()
+  
+}
+  
