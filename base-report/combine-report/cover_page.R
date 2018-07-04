@@ -67,6 +67,12 @@ title_height_coverpage = .6
 #### TESTING #####
 ##################
 
+width = 8.5 # page width in inches
+height = 11 # page height in inches
+ncols = 24 # number of cols for content
+nrows = 25 # number of rows for content
+margins = c(.75,.4,.75,.75) # top, right, bottom, left margin
+
 
 grid_cover <- get_grid(width, height, ncols, nrows, title_height_coverpage, margins)
 
