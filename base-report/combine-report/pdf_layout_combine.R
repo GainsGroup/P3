@@ -9,9 +9,11 @@ library(ReporteRs)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('report/themes.R')
-source('report/draw_objects.R')
-source('report/plotting.R')
+source('combine-report/themes.R')
+source('combine-report/draw_objects.R')
+source('combine-report/plotting.R')
+source('combine-report/coverpage.R')
+
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
