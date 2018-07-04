@@ -12,7 +12,7 @@ library(RGraphics)
 source('combine-report/themes.R')
 source('combine-report/draw_objects.R')
 source('combine-report/plotting_combine.R')
-source('combine-report/coverpage.R')
+source('combine-report/cover_page.R')
 
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
