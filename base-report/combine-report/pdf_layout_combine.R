@@ -11,7 +11,7 @@ library(grImport)
 library(RGraphics)
 source('combine-report/themes.R')
 source('combine-report/draw_objects.R')
-source('combine-report/plotting.R')
+source('combine-report/plotting_combine.R')
 source('combine-report/coverpage.R')
 
 
