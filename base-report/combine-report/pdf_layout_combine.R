@@ -42,6 +42,7 @@ accel_subtitle_2 <- "The graph below contains a series of metrics related to the
 intro <- Sys.getenv("INTRO")
 page_2_detail <- Sys.getenv("PAGE_2_DETAIL")
 training_recs <- Sys.getenv("TRAINING_RECS")
+covertitle <- paste("P3 - NBA Combine Report - ", playername, sep = "")
 
 ################
 ## LOAD DATA  ##
@@ -97,6 +98,18 @@ pdf(
   width = width,
   height = height
 )
+
+
+##########
+## COVER##
+##########
+newpage(grid_cover)
+
+print(drawtitle(covertitle), vp = vplayout(2, 3:25))
+print(get_logo(), vp = vplayout(3:8, 9:18))
+print(draw_preamble(preamble_text1), vp = vplayout(10:15,3:24))
+print(draw_preamble(preamble_text2), vp = vplayout(16:21,3:24))
+print(draw_preamble(preamble_text3), vp = vplayout(23:26,3:24))
 
 ###########
 ## PAGE 1##
@@ -185,6 +198,15 @@ print(dot_plot5, vp = vplayout(18:24, 17:26))
 
 ## ROW 7-8 LEFT: training targets and cluster plots
 print(drawtext(training_recs, 'Training Targets', header = FALSE), vp = vplayout(26:28, 2:11))
+
+##############
+## GLOSSARY###
+##############
+
+newpage(grid)
+
+print(get_glossary(), vp=vplayout(1:26,1:26))
+
 
 dev.off()
 
