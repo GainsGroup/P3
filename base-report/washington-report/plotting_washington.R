@@ -350,7 +350,7 @@ get_history <- function(playername,date) {
   hist_sql <- paste("select * from public.page_1_player_history
                            where name = '",playername,"' order by assessmentdate::date desc nulls last limit 2;",sep="")
   hist <- read_civis(sql(hist_sql),"P3")
-  hist <- hist[,7:11]
+  hist <- hist[,3:7]
   hist <- data.frame(t(hist))
   metric <- factor(c("delta_vert",
               "delta_drop",
