@@ -91,7 +91,7 @@ preamble_text3 <-
 ############################
 get_glossary <- function(){
   being_img <-
-    rasterGrob(readPNG("pdfimg.png"))
+    rasterGrob(readPNG("p3_glossary_updated.png"))
   
   fig <- ggplot() +
     annotation_custom(being_img)+
