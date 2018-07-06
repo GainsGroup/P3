@@ -113,7 +113,7 @@ get_athl_cluster_data <- function(playername,date) {
   cluster_radar$metric <- cluster_radar$label
   cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Vert Knee Ext. Velocity"
                                                                  ,"Rel. Conc. Force"
-                                                                 ,"Ecc Rel FF"
+                                                                 ,"Rel. Ecc. Force"
                                                                  ,"Lateral Drive (R)"
                                                                  ,"Hip Extension Velocity (R)"
                                                                  ,"Peak Hip Abduction (R)"
@@ -388,7 +388,7 @@ get_percentiles_page_2 <- function(playername, date) {
   full_table <- read_civis(sql(percentile_sql),"P3")
   values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
   percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
-  label <- c("Net Impact 1","Net Impact 2(L)","Net Impact 2(R)","Rel. Conc. Force","Knee Ext Velocity","Knee Ext Accel","Load Rel. FF","Ankle Ext Accel","Knee Ext Velocity","Knee Ext Accel","L - Load Rel. FF ","R - Load Rel FF","L - Lateral Drive","L - Hip Ext. Velocity","L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction","Net Rel. Conc Force")
+  label <- c("Net Impact 1","Net Impact 2(L)","Net Impact 2(R)","Rel. Conc. Force","Knee Ext Velocity","Knee Ext Accel","Rel. Ecc. Force","Ankle Ext Accel","Knee Ext Velocity","Knee Ext Accel","L - Load Rel. FF ","R - Load Rel FF","L - Lateral Drive","L - Hip Ext. Velocity","L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction","Net Rel. Conc Force")
   percentile_labels <- data.frame(values,percentiles,label)
   athlete_percentiles <- full_table[,3:length(full_table)]
   athlete_percentiles <- data.frame(t(athlete_percentiles))
@@ -414,7 +414,7 @@ get_percentiles_page_2 <- function(playername, date) {
                                              ,"Net Impact 2(R)"
                                              ,"Net Rel. Conc Force"
                                              ,"Rel. Conc. Force"
-                                             ,"Load Rel. FF"
+                                             ,"Rel. Ecc. Force"
                                              ,"Ankle Ext Accel"
                                              ,"L - Lateral Drive"
                                              ,"L - Hip Abduction"
