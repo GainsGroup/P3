@@ -98,7 +98,7 @@ get_athl_cluster_data <- function(playername,date) {
   label <- c("Net Impact 1"
              ,"Drop Knee Ext. Velocity"
              ,"Concentric Force"
-             ,"Ecc Rel FF"
+             ,"Rel. Ecc. Force"
              ,"Rel. Conc. Force"
              ,"Vert Knee Ext. Velocity"
              ,"Lateral Drive (L)"
