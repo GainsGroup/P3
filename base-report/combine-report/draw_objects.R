@@ -77,7 +77,7 @@ drawtable <- function(df, fill_col = NULL, fill = dkgrey, width=NULL) {
     col_index <- grep(fill_col, colnames(df))
     color_func <- colorRampPalette(c('white', fill))
     pal <- color_func(100)
-    for (n in 1:nrow(df)) {
+    for (n in 0:nrow(df)) {
       val <- df$Percentile[n]
       print(val)
       fill <- pal[val]
