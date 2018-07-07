@@ -675,6 +675,7 @@ radar_plot <- function(df.rad) {
 }
 
 dot_plot <-  function(overall, type = 'lateral',title='Graph') {
+  print("Retrieving dotplot")
   df <- overall %>% filter_(paste0('type == "', type, '"'))
   ggplot(df, aes(x=label, y=percentile)) +
     geom_point(aes(col=pos), size=4) +   # Draw points
