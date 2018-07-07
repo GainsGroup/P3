@@ -74,11 +74,19 @@ dot_plot8 <- dot_plot(history,type='current',title='Raw Performance Numbers')
 accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
 cluster_scatter <- graph_page_2_2x2(playername,date)
 radar_plot_athl <- radar_plot(cluster_athl) 
+print("Made it to the dot plots")
 dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
+print("Made it past low back")
 dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
+print("Made it past left knee")
 dot_plot3 <- dot_plot_right(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
+print("Made it past right knee")
 dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
+print("Made it past left foot")
 dot_plot5 <- dot_plot_right(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
+
+print("Made it past them all")
+
 
 
 ################
