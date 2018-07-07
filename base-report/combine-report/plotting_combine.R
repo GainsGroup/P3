@@ -649,6 +649,7 @@ acceleration_bars <- function(df,subtitle) {
 }
 
 radar_plot <- function(df.rad) {
+    print("Retrieving Spider Plot Data")
   radar_plot <- ggplot(df.rad, aes(x = metric, y = score/100, color = cluster, group = cluster)) +
     geom_polygon(aes(color = cluster, fill = cluster), alpha = .2) + geom_point(aes(color = cluster)) +
     coord_polar(start=-pi/4) +
