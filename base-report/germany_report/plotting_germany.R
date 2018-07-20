@@ -622,6 +622,20 @@ get_logo <- function(){
     theme_p3_fig()
 }
 
+get_eagle <- function(){
+  being_img <-
+    rasterGrob(readPNG("germany_eagle.png"))
+  
+  fig <- ggplot() +
+    annotation_custom(being_img, -1, 1, -1, 1) +
+    xlim(-.25, .25) +
+    ylim(-1, 1) +
+    scale_colour_manual(values = c(purple, blue)) +
+    guides(colour = FALSE, size = FALSE) +
+    scale_size(range = c(5, 8)) +
+    theme_p3_fig()
+}
+
 history_plot <- function(history) {
   ggplot(history, aes(x=label,y=value,group=period,color=period)) +
     geom_point(aes(col=period), size=4) +

@@ -10,9 +10,9 @@ library(ReporteRs)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('washington-report/themes_washington.R')
-source('washington-report/draw_objects_washington.R')
-source('washington-report/plotting_washington.R')
+source('germany-report/themes_germany.R')
+source('germany-report/draw_objects_germany.R')
+source('germany-report/plotting_germany.R')
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
@@ -113,8 +113,7 @@ print(get_logo(), vp = vplayout(2, 21:23))
 
 ## ROW 3/4: summary text and scores
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
-print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(3:6, 15:19))
-print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(3:6, 20:24))
+print(get_eagle(), vp = vplayout(3:6, 17:21))
 
 ## ROW 5-6: lollipop plot and figure
 print(dot_plot6, vp = vplayout(8:13, 2:12))
@@ -136,7 +135,7 @@ newpage(grid)
 print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 ## ROW 2: page title
 print(drawtext(intro, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(2, 18:22))
+print(get_eagle(), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
 ## ROW 3-6: Table
@@ -166,7 +165,7 @@ print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 
 ## ROW 2: page title
 print(drawtext(intro, 'P3 MECHANICS SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(2, 18:22))
+print(get_eagle(), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
 ## ROW 3-6 LEFT
