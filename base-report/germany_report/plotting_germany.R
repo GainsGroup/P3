@@ -7,13 +7,17 @@ library(png)
 
 loadfonts()
 
+dkred <<- '#b11a21'
 ltred <<- '#e0474c'
 blue <<- '#7acfd6'
 ltgrey <<- '#F0F0F0'
 midgrey <<- '#b4b4b4'
 middkgrey <<- '#969696'
+dkgrey <<- '#656565'
 white <<- '#ffffff'
+yellow <<- "#FFFF66"
 green <<- "#228b22"
+pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
 
 athlete_table <- 'public.page_1_bio_info'
