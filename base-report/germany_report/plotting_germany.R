@@ -565,7 +565,7 @@ summary_plot <- function(overall) {
     scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
     geom_point(
       stat = 'identity',
-      fill = gold,
+      fill = dkgrey,
       size = 10
     )  +
     scale_colour_manual(values=c("FALSE"=dkred,"TRUE"=dkgrey)) +
@@ -674,7 +674,7 @@ radar_plot <- function(df.rad) {
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
-              color=gold,size=2) +
+              color=dkgrey,size=2) +
     theme(
           legend.key = element_blank(),
           legend.position = 'right',
