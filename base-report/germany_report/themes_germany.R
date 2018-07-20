@@ -4,13 +4,13 @@ library(extrafont)
 
 loadfonts()
 
-purple <<- '#4b2e83'
+dkred <<- '#b11a21'
 ltred <<- '#e0474c'
 blue <<- '#7acfd6'
 ltgrey <<- '#F0F0F0'
 dkgrey <<- '#656565'
 white <<- '#ffffff'
-pal <<- c(purple, ltred, blue, ltgrey, dkgrey)
+pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
 
 theme_p3 <- function(base_size = 10,
@@ -231,6 +231,6 @@ p3_table_theme <- function(){
                                   , hjust = 0.5
                                   #, x=.05
                                   ),
-                   bg_params=list(fill=purple))
+                   bg_params=list(fill=dkred))
   )
   return(theme)}
