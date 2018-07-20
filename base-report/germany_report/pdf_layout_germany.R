@@ -113,7 +113,7 @@ print(get_logo(), vp = vplayout(2, 21:23))
 
 ## ROW 3/4: summary text and scores
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
-print(get_eagle(), vp = vplayout(3:6, 17:21))
+print(get_eagle(), vp = vplayout(3:6, 15:19))
 
 ## ROW 5-6: lollipop plot and figure
 print(dot_plot6, vp = vplayout(8:13, 2:12))
