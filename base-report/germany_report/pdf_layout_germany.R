@@ -10,9 +10,9 @@ library(ReporteRs)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('germany-report/themes_germany.R')
-source('germany-report/draw_objects_germany.R')
-source('germany-report/plotting_germany.R')
+source('germany_eport/themes_germany.R')
+source('germany_eport/draw_objects_germany.R')
+source('germany_eport/plotting_germany.R')
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
