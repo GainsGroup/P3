@@ -47,7 +47,7 @@ drawtext <- function(s, title = NULL, header = FALSE) {
       default.units = "npc",
       arrow = NULL,
       name = NULL,
-      gp = gpar(col = purple, lwd = 2),
+      gp = gpar(col = dkred, lwd = 2),
       vp = NULL
     )
     p <-
