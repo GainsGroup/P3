@@ -7,17 +7,13 @@ library(png)
 
 loadfonts()
 
-purple <<- '#4b2e83'
 ltred <<- '#e0474c'
 blue <<- '#7acfd6'
 ltgrey <<- '#F0F0F0'
 midgrey <<- '#b4b4b4'
 middkgrey <<- '#969696'
-gold <<- '#85754d'
 white <<- '#ffffff'
-yellow <<- "#FFFF66"
 green <<- "#228b22"
-pal <<- c(purple, ltred, blue, ltgrey, gold)
 
 
 athlete_table <- 'public.page_1_bio_info'
@@ -262,7 +258,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
           legend.position = 'bottom',
           legend.key = element_rect(linetype = "blank"),
           legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(white, purple, gold)) +
+    scale_fill_manual(values=c(white, dkred, dkgrey)) +
     guides(fill=guide_legend("Position"))
 
 
@@ -350,7 +346,7 @@ get_history <- function(playername,date) {
   hist_sql <- paste("select * from public.page_1_player_history
                            where name = '",playername,"' order by assessmentdate::date desc nulls last limit 2;",sep="")
   hist <- read_civis(sql(hist_sql),"P3")
-  hist <- hist[,3:7]
+  hist <- hist[3:7]
   hist <- data.frame(t(hist))
   metric <- factor(c("delta_vert",
               "delta_drop",
@@ -568,7 +564,7 @@ summary_plot <- function(overall) {
       fill = gold,
       size = 10
     )  +
-    scale_colour_manual(values=c("FALSE"=purple,"TRUE"=gold)) +
+    scale_colour_manual(values=c("FALSE"=dkred,"TRUE"=dkgrey)) +
     geom_text(color = white, size = 3) +
     ylim(0, 100) +
     #scale_alpha_manual(values = c('vertical' = .2, 'horizontal' = .2)) +
@@ -593,7 +589,7 @@ get_fig <- function(playername,date){
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
     color = c(as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   )
-  color_map <- c("red"=purple,"green"=green,"yellow"=yellow)
+  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-1, 1) +
@@ -640,7 +636,7 @@ history_plot <- function(history) {
   ggplot(history, aes(x=label,y=value,group=period,color=period)) +
     geom_point(aes(col=period), size=4) +
     #geom_line(size=2) +
-    scale_color_manual(values=c(purple,gold),labels=c("Current","Previous")) +
+    scale_color_manual(values=c(dkred,dkgrey),labels=c("Current","Previous")) +
     labs(title = "Performance Summary",
          subtitle = "Scores from previous assessments") +
     scale_x_discrete(labels = function(x) str_wrap(x, width = 10)
@@ -656,7 +652,7 @@ acceleration_bars <- function(df,subtitle) {
     geom_bar(stat = 'identity') +
     labs(title="Acceleration / Deceleration",
          subtitle=subtitle) +
-    scale_fill_manual("legend",values = c(purple,gold,purple,gold,purple)) +
+    scale_fill_manual("legend",values = c(dkred,dkgrey,dkred,dkgrey,dkred)) +
     coord_flip() +
     theme_p3() +
     ylim(-100,100)
@@ -667,8 +663,8 @@ radar_plot <- function(df.rad) {
     geom_polygon(aes(color = cluster, fill = cluster), alpha = .2) + geom_point(aes(color = cluster)) +
     coord_polar(start=-pi/4) +
     theme_p3() +
-    scale_color_manual(values=c(gold, purple), guide = FALSE) +
-    scale_fill_manual(values=c(gold, purple), labels = c("Athlete", 'Cluster'), name = NULL) +
+    scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
+    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Cluster'), name = NULL) +
     labs(title="Performance Factor Comparison",
          subtitle="Athlete Relative to Cluster") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
@@ -700,7 +696,7 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="Percent Rank") +
-    scale_colour_manual(values=c("FALSE"=purple,"TRUE"=gold)) +
+    scale_colour_manual(values=c("FALSE"=dkred,"TRUE"=dkgrey)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
@@ -723,7 +719,7 @@ dot_plot_right <-  function(overall, type = 'lateral',title='Graph') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="Percent Rank") +
-    scale_colour_manual(values=c(purple, gold)) +
+    scale_colour_manual(values=c(dkred, dkgrey)) +
     theme_p3() +
     coord_flip() +
     scale_x_discrete(position="top") +
