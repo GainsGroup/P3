@@ -49,7 +49,6 @@ training_recs <- Sys.getenv("TRAINING_RECS")
 ################
 stats_df <- get_stats(playername, date)
 kpis <- get_kpis(playername, date)
-ad1 <- get_accel_decel_1(playername,date)
 ad2 <- get_accel_decel_2(playername,date)
 history <- get_history(playername,date)
 cluster_athl <- get_athl_cluster_data(playername,date)
@@ -67,8 +66,8 @@ mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$mech_score)
 #p <- summary_plot(kpis)
 dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
 dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
+dot_plot8 <- dot_plot(kpis, type = 'performance', title='Raw Performance Factors')
 fig <- get_fig(playername,date)
-dot_plot8 <- dot_plot(history,type='current',title='Raw Performance Numbers')
 accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
 cluster_scatter <- graph_page_2_2x2(playername,date)
 radar_plot_athl <- radar_plot(cluster_athl) 
@@ -109,11 +108,12 @@ print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 3:25))
 
 ## ROW 2: page title
 print(drawtext(intro, pagetitle, header = TRUE), vp = vplayout(2, 3:20))
-print(get_logo(), vp = vplayout(2, 21:23))
 
 ## ROW 3/4: summary text and scores
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
-print(get_eagle(), vp = vplayout(3:6, 15:19))
+print(get_eagle(), vp = vplayout(3:6, 18:20))
+print(get_logo(), vp = vplayout(2, 21:23))
+
 
 ## ROW 5-6: lollipop plot and figure
 print(dot_plot6, vp = vplayout(8:13, 2:12))
@@ -139,11 +139,13 @@ print(get_eagle(), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
 ## ROW 3-6: Table
-drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
-print(drawtable(drop_jump %>% dplyr::rename("Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(3:10, 2:11), newpage=FALSE)
+drop_jump <- percentiles_page2 %>% filter(test_type=="SL Drop Stance") %>% select(metric, Percentile)
+print(drawtable(drop_jump %>% dplyr::rename("SL Drop Stance"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(3:7, 2:11), newpage=FALSE)
+drop_jump <- percentiles_page2 %>% filter(test_type=="SL Drop Kick") %>% select(metric, Percentile)
+print(drawtable(drop_jump %>% dplyr::rename("SL Drop Kick"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(8:12, 2:11), newpage=FALSE)
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
-print(drawtable(st_vert %>% dplyr::rename("Standing Vert"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(11:18, 2:11), newpage=FALSE)
-skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
+print(drawtable(st_vert %>% dplyr::rename("Standing Vert"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(13:18, 2:11), newpage=FALSE)
+skater <- percentiles_page2 %>% filter(test_type== "Skater") %>% select(metric, Percentile)
 print(drawtable(skater %>% dplyr::rename("Skater"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(19:26, 2:11), newpage=FALSE)
 
 

@@ -20,55 +20,35 @@ green <<- "#228b22"
 pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
 
-athlete_table <- 'public.page_1_bio_info'
+athlete_table <- 'public.soccer_page_1_bio_info'
+
 get_stats <- function(playername, date) {
   print("Retrieving Bio Info")
-  query <- paste("select name as playername, assessmentdate as date, height as playerht, bodyweightkg as playerwt, reach as playerrch from "
+  query <- paste("select name as playername, assessmentdate as date, height as playerht, bwkg as playerwt from "
         ,athlete_table, " where \"name\" = '",playername,
                  "' and assessmentdate = '",date, "'",sep="")
   stats_df <- read_civis(sql(query),'P3')
-  colnames(stats_df) <- c("Name","Date","Height","Weight","Reach")
+  colnames(stats_df) <- c("Name","Date","Height","Weight")
   return(stats_df)
-}
+}   ### UPDATED 
 
 
 get_athl_cluster_data <- function(playername,date) {
   print("Retrieving Athleticism Cluster Data")
-  cluster_athlete_query <- paste("select cluster
-    ,avg(imp_1_avg) as imp_1_avg
-    ,avg(conc_raw_avg) as conc_raw_avg
-    ,avg(dropmaxkneeextensionvelocityavg) as dropmaxkneeextensionvelocityavg
-    ,avg(ecc_rel_ff) as ecc_rel_ff
-    ,avg(conc_rel_ff) as conc_rel_ff
-    ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-    ,avg(slaveragelateralrfd) as slaveragelateralrfd
-    ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
-    ,avg(slmaxhipabduction) as slmaxhipabduction
-    ,avg(sraveragelateralrfd) as sraveragelateralrfd
-    ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
-    ,avg(srmaxhipabduction) as srmaxhipabduction
-    from public.spider_plot_data
-    where name = '",playername,"' and assessmentdate = '",date,"' group by 1",sep="")
+  cluster_athlete_query <- paste("select *
+    from public.soccer_spider_plot_data
+    where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
 
   cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
-  cluster_athlete$cluster
-  cluster_avg_sql <- paste("select avg(imp_1_avg) as imp_1_avg
-      ,avg(conc_raw_avg) as conc_raw_avg
-      ,avg(dropmaxkneeextensionvelocityavg) as dropmaxkneeextensionvelocityavg
-      ,avg(ecc_rel_ff) as ecc_rel_ff
-      ,avg(conc_rel_ff) as conc_rel_ff
-      ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-      ,avg(slaveragelateralrfd) as slaveragelateralrfd
-      ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
-      ,avg(slmaxhipabduction) as slmaxhipabduction
-      ,avg(sraveragelateralrfd) as sraveragelateralrfd
-      ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
-      ,avg(srmaxhipabduction) as srmaxhipabduction
-    from public.spider_plot_data
-    where cluster = ",cluster_athlete$cluster,sep="")
+
+  cluster_avg_sql <- paste("select *
+    from public.soccer_spider_plot_data
+    where name = 'Joel Ward' and assessmentdate = '2018-06-08'",sep="")
 
   cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
-  cluster_athlete_compare <- cluster_athlete[,-1]
+  
+  cluster_avg <- cluster_avg[,-c(1:2)]
+  cluster_athlete_compare <- cluster_athlete[,-c(1:2)]
 
   t_athl_compare <- data.frame(t(cluster_athlete_compare))
   t_athl_compare <- add_rownames(t_athl_compare,"metric")
@@ -78,165 +58,62 @@ get_athl_cluster_data <- function(playername,date) {
   t_cluster_avg <- data.frame(t(cluster_avg))
   t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
   colnames(t_cluster_avg) <- c("metric","score")
-  t_cluster_avg$cluster <- 'cluster'
+  t_cluster_avg$cluster <- 'comparison'
   t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
   cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
 
-  metric <- c("imp_1_avg"
-              ,"dropmaxkneeextensionvelocityavg"
-              ,"conc_raw_avg"
-              ,"ecc_rel_ff"
-              ,"conc_rel_ff"
-              ,"vertmaxkneeextensionvelocityavg"
-              ,"slaveragelateralrfd"
-              ,"slmaxhipextensionvelocity"
-              ,"slmaxhipabduction"
-              ,"sraveragelateralrfd"
-              ,"srmaxhipextensionvelocity"
-              ,"srmaxhipabduction")
+  metric <- c("avg_total_movement_time",
+              "conc_rel_ff",
+              "ecc_rel_ff",                         
+              "lateralforceleftbw",
+              "lateralforcerightbw",
+              "relativepower",                      
+              "slmaxhipabduction",
+              "slmaxhipextensionvelocity",
+              "srmaxhipabduction",                  
+              "srmaxhipextensionvelocity",
+              "vertmaxkneeextensionaccelerationavg",
+              "vertmaxkneeextensionvelocityavg")
 
-  label <- c("Net Impact 1"
-             ,"Drop Knee Ext. Velocity"
-             ,"Concentric Force"
-             ,"Ecc Rel FF"
+  label <- c("Avg. Total Mvmt. Time"
              ,"Conc Rel FF"
-             ,"Vert Knee Ext. Velocity"
+             ,"Ecc Rel FF"
              ,"Lateral Drive (L)"
-             ,"Hip Extension Velocity (L)"
-             ,"Peak Hip Abduction (L)"
              ,"Lateral Drive (R)"
+             ,"Relative Power"
+             ,"Peak Hip Abduction (L)"
+             ,"Hip Extension Velocity (L)"
+             ,"Peak Hip Abduction (R)"
              ,"Hip Extension Velocity (R)"
-             ,"Peak Hip Abduction (R)")
+             ,"Knee Ext. Accel."
+             ,"Knee Ext. Velocity")
 
   cl <- data.frame(metric,label)
   cluster_radar <- merge(cluster_radar,cl,by="metric")
   cluster_radar$metric <- cluster_radar$label
-  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Vert Knee Ext. Velocity"
+  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Relative Power"
                                                                  ,"Conc Rel FF"
                                                                  ,"Ecc Rel FF"
                                                                  ,"Lateral Drive (R)"
                                                                  ,"Hip Extension Velocity (R)"
                                                                  ,"Peak Hip Abduction (R)"
-                                                                 ,"Net Impact 1"
-                                                                 ,"Concentric Force"
-                                                                 ,"Drop Knee Ext. Velocity"
+                                                                 ,"Knee Ext. Velocity"
+                                                                 ,"Avg. Total Mvmt. Time"
+                                                                 ,"Knee Ext. Accel."
                                                                  ,"Peak Hip Abduction (L)"
                                                                  ,"Hip Extension Velocity (L)"
                                                                  ,"Lateral Drive (L)"))
   cluster_radar <- cluster_radar[order(cluster_radar$metric),]
   return(cluster_radar)
 
-}
+}   ### DONE
 
-get_mech_cluster_data <- function(playername,date) {
-  print("Retrieving Mechanics Cluster Data")
-  cluster_athlete_query <- paste("select cluster
-                                 ,avg(imp2lraw) as imp2lraw
-                                 ,avg(imp2lraw) as imp2rraw
-                                 ,avg(inversionl) as inversionl
-                                 ,avg(inversionr) as inversionr
-                                 ,avg(eversionl) as eversionl
-                                 ,avg(translationl) as translationl
-                                 ,avg(translationr) as translationr
-                                 ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
-                                 ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
-                                 ,avg(droptibialrotationatmaxrelativerotationleft) as dropmaxrelativerotationleft
-                                 ,avg(droptibialrotationatmaxrelativerotationright) as dropmaxrelativerotationright
-                                 ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
-                                 ,avg(dropdeltahip_average) as dropdeltahip_average
-                                 from public.page_3_mech_spider
-                                 where name = '",playername,"' and assessmentdate = '",date,"' group by 1",sep="")
 
-  cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
-  cluster_athlete$cluster
-  cluster_avg_sql <- paste("select avg(imp2lraw) as imp2lraw
-                           ,avg(imp2lraw) as imp2rraw
-                           ,avg(inversionl) as inversionl
-                           ,avg(inversionr) as inversionr
-                           ,avg(eversionl) as eversionl
-                           ,avg(translationl) as translationl
-                           ,avg(translationr) as translationr
-                           ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
-                           ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
-                           ,avg(dropmaxrelativerotationleft) as dropmaxrelativerotationleft
-                           ,avg(dropmaxrelativerotationright) as dropmaxrelativerotationright
-                           ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
-                           ,avg(dropdeltahip_average) as dropdeltahip_average
-                           from public.page_3_mech_spider
-                           where cluster = ",cluster_athlete$cluster,sep="")
-
-  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
-  cluster_athlete_compare <- cluster_athlete[,-1]
-
-  t_athl_compare <- data.frame(t(cluster_athlete_compare))
-  t_athl_compare <- add_rownames(t_athl_compare,"metric")
-  colnames(t_athl_compare) <- c("metric","score")
-  t_athl_compare$cluster <- 'athlete'
-  t_athl_compare <- t_athl_compare[order(t_athl_compare$metric),]
-  t_cluster_avg <- data.frame(t(cluster_avg))
-  t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
-  colnames(t_cluster_avg) <- c("metric","score")
-  t_cluster_avg$cluster <- 'cluster'
-  t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
-  cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
-
-  metric <- c("imp2lraw"
-              ,"imp2rraw"
-              ,"inversionl"
-              ,"inversionr"
-              ,"eversionl"
-              ,"eversionr"
-              ,"translationl"
-              ,"translationr"
-              ,"dropankleactivedecelerationleft"
-              ,"dropankleactivedecelerationright"
-              ,"dropmaxrelativerotationleft"
-              ,"dropmaxrelativerotationright"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropdeltahip_average")
-
-  label <- c("Net Imp 2 (L)"
-             ,"Net Imp 2 (R)"
-             ,"Inversion (L)"
-             ,"Inversion (R)"
-             ,"Eversion (L)"
-             ,"Eversion (R)"
-             ,"Translation (L)"
-             ,"Translation (R)"
-             ,"Drop Ank. Decel (L)"
-             ,"Drop Ank. Decel (R)"
-             ,"Drop Rel. Rot. (L)"
-             ,"Drop Rel Rot. (R)"
-             ,"Tot. Impulse Asym"
-             ,"Drop Delta Hip Avg.")
-
-  cl <- data.frame(metric,label)
-  cluster_radar <- merge(cluster_radar,cl,by="metric")
-  cluster_radar$metric <- cluster_radar$label
-  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Drop Delta Hip Avg."
-                                                                 ,"Tot. Impulse Asym"
-                                                                 ,"Net Imp 2 (R)"
-                                                                 ,"Translation (R)"
-                                                                 ,"Drop Rel Rot. (R)"
-                                                                 ,"Inversion (R)"
-                                                                 ,"Eversion (R)"
-                                                                 ,"Drop Ank. Decel (R)"
-                                                                 ,"Net Imp 2 (L)"
-                                                                 ,"Translation (L)"
-                                                                 ,"Drop Rel. Rot. (L)"
-                                                                 ,"Inversion (L)"
-                                                                 ,"Eversion (L)"
-                                                                 ,"Drop Ank. Decel (L)"))
-
-  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
-  return(cluster_radar)
-
-}
 
 graph_page_2_2x2 <- function(playername, assessmentdate){
   print("Retrieving 2x2 Scatter Cluster Data")
   ### Extract the player's position to allow for comparison and to allow for dynamic graph labeling (used below)
-  data <- read_civis('public.page2_2x2','P3')
+  data <- read_civis('public.soccer_page_1_scatter','P3')
   players_position <- data %>%
     filter(name == as.character(playername)) %>%
     select(position) %>%
@@ -268,31 +145,37 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
 
   return(graph)
 
-}
+}   ### UPDATED - WILL NEED TO FIX 
 
 
 get_kpis <- function(playername, date) {
   print("Retrieving Page 1 Percentiles")
-  std_sql <- paste("select * from public.page_1_summary_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  std_sql <- paste("select * from public.soccer_page_1_summary_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   std <- read_civis(sql(std_sql),"P3")
   std <- add_rownames(data.frame(t(std[,3:length(std)])),"metric")
   colnames(std) <- c("metric","percentile")
-  metric <- c("vertmaxkneeextensionvelocityavg"
-              ,"conc_rel_ff"
-              ,"dropmaxkneeextensionvelocityavg"
-              ,"imp_1_avg"
-              ,"slmaxhipabduction"
-              ,"srmaxhipabduction"
-              ,"slmaxhipextensionvelocity"
-              ,"srmaxhipextensionvelocity")
+  metric <- c("vertmaxkneeextensionvelocityavg", 
+              "conc_rel_ff", 
+              "relativepower", 
+              "vertmaxkneeextensionaccelerationavg", 
+              "lateralforceleftbw", 
+              "lateralforcerightbw", 
+              "slmaxhipabduction",
+              "srmaxhipabduction",
+              "stancesldvjumpheight", 
+              "kickingsldvjumpheight", 
+              "svbbjumpheight")
   label <- factor(c("Knee Ext Vel (SV)"
              ,"Conc Rel FF (SV)"
-             ,"Knee Ext Vel (DV)"
-             ,"Net Imp 1 (DV)"
+             ,"Relative Power (SV)"
+             ,"Knee Ext Accel (SV)"
+             ,"Lateral Drive (L SK)"
+             ,"Lateral Drive (R SK)"
              ,"Max Hip Abd. (L SK)"
              ,"Max Hip Abd. (R SK)"
-             ,"Hip Ext Vel (L SK)"
-             ,"Hip Ext Vel (R SK)"))
+             ,"SL - Stance"
+             ,"SL - Kick"
+             ,"Vertical Jump"))
   type <- c("vertical"
             ,"vertical"
             ,"vertical"
@@ -300,7 +183,10 @@ get_kpis <- function(playername, date) {
             ,"lateral"
             ,"lateral"
             ,"lateral"
-            ,"lateral")
+            ,"lateral"
+            ,"performance"
+            ,"performance"
+            ,"performance")
   std_merge <- data.frame(metric,label,type)
   kpis <- merge(std,std_merge,by="metric")
   kpis$percentile <- as.numeric(as.character(kpis$percentile))
@@ -311,120 +197,66 @@ get_kpis <- function(playername, date) {
   }
   kpis$pos <- as.character(lapply(kpis$percentile, function(x) over_50(x)))
   return(kpis)
-}
+} ## DONE
 
-get_accel_decel_1 <- function(playername,date) {
-  print("Retrieving Page 1 Accel Decel Data")
-  accel_decel_sql <- paste("select * from public.page_1_accel_decel
-                           where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-  accel_decel <- read_civis(sql(accel_decel_sql),"P3")
-  accel_decel_1 <- accel_decel[,3:4]
-  colnames(accel_decel_1) <- c("Rel Conc. Force","Rel. Ecc Force")
-  accel_decel_1 <- data.frame(t(accel_decel_1))
-  accel_decel_1 <- add_rownames(accel_decel_1,"metric")
-  colnames(accel_decel_1) <- c("metric","value")
-  accel_decel_1$metric <- factor(accel_decel_1$metric)
-  return(accel_decel_1)
-}
 
 get_accel_decel_2 <- function(playername,date) {
   print("Retrieving Page 2 Accel Decel Data")
-  accel_decel_sql <- paste("select * from public.page_2_accel_decel
+  accel_decel_sql <- paste("select * from public.soccer_page_2_accel_decel
                            where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   accel_decel <- read_civis(sql(accel_decel_sql),"P3")
-  accel_decel_1 <- accel_decel[,3:7]
+  accel_decel_1 <- accel_decel[,3:8]
   colnames(accel_decel_1)[which(names(accel_decel_1) == "ecc_rel_ff")] <- "Ecc. Force"
   colnames(accel_decel_1)[which(names(accel_decel_1) == "conc_rel_ff")] <- "Rel Conc Force"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "skater_lat_drive_avg")] <- "Lat. Drive - Avg."
+  colnames(accel_decel_1)[which(names(accel_decel_1) == "average_lateralforcebw")] <- "Lat. Drive - Avg."
   colnames(accel_decel_1)[which(names(accel_decel_1) == "vertmaxkneeextensionaccelerationavg")] <- "Knee Ext Accel"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "ankle_act_dec_avg")] <- "Ank. Active Decel"
+  colnames(accel_decel_1)[which(names(accel_decel_1) == "drop_kickmaxkneeactivedecelerationkicking")] <- "Knee Active Decel\n(Kick)"
+  colnames(accel_decel_1)[which(names(accel_decel_1) == "drop_stancemaxkneeactivedecelerationstance")] <- "Knee Active Decel\n(Stance)"
   accel_decel_1 <- data.frame(t(accel_decel_1))
   accel_decel_1 <- add_rownames(accel_decel_1,"metric")
   colnames(accel_decel_1) <- c("metric","value")
-  accel_decel_1$metric <- factor(accel_decel_1$metric,levels = c("Lat. Drive - Avg.","Ecc. Force","Knee Ext Accel","Ank. Active Decel","Rel Conc Force"))
+  accel_decel_1$metric <- factor(accel_decel_1$metric,levels = c("Lat. Drive - Avg.","Ecc. Force","Knee Ext Accel","Knee Active Decel\n(Kick)","Rel Conc Force","Knee Active Decel\n(Stance)"))
   return(accel_decel_1)
-}
+} ## DONE
 
-get_history <- function(playername,date) {
-  print("Retrieving Performance Summary Data")
-  hist_sql <- paste("select * from public.page_1_player_history
-                           where name = '",playername,"' order by assessmentdate::date desc nulls last limit 2;",sep="")
-  hist <- read_civis(sql(hist_sql),"P3")
-  hist <- hist[3:7]
-  hist <- data.frame(t(hist))
-  metric <- factor(c("delta_vert",
-              "delta_drop",
-              "lateralforceleftbw",
-              "lateralforcerightbw"))
-  label <- factor(c("Standing Vert",
-              "Drop Jump",
-              "Lateral Drive (L)",
-              "Lateral Drive (R)"))
-  hist <- add_rownames(hist,"metric")
-  if (length(hist) == 2) {
-    colnames(hist) <- c("metric","current")
-    labelframe <- data.frame(metric,label)
-    hist <- merge(hist,labelframe,by="metric")
-    hist <- hist[,2:3]
-  } else {
-    colnames(hist) <- c("metric","current","previous")
-    labelframe <- data.frame(metric,label)
-    hist <- merge(hist,labelframe,by="metric")
-    hist <- hist[,2:4]
-  }
-  hist$label <- factor(hist$label,levels=label)
-  hist <- melt(hist,id='label')
-  colnames(hist) <- c("label","type","percentile")
-  over_50 <- function(x) {
-    ifelse(is.na(x),FALSE,x>50)
-  }
-  hist$pos <- as.character(lapply(hist$percentile, function(x) over_50(x)))
-  return(hist)
-}
 
 get_percentiles_page_2 <- function(playername, date) {
   print("Retrieving Page 2 Percentiles Data")
-  percentile_sql <- paste("select * from public.page_2_percentiles where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+  percentile_sql <- paste("select * from public.soccer_page_2_percentiles where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   full_table <- read_civis(sql(percentile_sql),"P3")
-  values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
-  percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
-  label <- c("Net Impact 1","Net Impact 2(L)","Net Impact 2(R)","Conc Rel FF","Knee Ext Velocity","Knee Ext Accel","Load Rel. FF","Ankle Ext Accel","Knee Ext Velocity","Knee Ext Accel","L - Load Rel. FF ","R - Load Rel FF","L - Lateral Drive","L - Hip Ext. Velocity","L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction","Net Rel. Conc Force")
-  percentile_labels <- data.frame(values,percentiles,label)
+  percentiles <- c("drop_stancetotalmovementtimestance","drop_stanceankletotalromstance","drop_stancemaxkneeactivedecelerationstance",
+                   "concstanceraw","drop_kicktotalmovementtimekicking","drop_kickankletotalromkicking",             
+                   "drop_kickmaxkneeactivedecelerationkicking","conckickingraw","conc_rel_ff",                                
+                   "load_rel_ff","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg",       
+                   "relativepower","lateralforceleftbw","slmaxhipextensionvelocity",                 
+                   "slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction")
+  label <- c("Context Time","Ankle ROM","Knee Active Decel",
+             "Peak Conc Force","Context Time","Ankle ROM",
+             "Knee Active Devel","Peak Conc Force","Conc Rel FF",
+             "Load Rel FF","Knee Ext Velocity","Knee Ext Accel",
+             "Relative Power","L - Lateral Drive","L - Hip Ext. Velocity",
+             "L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction")
+  percentile_labels <- data.frame(percentiles,label)
   athlete_percentiles <- full_table[,3:length(full_table)]
   athlete_percentiles <- data.frame(t(athlete_percentiles))
   athlete_percentiles <- add_rownames(athlete_percentiles,"metric")
   colnames(athlete_percentiles) <- c("metric","value")
-  values_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("values"),by.y=c("metric"))
   percentiles_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("percentiles"),by.y=c("metric"))
 
-  vars <- c("percconc_rel_ff","percdropmaxkneeextensionaccelerationavg","percdropmaxkneeextensionvelocityavg","percdroppeakconcentricforceleft","percdroppeakconcentricforceright","percimp_1_avg","percimp2lraw","percimp2rraw","perclateralforceleftbw","percslmaxhipabduction","percslmaxhipextensionvelocity","perclateralforcerightbw","percsrmaxhipabduction","percsrmaxhipextensionvelocity","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","percnet_rel_conc_force","percload_rel_ff")
-  tests <- c("Standing Vertical","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Drop Jump","Standing Vertical")
-  var_tests <- data.frame(vars,tests)
+  tests <- c("SL Drop Stance","SL Drop Stance","SL Drop Stance","SL Drop Stance",
+             "SL Drop Kick","SL Drop Kick","SL Drop Kick","SL Drop Kick",
+             "Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical",
+             "Skater","Skater","Skater","Skater","Skater","Skater")
+  var_tests <- data.frame(percentiles,tests)
 
-  final_frame <- merge(values_frame[,3:4],percentiles_frame[,3:4],by="label")
-  final_frame <- merge(values_frame,percentiles_frame[,2:4],by="values")
-  ff2 <- merge(final_frame,var_tests,by.x="percentiles",by.y="vars")
-  ff2 <- ff2[c("label.x","value.x","value.y","tests")]
-  colnames(ff2) <- c("metric","value","Percentile","test_type")
-  ff2$value <- round(ff2$value,2)
-  ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
-                                             ,"Knee Ext Velocity"
-                                             ,"Net Impact 1"
-                                             ,"Net Impact 2(L)"
-                                             ,"Net Impact 2(R)"
-                                             ,"Net Rel. Conc Force"
-                                             ,"Conc Rel FF"
-                                             ,"Load Rel. FF"
-                                             ,"Ankle Ext Accel"
-                                             ,"L - Lateral Drive"
-                                             ,"L - Hip Abduction"
-                                             ,"L - Hip Ext. Velocity"
-                                             ,"R - Lateral Drive"
-                                             ,"R - Hip Abduction"
-                                             ,"R - Hip Ext. Velocity"))
+
+  ff2 <- merge(percentiles_frame,var_tests,by.x="percentiles")
+  ff2 <- ff2[,-1]
+  colnames(ff2) <- c("metric","Percentile","test_type")
+  ff2$metric <- factor(ff2$metric,levels = label)
   ff2 <- ff2[order(ff2$metric),]
   return(ff2)
-}
+}  ## DONE
 
 get_percentiles_page_3 <- function(playername,date) {
   print("Retrieving Page 3 Dot Plot Percentiles")
@@ -668,9 +500,9 @@ radar_plot <- function(df.rad) {
     coord_polar(start=-pi/4) +
     theme_p3() +
     scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
-    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Cluster'), name = NULL) +
+    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'EPL CB'), name = NULL) +
     labs(title="Performance Factor Comparison",
-         subtitle="Athlete Relative to Cluster") +
+         subtitle="Athlete Relative to EPL Player") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
