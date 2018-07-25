@@ -124,7 +124,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
     geom_vline(xintercept = mean(data$xaxis)) + ### position mean, x
     geom_hline(yintercept = mean(data$yaxis)) + ### position mean, y
     geom_point(aes(fill=position),size=7, pch =21, alpha=0.5) +  ### overall points
-    geom_point(data = data[data[,1] == playername & data[,2] == assessmentdate , ], size = 12, fill = "black", pch=21, show.legend = FALSE) +  ## point for target athlete
+    geom_point(data = data[data[,1] == playername & data[,2] == assessmentdate , ], size = 11, fill = "black", pch=21, show.legend = FALSE) +  ## point for target athlete
     geom_text(data = data[data[,1] == playername & data[,2] == assessmentdate , ]
               , aes(xaxis,yaxis,label = paste(substr(word(name),1,1),substr(word(name,2),1,1),sep="")), size = 5, fontface="bold",color="white") +  ## text for target athlete
     xlab("Lateral Acceleration") +
@@ -141,7 +141,6 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
           legend.key.size = unit(1,"line"))  +
     scale_fill_manual(values=c(white, dkred, dkgrey)) +
     guides(fill=guide_legend("Position"))
-
 
   return(graph)
 
@@ -341,8 +340,8 @@ get_percentiles_page_3 <- function(playername,date) {
               "drop_stanceankleflexionatt0stance",
               "inversionstance",
               "eversionstance", 
-              "drop_kick.ankleactivedecelerationkicking",
-              "drop_kick.ankleflexionatt0kicking",
+              "drop_kickankleactivedecelerationkicking",
+              "drop_kickankleflexionatt0kicking",
               "inversionkicking",
               "eversionkicking")
 
@@ -491,7 +490,7 @@ radar_plot <- function(df.rad) {
     scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
     scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'EPL CB'), name = NULL) +
     labs(title="Performance Factor Comparison",
-         subtitle="Athlete Relative to EPL Player") +
+         subtitle="Athlete Relative to EPL CB") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
