@@ -230,7 +230,7 @@ get_percentiles_page_2 <- function(playername, date) {
                    "load_rel_ff","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg",       
                    "relativepower","lateralforceleftbw","slmaxhipextensionvelocity",                 
                    "slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction")
-  label <- c("Context Time","Ankle ROM","Knee Active Decel",
+  label <- c("Context Time ","Ankle ROM","Knee Active Decel",
              "Peak Conc Force","Context Time","Ankle ROM",
              "Knee Active Devel","Peak Conc Force","Conc Rel FF",
              "Load Rel FF","Knee Ext Velocity","Knee Ext Accel",
@@ -406,7 +406,7 @@ get_fig <- function(playername,date){
   being_img <-
     rasterGrob(readPNG("p3 man.png"))
   print("Retrieving Flag Diagram Data")
-  color_sql <- paste("select * from public.page_1_and_3_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  color_sql <- paste("select * from public.soccer_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
   df <- data.frame(
     # L Ankle, L Knee, R Ankle, R Knee, M Back
