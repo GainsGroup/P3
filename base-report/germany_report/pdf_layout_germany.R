@@ -50,15 +50,11 @@ training_recs <- Sys.getenv("TRAINING_RECS")
 stats_df <- get_stats(playername, date)
 kpis <- get_kpis(playername, date)
 ad2 <- get_accel_decel_2(playername,date)
-history <- get_history(playername,date)
 cluster_athl <- get_athl_cluster_data(playername,date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
 percentiles_page3 <- get_percentiles_page_3(playername,date)
 
-athl_score_sql <- paste("select * from public.athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-athletecism_score <- round(read_civis(sql(athl_score_sql),"P3")$athl_score)
-mech_score_sql <- paste("select * from public.mech_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$mech_score)
+
 
 ################
 ## GET PLOTS ##
