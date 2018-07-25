@@ -260,13 +260,13 @@ get_percentiles_page_2 <- function(playername, date) {
 
 get_percentiles_page_3 <- function(playername,date) {
   print("Retrieving Page 3 Dot Plot Percentiles")
-  percentile_sql <- paste("select * from public.page_3_percentiles
+  percentile_sql <- paste("select * from public.soccer_page_3_percentiles
    where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   full_table <- read_civis(sql(percentile_sql),"P3")
-  low_back <- full_table[,c("dropdeltahip_average"
-    , "imp2lraw"
-    , "imp2rraw"
-    , "droptotalmovementimpulseasymmetry")]
+  low_back <- full_table[,c("average_ankle_dorsi", 
+                            "trunk_stability_l", 
+                            "trunk_stability_r", 
+                            "average_delta_hip_flex" )]
   low_back <- data.frame(t(low_back))
   low_back <- add_rownames(low_back, "metric")
   colnames(low_back) <- c("metric","value")
@@ -274,55 +274,51 @@ get_percentiles_page_3 <- function(playername,date) {
   low_back$order <- c(1:4)
   low_back$metric <- factor(low_back$metric, levels = low_back$metric[order(low_back$order)])
 
-  left_knee <- full_table[,c("dropmaxrelativerotationleft"
-    , "droptibialrotationatmaxrelativerotationleft"
-    , "translationl"
-    , "dropankleactivedecelerationleft"
-    , "droptotalmovementimpulseasymmetry")]
-  left_knee <- data.frame(t(left_knee))
-  left_knee <- add_rownames(left_knee,"metric")
-  colnames(left_knee) <- c("metric","value")
-  left_knee$type <- 'left knee'
-  left_knee$order <- c(1:5)
-  left_knee$metric <- factor(left_knee$metric, levels = left_knee$metric[order(left_knee$order)])
+  stance_knee <- full_table[,c("drop_stancetibialrotationatmaxrelativerotationstance", 
+                             "translationstance", 
+                             "drop_stancedeltahipflexionstance")]
+  stance_knee <- data.frame(t(stance_knee))
+  stance_knee <- add_rownames(stance_knee,"metric")
+  colnames(stance_knee) <- c("metric","value")
+  stance_knee$type <- ifelse(full_table$drop_stanceleg == "L", 'left knee', 'right knee')
+  stance_knee$order <- c(1:3)
+  stance_knee$metric <- factor(stance_knee$metric, levels = stance_knee$metric[order(stance_knee$order)])
 
 
-  right_knee <- full_table[,c("dropmaxrelativerotationright"
-    , "droptibialrotationatmaxrelativerotationright"
-    , "translationr"
-    , "dropankleactivedecelerationright"
-    , "droptotalmovementimpulseasymmetry")]
-  right_knee <- data.frame(t(right_knee))
-  right_knee <- add_rownames(right_knee,"metric")
-  colnames(right_knee) <- c("metric","value")
-  right_knee$type <- 'right knee'
-  right_knee$order <- c(1:5)
-  right_knee$metric <- factor(right_knee$metric, levels = right_knee$metric[order(right_knee$order)])
+  kick_knee <- full_table[,c("drop_kicktibialrotationatmaxrelativerotationkicking",
+                              "translationkicking", 
+                              "drop_kickdeltahipflexionkicking")]
+  kick_knee <- data.frame(t(kick_knee))
+  kick_knee <- add_rownames(kick_knee,"metric")
+  colnames(kick_knee) <- c("metric","value")
+  kick_knee$type <- ifelse(full_table$drop_kickleg == "L", 'left knee', 'right knee')
+  kick_knee$order <- c(1:3)
+  kick_knee$metric <- factor(kick_knee$metric, levels = kick_knee$metric[order(kick_knee$order)])
 
-  left_foot <- full_table[,c("inversionl"
-    , "eversionl"
-    , "dropankleactivedecelerationleft"
-    , "droptotalmovementimpulseasymmetry")]
-  left_foot <- data.frame(t(left_foot))
-  left_foot <- add_rownames(left_foot,"metric")
-  colnames(left_foot) <- c("metric","value")
-  left_foot$type <- 'left foot'
-  left_foot$order <- c(1:4)
-  left_foot$metric <- factor(left_foot$metric, levels = left_foot$metric[order(left_foot$order)])
+  stance_foot <- full_table[,c("drop_stanceankleactivedecelerationstance",
+                             "drop_stanceankleflexionatt0stance",
+                             "inversionstance",
+                             "eversionstance" )]
+  stance_foot <- data.frame(t(stance_foot))
+  stance_foot <- add_rownames(stance_foot,"metric")
+  colnames(stance_foot) <- c("metric","value")
+  stance_foot$type <- ifelse(full_table$drop_stanceleg == "L", 'left foot', 'right foot')
+  stance_foot$order <- c(1:4)
+  stance_foot$metric <- factor(stance_foot$metric, levels = stance_foot$metric[order(stance_foot$order)])
 
 
-  right_foot <- full_table[,c("inversionr"
-    , "eversionr"
-    , "dropankleactivedecelerationright"
-    , "droptotalmovementimpulseasymmetry")]
-  right_foot <- data.frame(t(right_foot))
-  right_foot <- add_rownames(right_foot,"metric")
-  colnames(right_foot) <- c("metric","value")
-  right_foot$type <- 'right foot'
-  right_foot$order <- c(1:4)
-  right_foot$metric <- factor(right_foot$metric, levels = right_foot$metric[order(right_foot$order)])
+  kick_foot <- full_table[,c("drop_kickankleactivedecelerationkicking",
+                              "drop_kickankleflexionatt0kicking",
+                              "inversionkicking",
+                              "eversionkicking" )]
+  kick_foot <- data.frame(t(kick_foot))
+  kick_foot <- add_rownames(kick_foot,"metric")
+  colnames(kick_foot) <- c("metric","value")
+  kick_foot$type <- ifelse(full_table$drop_kickleg == "L", 'left foot', 'right foot')
+  kick_foot$order <- c(1:4)
+  kick_foot$metric <- factor(kick_foot$metric, levels = kick_foot$metric[order(kick_foot$order)])
 
-  percent_frame <- bind_rows(low_back,left_knee, left_foot, right_knee, right_foot)
+  percent_frame <- bind_rows(low_back,stance_knee, stance_foot, kick_knee, kick_foot)
   colnames(percent_frame) <- c("metric","percentile","type","order")
   percent_frame$pos <- FALSE
   percent_frame$percentile <- percent_frame$percentile
@@ -331,51 +327,44 @@ get_percentiles_page_3 <- function(playername,date) {
   }
   percent_frame$pos <- as.character(lapply(percent_frame$percentile, function(x) over_50(x)))
 
-  metric <- c("dropdeltahip_average"
-              ,"imp2lraw"
-              ,"imp2rraw"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropmaxrelativerotationleft"
-              ,"dropdeltarelativerotationleft"
-              ,"translationl"
-              ,"dropankleactivedecelerationleft"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropmaxrelativerotationright"
-              ,"dropdeltarelativerotationright"
-              ,"translationr"
-              ,"dropankleactivedecelerationright"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"inversionl"
-              ,"eversionl"
-              ,"dropankleactivedecelerationleft"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"inversionr"
-              ,"eversionr"
-              ,"dropankleactivedecelerationright"
-              ,"droptotalmovementimpulseasymmetry")
+  metric <- c("average_ankle_dorsi", 
+              "trunk_stability_l", 
+              "trunk_stability_r", 
+              "average_delta_hip_flex",
+              "drop_stancetibialrotationatmaxrelativerotationstance", 
+              "translationstance", 
+              "drop_stancedeltahipflexionstance",
+              "drop_kicktibialrotationatmaxrelativerotationkicking",
+              "translationkicking", 
+              "drop_kickdeltahipflexionkicking",
+              "drop_stanceankleactivedecelerationstance",
+              "drop_stanceankleflexionatt0stance",
+              "inversionstance",
+              "eversionstance", 
+              "drop_kick.ankleactivedecelerationkicking",
+              "drop_kick.ankleflexionatt0kicking",
+              "inversionkicking",
+              "eversionkicking")
 
-  label <- c("Delta Hip Flex."
-             ,"Impact 2 (L)"
-             ,"Impact 2 (R)"
-             ,"Impulse Asym"
+  label <- c("Avg. Ankle Dorsi"
+             ,"Trunk Stability-L"
+             ,"Trunk Stability-R"
+             ,"Avg. Delta Hip Flex"
              ,"Rel. Rotation"
-             ,"Delta Rel. Rot."
              ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym"
-             ,"Rel. Rotation"
-             ,"Delta Rel. Rot."
+             ,"Delta Hip Flex"
+             ,"Rel Rotation"
              ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym"
+             ,"Delta Hip Flex"
+             ,"Ankle Act. Decel"
+             ,"Active Dorsi"
              ,"Inversion"
              ,"Eversion"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym"
+             ,"Ankle Act. Decel"
+             ,"Active Dorsi"
              ,"Inversion"
              ,"Eversion"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym")
+             )
 
   column_labels <- unique(data.frame(metric,label))
   percent_merged_frame <- merge(percent_frame,column_labels,by="metric")
