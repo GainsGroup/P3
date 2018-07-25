@@ -437,7 +437,7 @@ get_logo <- function(){
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-.25, .25) +
     ylim(-1, 1) +
-    scale_colour_manual(values = c(purple, blue)) +
+    scale_colour_manual(values = c(dkgrey, blue)) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(5, 8)) +
     theme_p3_fig()
@@ -451,7 +451,7 @@ get_eagle <- function(){
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-.25, .25) +
     ylim(-1, 1) +
-    scale_colour_manual(values = c(purple, blue)) +
+    scale_colour_manual(values = c(dkgrey, blue)) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(5, 8)) +
     theme_p3_fig()
@@ -477,7 +477,7 @@ acceleration_bars <- function(df,subtitle) {
     geom_bar(stat = 'identity') +
     labs(title="Acceleration / Deceleration",
          subtitle=subtitle) +
-    scale_fill_manual("legend",values = c(dkred,dkgrey,dkred,dkgrey,dkred)) +
+    scale_fill_manual("legend",values = c(dkred,dkgrey,dkred,dkgrey,dkred,dkgrey)) +
     coord_flip() +
     theme_p3() +
     ylim(-100,100)
