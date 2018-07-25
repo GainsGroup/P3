@@ -107,8 +107,8 @@ print(drawtext(intro, pagetitle, header = TRUE), vp = vplayout(2, 3:20))
 
 ## ROW 3/4: summary text and scores
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
-print(get_eagle(), vp = vplayout(3:6, 18:20))
-print(get_logo(), vp = vplayout(2, 21:23))
+print(get_eagle(), vp = vplayout(3:6, 16:20))
+print(get_logo(), vp = vplayout(3:6, 21:23))
 
 
 ## ROW 5-6: lollipop plot and figure
