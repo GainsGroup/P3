@@ -3,7 +3,7 @@ get_grid <- function(width = 8.5, # page width in inches
                      height = 11, # page height in inches
                      ncols = 12, # number of cols for content
                      nrows = 6, # number of rows for content
-                     title_height = 1.5, # height in inches of title area
+                     title_height = 1.4, # height in inches of title area
                      margins = c(.75,.75,.75,.75) # top, right, bottom, left margin
                      ) {
   heights = c(margins[1], title_height, rep((height - margins[1] - margins[3] - title_height) / nrows, nrows), margins[3])
