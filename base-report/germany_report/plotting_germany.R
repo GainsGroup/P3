@@ -411,7 +411,7 @@ get_fig <- function(playername,date){
     # L Ankle, L Knee, R Ankle, R Knee, M Back
     x = c(-0.22, -0.23, 0.05,  0.02, -0.13),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
-    color = c(as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"lowback_flag"]))
+    color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
