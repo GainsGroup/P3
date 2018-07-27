@@ -348,30 +348,25 @@ get_accel_decel_2 <- function(playername,date) {
 get_history <- function(playername,date) {
   print("Retrieving Performance Summary Data")
   hist_sql <- paste("select * from public.page_1_player_history
-                    where name = '",playername,"' order by assessmentdate::date desc nulls last limit 2;",sep="")
+                           where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   hist <- read_civis(sql(hist_sql),"P3")
-  hist <- hist[,3:7]
+  hist <- hist[,3:6]
   hist <- data.frame(t(hist))
   metric <- factor(c("delta_vert",
-                     "delta_drop",
-                     "lateralforceleftbw",
-                     "lateralforcerightbw"))
+              "delta_drop",
+              "lateralforceleftbw",
+              "lateralforcerightbw"))
   label <- factor(c("Standing Vert",
-                    "Drop Jump",
-                    "Lateral Drive (L)",
-                    "Lateral Drive (R)"))
+              "Drop Jump",
+              "Lateral Drive (L)",
+              "Lateral Drive (R)"))
   hist <- add_rownames(hist,"metric")
-  if (length(hist) == 2) {
+
     colnames(hist) <- c("metric","current")
     labelframe <- data.frame(metric,label)
     hist <- merge(hist,labelframe,by="metric")
     hist <- hist[,2:3]
-  } else {
-    colnames(hist) <- c("metric","current","previous")
-    labelframe <- data.frame(metric,label)
-    hist <- merge(hist,labelframe,by="metric")
-    hist <- hist[,2:4]
-  }
+  
   hist$label <- factor(hist$label,levels=label)
   hist <- melt(hist,id='label')
   colnames(hist) <- c("label","type","percentile")
