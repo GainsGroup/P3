@@ -209,8 +209,8 @@ theme_p3_fig <- function(base_size = 18,
       line = element_blank(),
       text = element_blank(),
       title = element_blank(),
-      plot.background = element_rect(fill = dkgrey, color = dkgrey),
-      panel.background = element_rect(fill = dkgrey, color = dkgrey)
+      plot.background = element_rect(fill = ltgrey, color = ltgrey),
+      panel.background = element_rect(fill = ltgrey, color = ltgrey)
     )
 }
 
