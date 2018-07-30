@@ -108,6 +108,7 @@ print(get_eagle(), vp = vplayout(2:3, 17:21))
 print(get_logo(), vp = vplayout(2:3, 22:25))
 
 ## ROW 3/4: summary text and scores
+print(fig, vp = vplayout(5:17, 14:25))
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
 #print(get_eagle(), vp = vplayout(3:6, 16:20))
 #print(get_logo(), vp = vplayout(3:6, 21:23))
@@ -117,7 +118,7 @@ print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
 print(dot_plot6, vp = vplayout(8:13, 2:12))
 print(dot_plot7, vp = vplayout(15:20, 2:12))
 print(dot_plot8, vp = vplayout(22:27, 2:12))
-print(fig, vp = vplayout(5:17, 14:25))
+
 
 ## ROW 7-8: history and acceleration plots
 print(cluster_scatter, vp = vplayout(18:28, 14:25))
