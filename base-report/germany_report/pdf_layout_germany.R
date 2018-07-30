@@ -108,7 +108,7 @@ print(get_eagle(), vp = vplayout(2:3, 17:21))
 print(get_logo(), vp = vplayout(2:3, 22:25))
 
 ## ROW 3/4: summary text and scores
-print(fig, vp = vplayout(5:17, 14:25))
+print(fig, vp = vplayout(4:17, 14:25))
 print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
 #print(get_eagle(), vp = vplayout(3:6, 16:20))
 #print(get_logo(), vp = vplayout(3:6, 21:23))
