@@ -216,7 +216,7 @@ theme_p3_fig <- function(base_size = 18,
 
 theme_p3_man <- function(base_size = 18,
                          base_family = "Abel") {
-  theme_classic() %+replace%
+  theme_minimal() %+replace%
     theme(
       line = element_blank(),
       text = element_blank(),
