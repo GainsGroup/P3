@@ -117,7 +117,7 @@ print(drawtable(stats_df), vp = vplayout(3:6, 2:14))
 print(dot_plot6, vp = vplayout(8:13, 2:12))
 print(dot_plot7, vp = vplayout(15:20, 2:12))
 print(dot_plot8, vp = vplayout(22:27, 2:12))
-print(fig, vp = vplayout(7:17, 14:25))
+print(fig, vp = vplayout(5:17, 14:25))
 
 ## ROW 7-8: history and acceleration plots
 print(cluster_scatter, vp = vplayout(18:28, 14:25))
