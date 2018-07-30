@@ -403,7 +403,7 @@ summary_plot <- function(overall) {
 
 get_fig <- function(playername,date){
   being_img <-
-    rasterGrob(readPNG("p3 man.png"))
+    rasterGrob(readPNG("p3manvector.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.soccer_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
@@ -425,7 +425,7 @@ get_fig <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
-    theme_p3_fig()
+    theme_p3_man()
 }
 
 get_logo <- function(){
