@@ -263,8 +263,8 @@ get_percentiles_page_3 <- function(playername,date) {
    where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   full_table <- read_civis(sql(percentile_sql),"P3")
   low_back <- full_table[,c("average_ankle_dorsi", 
-                            "trunk_stability_l", 
-                            "trunk_stability_r", 
+                            "trunkl", 
+                            "trunkr", 
                             "average_delta_hip_flex" )]
   low_back <- data.frame(t(low_back))
   low_back <- add_rownames(low_back, "metric")
@@ -327,8 +327,8 @@ get_percentiles_page_3 <- function(playername,date) {
   percent_frame$pos <- as.character(lapply(percent_frame$percentile, function(x) over_50(x)))
 
   metric <- c("average_ankle_dorsi", 
-              "trunk_stability_l", 
-              "trunk_stability_r", 
+              "trunkl", 
+              "trunkr", 
               "average_delta_hip_flex",
               "drop_stancetibialrotationatmaxrelativerotationstance", 
               "translationstance", 
@@ -403,7 +403,7 @@ summary_plot <- function(overall) {
 
 get_fig <- function(playername,date){
   being_img <-
-    rasterGrob(readPNG("p3 man.png"))
+    rasterGrob(readPNG("p3manvector.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.soccer_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
