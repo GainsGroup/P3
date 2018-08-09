@@ -24,7 +24,7 @@ athlete_table <- 'public.page_1_bio_info'
 get_stats <- function(playername, date) {
   print("Retrieving Bio Info")
   query <- paste("select name as playername, assessmentdate as date, height as playerht, bodyweightkg as playerwt, reach as playerrch,
-                    display_name as displaynamefrom "
+                    display_name as displayname from "
         ,athlete_table, " where \"name\" = '",playername,
                  "' and assessmentdate = '",date, "'",sep="")
   stats_df <- read_civis(sql(query),'P3')
