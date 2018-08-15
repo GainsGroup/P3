@@ -28,7 +28,7 @@ get_stats <- function(playername, date) {
         ,athlete_table, " where \"name\" = '",playername,
                  "' and assessmentdate = '",date, "'",sep="")
   stats_df <- read_civis(sql(query),'P3')
-  colnames(stats_df) <- c("Name","Date","Height","Weight")
+  colnames(stats_df) <- c("Name","Date","Height","Weight", "Position")
   return(stats_df)
 }   ### UPDATED 
 
