@@ -139,7 +139,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
           legend.position = 'bottom',
           legend.key = element_rect(linetype = "blank"),
           legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(white, dkgrey, dkred)) +
+    scale_fill_manual(values=c(dkgrey, white, dkred)) +
     guides(fill=guide_legend("Position"))
 
   return(graph)
