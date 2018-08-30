@@ -229,8 +229,8 @@ get_percentiles_page_2 <- function(playername, date) {
                    "load_rel_ff","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg",       
                    "relativepower","lateralforceleftbw","slmaxhipextensionvelocity",                 
                    "slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction")
-  label <- c("Context Time ","Ankle ROM","Knee Active Decel",
-             "Peak Conc Force","Context Time","Ankle ROM ",
+  label <- c("Contact Time ","Ankle ROM","Knee Active Decel",
+             "Peak Conc Force","Contact Time","Ankle ROM ",
              "Knee Active Decel ","Peak Conc Force ","Conc Rel FF",
              "Load Rel FF","Knee Ext Velocity","Knee Ext Accel",
              "Relative Power","L - Lateral Drive","L - Hip Ext. Velocity",
