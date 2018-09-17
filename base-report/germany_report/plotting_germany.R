@@ -412,12 +412,24 @@ get_fig <- function(playername,date){
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.soccer_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
-  df <- data.frame(
+  
+  if(Sys.getenv("GENDER") == "Male"){
+    df <- data.frame(
     # L Ankle, L Knee, R Ankle, R Knee, M Back
     x = c(-0.22, -0.23, 0.05,  0.02, -0.13),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
-  )
+  )  }
+  else{
+    df <- data.frame(
+    # L Ankle, L Knee, R Ankle, R Knee, M Back
+    x = c(-0.18, -0.18, 0.15,  0.1, 0.00),
+    y = c(-0.73, -0.41, -0.76, -0.42, 0.15),
+    color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
+  )  }
+    
+  }
+  
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
