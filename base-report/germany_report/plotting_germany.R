@@ -273,7 +273,7 @@ get_percentiles_page_3 <- function(playername,date) {
   low_back$order <- c(1:4)
   low_back$metric <- factor(low_back$metric, levels = low_back$metric[order(low_back$order)])
 
-  stance_knee <- full_table[,c("drop_stancetibialrotationatmaxrelativerotationstance", 
+  stance_knee <- full_table[,c("drop_stancemaxrelativerotationstance", 
                              "translationstance", 
                              "drop_stancedeltahipflexionstance")]
   stance_knee <- data.frame(t(stance_knee))
@@ -284,7 +284,7 @@ get_percentiles_page_3 <- function(playername,date) {
   stance_knee$metric <- factor(stance_knee$metric, levels = stance_knee$metric[order(stance_knee$order)])
 
 
-  kick_knee <- full_table[,c("drop_kicktibialrotationatmaxrelativerotationkicking",
+  kick_knee <- full_table[,c("drop_kickmaxrelativerotationkicking",
                               "translationkicking", 
                               "drop_kickdeltahipflexionkicking")]
   kick_knee <- data.frame(t(kick_knee))
@@ -330,10 +330,10 @@ get_percentiles_page_3 <- function(playername,date) {
               "trunkl", 
               "trunkr", 
               "average_delta_hip_flex",
-              "drop_stancetibialrotationatmaxrelativerotationstance", 
+              "drop_stancemaxrelativerotationstance", 
               "translationstance", 
               "drop_stancedeltahipflexionstance",
-              "drop_kicktibialrotationatmaxrelativerotationkicking",
+              "drop_kickmaxrelativerotationkicking",
               "translationkicking", 
               "drop_kickdeltahipflexionkicking",
               "drop_stanceankleactivedecelerationstance",
