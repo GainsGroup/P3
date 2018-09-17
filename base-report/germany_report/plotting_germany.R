@@ -426,9 +426,7 @@ get_fig <- function(playername,date){
     x = c(-0.18, -0.18, 0.15,  0.1, 0.00),
     y = c(-0.73, -0.41, -0.76, -0.42, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
-  )  }
-    
-  }
+  ) }
   
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
