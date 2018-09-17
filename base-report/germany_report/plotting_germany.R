@@ -402,7 +402,7 @@ summary_plot <- function(overall) {
 }
 
 get_fig <- function(playername,date){
-    if(Sys.getenv("GENDER") == FALSE){
+    if(Sys.getenv("GENDER") == "Male"){
     being_img <- rasterGrob(readPNG("p3 man.png"))
   }
   else{
