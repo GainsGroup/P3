@@ -423,8 +423,8 @@ get_fig <- function(playername,date){
   else{
     df <- data.frame(
     # L Ankle, L Knee, R Ankle, R Knee, M Back
-    x = c(-0.18, -0.18, 0.15,  0.1, 0.00),
-    y = c(-0.73, -0.41, -0.76, -0.42, 0.15),
+    x = c(-0.14, -0.14, 0.15,  0.12, 0.08),
+    y = c(-0.75, -0.41, -0.73, -0.39, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   ) }
   
