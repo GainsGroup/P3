@@ -406,7 +406,7 @@ get_fig <- function(playername,date){
     being_img <- rasterGrob(readPNG("p3 man.png"))
   }
   else{
-    being_img <- rasterGrob(readPNG("p3_woman_2.png"))
+    being_img <- rasterGrob(readPNG("p3_woman_3.png"))
     
   }
   print("Retrieving Flag Diagram Data")
