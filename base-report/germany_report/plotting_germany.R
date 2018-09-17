@@ -402,9 +402,15 @@ summary_plot <- function(overall) {
 }
 
 get_fig <- function(playername,date){
-  being_img <- rasterGrob(readPNG("p3 man.png"))
-  being_img_female <- rasterGrob(readPNG("p3_woman.png"))
-  #being_img <- ifelse(Sys.getenv("GENDER") != "false", being_img_female, being_img_male) 
+    if(Sys.getenv("GENDER") == FALSE){
+    being_img <- rasterGrob(readPNG("p3 man.png"))
+  }
+  else{
+    being_img <- rasterGrob(readPNG("p3_woman.png"))
+    
+  }
+  #being_img <- rasterGrob(readPNG("p3 man.png"))
+  #being_img_female <- rasterGrob(readPNG("p3_woman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.soccer_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
