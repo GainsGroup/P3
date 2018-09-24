@@ -43,7 +43,7 @@ get_athl_cluster_data <- function(playername,date) {
 
   cluster_avg_sql <- paste("select *
     from public.soccer_spider_plot_data
-    where name = 'Joel Ward' and assessmentdate = '2018-06-08'",sep="")
+    where name = 'Average DFB Male' and assessmentdate = '2018-08-21'",sep="")
 
   cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
   
