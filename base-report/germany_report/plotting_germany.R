@@ -505,7 +505,7 @@ radar_plot <- function(df.rad) {
     scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
     scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Avg. DFB Male'), name = NULL) +
     labs(title="Performance Factor Comparison",
-         subtitle="Relative to Avg. DFB Male") +
+         subtitle="Relative to Avg. DFB") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
