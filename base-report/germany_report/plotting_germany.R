@@ -514,7 +514,7 @@ radar_plot <- function(df.rad) {
           legend.key = element_blank(),
           legend.position = 'right',
           axis.text.x=element_blank(),
-          plot.subtitle = element_text(vjust=6, size=10),
+          plot.subtitle = element_text(vjust=2, size=12),
           axis.ticks.y = element_blank(),
           axis.text.y = element_blank()
     )
