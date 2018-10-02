@@ -439,7 +439,6 @@ get_percentiles_page_3 <- function(playername,date) {
   low_back$metric <- factor(low_back$metric, levels = low_back$metric[order(low_back$order)])
 
   left_knee <- full_table[,c("dropmaxrelativerotationleft"
-    , "droptibialrotationatmaxrelativerotationleft"
     , "translationl"
     , "dropankleactivedecelerationleft"
     , "droptotalmovementimpulseasymmetry")]
@@ -452,7 +451,6 @@ get_percentiles_page_3 <- function(playername,date) {
 
 
   right_knee <- full_table[,c("dropmaxrelativerotationright"
-    , "droptibialrotationatmaxrelativerotationright"
     , "translationr"
     , "dropankleactivedecelerationright"
     , "droptotalmovementimpulseasymmetry")]
