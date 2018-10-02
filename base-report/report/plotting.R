@@ -130,108 +130,108 @@ get_athl_cluster_data <- function(playername,date) {
 
 }
 
-get_mech_cluster_data <- function(playername,date) {
-  print("Retrieving Mechanics Cluster Data")
-  cluster_athlete_query <- paste("select cluster
-                                 ,avg(imp2lraw) as imp2lraw
-                                 ,avg(imp2lraw) as imp2rraw
-                                 ,avg(inversionl) as inversionl
-                                 ,avg(inversionr) as inversionr
-                                 ,avg(eversionl) as eversionl
-                                 ,avg(translationl) as translationl
-                                 ,avg(translationr) as translationr
-                                 ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
-                                 ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
-                                 ,avg(droptibialrotationatmaxrelativerotationleft) as dropmaxrelativerotationleft
-                                 ,avg(droptibialrotationatmaxrelativerotationright) as dropmaxrelativerotationright
-                                 ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
-                                 ,avg(dropdeltahip_average) as dropdeltahip_average
-                                 from public.page_3_mech_spider
-                                 where name = '",playername,"' and assessmentdate = '",date,"' group by 1",sep="")
+#get_mech_cluster_data <- function(playername,date) {
+ # print("Retrieving Mechanics Cluster Data")
+  #cluster_athlete_query <- paste("select cluster
+   #                              ,avg(imp2lraw) as imp2lraw
+    #                             ,avg(imp2lraw) as imp2rraw
+     #                            ,avg(inversionl) as inversionl
+      #                           ,avg(inversionr) as inversionr
+       #                          ,avg(eversionl) as eversionl
+        #                         ,avg(translationl) as translationl
+         #                        ,avg(translationr) as translationr
+          #                       ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
+           #                      ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
+            #                     ,avg(droptibialrotationatmaxrelativerotationleft) as dropmaxrelativerotationleft
+             #                    ,avg(droptibialrotationatmaxrelativerotationright) as dropmaxrelativerotationright
+              #                   ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
+               #                  ,avg(dropdeltahip_average) as dropdeltahip_average
+                #                 from public.page_3_mech_spider
+                 #                where name = '",playername,"' and assessmentdate = '",date,"' group by 1",sep="")
 
-  cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
-  cluster_athlete$cluster
-  cluster_avg_sql <- paste("select avg(imp2lraw) as imp2lraw
-                           ,avg(imp2lraw) as imp2rraw
-                           ,avg(inversionl) as inversionl
-                           ,avg(inversionr) as inversionr
-                           ,avg(eversionl) as eversionl
-                           ,avg(translationl) as translationl
-                           ,avg(translationr) as translationr
-                           ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
-                           ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
-                           ,avg(dropmaxrelativerotationleft) as dropmaxrelativerotationleft
-                           ,avg(dropmaxrelativerotationright) as dropmaxrelativerotationright
-                           ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
-                           ,avg(dropdeltahip_average) as dropdeltahip_average
-                           from public.page_3_mech_spider
-                           where cluster = ",cluster_athlete$cluster,sep="")
+ # cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
+ # cluster_athlete$cluster
+ # cluster_avg_sql <- paste("select avg(imp2lraw) as imp2lraw
+  #                         ,avg(imp2lraw) as imp2rraw
+  #                         ,avg(inversionl) as inversionl
+  #                         ,avg(inversionr) as inversionr
+  #                         ,avg(eversionl) as eversionl
+  #                         ,avg(translationl) as translationl
+  #                         ,avg(translationr) as translationr
+  #                         ,avg(dropankleactivedecelerationleft) as dropankleactivedecelerationleft
+  #                         ,avg(dropankleactivedecelerationright) as dropankleactivedecelerationright
+  #                         ,avg(dropmaxrelativerotationleft) as dropmaxrelativerotationleft
+  #                         ,avg(dropmaxrelativerotationright) as dropmaxrelativerotationright
+  #                         ,avg(droptotalmovementimpulseasymmetry) as droptotalmovementimpulseasymmetry
+  #                         ,avg(dropdeltahip_average) as dropdeltahip_average
+  #                         from public.page_3_mech_spider
+  #                         where cluster = ",cluster_athlete$cluster,sep="")
 
-  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
-  cluster_athlete_compare <- cluster_athlete[,-1]
+ # cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
+ # cluster_athlete_compare <- cluster_athlete[,-1]
 
-  t_athl_compare <- data.frame(t(cluster_athlete_compare))
-  t_athl_compare <- add_rownames(t_athl_compare,"metric")
-  colnames(t_athl_compare) <- c("metric","score")
-  t_athl_compare$cluster <- 'athlete'
-  t_athl_compare <- t_athl_compare[order(t_athl_compare$metric),]
-  t_cluster_avg <- data.frame(t(cluster_avg))
-  t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
-  colnames(t_cluster_avg) <- c("metric","score")
-  t_cluster_avg$cluster <- 'cluster'
-  t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
-  cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
+ # t_athl_compare <- data.frame(t(cluster_athlete_compare))
+ # t_athl_compare <- add_rownames(t_athl_compare,"metric")
+ # colnames(t_athl_compare) <- c("metric","score")
+ # t_athl_compare$cluster <- 'athlete'
+ # t_athl_compare <- t_athl_compare[order(t_athl_compare$metric),]
+ # t_cluster_avg <- data.frame(t(cluster_avg))
+ # t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
+ # colnames(t_cluster_avg) <- c("metric","score")
+ # t_cluster_avg$cluster <- 'cluster'
+ # t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
+ # cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
 
-  metric <- c("imp2lraw"
-              ,"imp2rraw"
-              ,"inversionl"
-              ,"inversionr"
-              ,"eversionl"
-              ,"eversionr"
-              ,"translationl"
-              ,"translationr"
-              ,"dropankleactivedecelerationleft"
-              ,"dropankleactivedecelerationright"
-              ,"dropmaxrelativerotationleft"
-              ,"dropmaxrelativerotationright"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropdeltahip_average")
+ # metric <- c("imp2lraw"
+  #            ,"imp2rraw"
+  #            ,"inversionl"
+  #            ,"inversionr"
+  #            ,"eversionl"
+  #            ,"eversionr"
+  #            ,"translationl"
+  #            ,"translationr"
+  #            ,"dropankleactivedecelerationleft"
+  #            ,"dropankleactivedecelerationright"
+  #            ,"dropmaxrelativerotationleft"
+  #            ,"dropmaxrelativerotationright"
+   #           ,"droptotalmovementimpulseasymmetry"
+   #           ,"dropdeltahip_average")
 
-  label <- c("Net Imp 2 (L)"
-             ,"Net Imp 2 (R)"
-             ,"Inversion (L)"
-             ,"Inversion (R)"
-             ,"Eversion (L)"
-             ,"Eversion (R)"
-             ,"Translation (L)"
-             ,"Translation (R)"
-             ,"Drop Ank. Decel (L)"
-             ,"Drop Ank. Decel (R)"
-             ,"Drop Rel. Rot. (L)"
-             ,"Drop Rel Rot. (R)"
-             ,"Tot. Impulse Asym"
-             ,"Drop Delta Hip Avg.")
+#  label <- c("Net Imp 2 (L)"
+#             ,"Net Imp 2 (R)"
+#             ,"Inversion (L)"
+#             ,"Inversion (R)"
+#             ,"Eversion (L)"
+#             ,"Eversion (R)"
+#             ,"Translation (L)"
+#             ,"Translation (R)"
+#             ,"Drop Ank. Decel (L)"
+#             ,"Drop Ank. Decel (R)"
+#             ,"Drop Rel. Rot. (L)"
+#             ,"Drop Rel Rot. (R)"
+#             ,"Tot. Impulse Asym"
+#             ,"Drop Delta Hip Avg.")
 
-  cl <- data.frame(metric,label)
-  cluster_radar <- merge(cluster_radar,cl,by="metric")
-  cluster_radar$metric <- cluster_radar$label
-  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Drop Delta Hip Avg."
-                                                                 ,"Tot. Impulse Asym"
-                                                                 ,"Net Imp 2 (R)"
-                                                                 ,"Translation (R)"
-                                                                 ,"Drop Rel Rot. (R)"
-                                                                 ,"Inversion (R)"
-                                                                 ,"Eversion (R)"
-                                                                 ,"Drop Ank. Decel (R)"
-                                                                 ,"Net Imp 2 (L)"
-                                                                 ,"Translation (L)"
-                                                                 ,"Drop Rel. Rot. (L)"
-                                                                 ,"Inversion (L)"
-                                                                 ,"Eversion (L)"
-                                                                 ,"Drop Ank. Decel (L)"))
+#  cl <- data.frame(metric,label)
+#  cluster_radar <- merge(cluster_radar,cl,by="metric")
+#  cluster_radar$metric <- cluster_radar$label
+#  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Drop Delta Hip Avg."
+#                                                                 ,"Tot. Impulse Asym"
+ #                                                                ,"Net Imp 2 (R)"
+  #                                                               ,"Translation (R)"
+   #                                                              ,"Drop Rel Rot. (R)"
+    #                                                             ,"Inversion (R)"
+     #                                                            ,"Eversion (R)"
+      #                                                           ,"Drop Ank. Decel (R)"
+       #                                                          ,"Net Imp 2 (L)"
+        #                                                         ,"Translation (L)"
+         #                                                        ,"Drop Rel. Rot. (L)"
+          #                                                       ,"Inversion (L)"
+           #                                                      ,"Eversion (L)"
+            #                                                     ,"Drop Ank. Decel (L)"))
 
-  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
-  return(cluster_radar)
+#  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
+ # return(cluster_radar)
 
 }
 
