@@ -233,7 +233,7 @@ get_athl_cluster_data <- function(playername,date) {
 #  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
  # return(cluster_radar)
 
-}
+#}
 
 graph_page_2_2x2 <- function(playername, assessmentdate){
   print("Retrieving 2x2 Scatter Cluster Data")
