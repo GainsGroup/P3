@@ -446,7 +446,7 @@ get_percentiles_page_3 <- function(playername,date) {
   left_knee <- add_rownames(left_knee,"metric")
   colnames(left_knee) <- c("metric","value")
   left_knee$type <- 'left knee'
-  left_knee$order <- c(1:5)
+  left_knee$order <- c(1:4)
   left_knee$metric <- factor(left_knee$metric, levels = left_knee$metric[order(left_knee$order)])
 
 
@@ -458,7 +458,7 @@ get_percentiles_page_3 <- function(playername,date) {
   right_knee <- add_rownames(right_knee,"metric")
   colnames(right_knee) <- c("metric","value")
   right_knee$type <- 'right knee'
-  right_knee$order <- c(1:5)
+  right_knee$order <- c(1:4)
   right_knee$metric <- factor(right_knee$metric, levels = right_knee$metric[order(right_knee$order)])
 
   left_foot <- full_table[,c("inversionl"
