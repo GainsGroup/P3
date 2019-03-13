@@ -7,8 +7,6 @@ library(png)
 
 loadfonts()
 
-playername <- "Josh Okogie"
-date <- "2018-04-18"
 
 dkred <<- '#b11a21'
 ltred <<- '#e0474c'
