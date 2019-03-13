@@ -28,8 +28,8 @@ get_table_stats <- function(playername, date) {
   df <- read_civis(athlete_table, database = "P3") %>%
     filter(name == playername) %>%
     filter(date == assessmentdate)
-  stats_df <- df[,c(3,2,6,8,7)]
-  colnames(stats_df) <- c("Name","Assessment Date","Height","Weight","Reach")
+  stats_df <- df[,c(3,6,8,7)]
+  colnames(stats_df) <- c("Name","Height","Weight","Reach")
 ### Table 2 - performance info
   performance_df_player <- df %>%
     select(display_name, display_vert, display_drop,display_latforce) %>%
