@@ -17,7 +17,7 @@ new_cluster<- read_civis("public.plotting_cluster_data", database = "P3")
 cluster_raw_data <- read.csv("report_v2/p3clustering_single.csv", stringsAsFactors = FALSE) %>%
   select(-hawks)
 completed_cluster <- readRDS("report_v2/production_cluster_data_v1.RDS")
-model <- readRDS("cluster_sorting.RDS")
+model <- readRDS("report_v2/cluster_sorting.RDS")
 
 
 ### Pull in the athlete whos data were generating the report for, make sure column names match up
