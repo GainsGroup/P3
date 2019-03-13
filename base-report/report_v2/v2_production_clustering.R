@@ -1,4 +1,6 @@
-#library(useful)
+print("hi we made it to clustering")
+install.packages(useful)
+library(useful)
 library(dplyr)
 library(cluster)
 library(fpc)
