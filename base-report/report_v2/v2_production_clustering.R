@@ -1,5 +1,5 @@
 print("hi we made it to clustering")
-install.packages(caret)
+install.packages("caret")
 library(caret)
 #library(useful)
 library(dplyr)
@@ -25,6 +25,9 @@ model <- readRDS("report_v2/cluster_sorting.RDS")
 single_athlete <- new_cluster %>%
   filter(name == playername) %>%
   filter(assessmentdate == date) 
+
+print(single_athlete)
+
 names(single_athlete) <- names(cluster_raw_data)  
 
 ### Sort the athlete and pull out his predicted cluster
