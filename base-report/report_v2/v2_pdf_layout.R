@@ -122,7 +122,7 @@ print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(10:14, 20:24
 print(main_page_1_dot_plot(), vp = vplayout(8:15, 2:12))  #pull from right df, move to right area
 
 ### The V man
-print(fig, vp = vplayout(15:28, 13:25))  ### move mroe bottom right 
+print(fig, vp = vplayout(15:28, 13:24))  ### move mroe bottom right 
 
 ## ROW 7-8: 2x2 scatter
 print(cluster_scatter, vp = vplayout(17:28, 2:12)) 
