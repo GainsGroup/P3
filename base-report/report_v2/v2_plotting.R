@@ -44,11 +44,12 @@ get_table_stats <- function(playername, date) {
   
   performance_df <- rbind(performance_df_player, performance_df_average)
   
+  overall_df <- left_join(stats_df, performance_df, by = "Name")
   
     
 
   
-  return(list(as.data.frame(stats_df), as.data.frame(performance_df)))
+  return(overall_df)
 }
 
 
