@@ -12,6 +12,8 @@ library(RGraphics)
 source('report/themes.R')
 source('report/draw_objects.R')
 source('report_v2/v2_plotting.R')
+source('report_v2/v2_production_clustering.R')
+
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
