@@ -46,8 +46,8 @@ training_recs <- Sys.getenv("TRAINING_RECS")
 ################
 ## LOAD DATA  ##
 ################
-#bio_stats_df <- get_table_stats(playername, date)[[1]]
-#performance_stats_df <- get_table_stats(playername, date)[[2]]
+bio_stats_df <- get_table_stats(playername, date)[[1]]
+performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
 ad2 <- get_accel_decel_2(playername,date)
 history <- get_history(playername,date)
