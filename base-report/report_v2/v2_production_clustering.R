@@ -1,11 +1,9 @@
-# ATL Hawks Clustering
-library(useful)
+#library(useful)
 library(dplyr)
 library(cluster)
 library(fpc)
 library(ggfortify)
 library(ggplot2)
-library(png)
 library(caret)
 library(civis)
 library(grid)
