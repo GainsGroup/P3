@@ -51,8 +51,8 @@ training_recs <- Sys.getenv("TRAINING_RECS")
 ################
 ## LOAD DATA  ##
 ################
-bio_stats_df <- get_table_stats(playername, date)[[1]]
-performance_stats_df <- get_table_stats(playername, date)[[2]]
+bio_stats_df <- get_table_stats(playername, date)
+#performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
 ad2 <- get_accel_decel_2(playername,date)
 cluster_athl <- get_athl_cluster_data(playername,date)
@@ -113,8 +113,8 @@ print(drawtext(intro, pagetitle, header = TRUE), vp = vplayout(2, 3:20))
 print(get_logo(), vp = vplayout(2, 21:23))
 
 ## ROW 3/4: summary text and scores
-print(drawtable(bio_stats_df), vp = vplayout(3:6, 2:12))
-print(drawtable(performance_stats_df), vp = vplayout(3:9, 13:24)) #this is directionally right, placement wise 
+print(drawtable(bio_stats_df), vp = vplayout(3:6, 2:20))
+#print(drawtable(performance_stats_df), vp = vplayout(3:9, 13:24)) #this is directionally right, placement wise 
 print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(10:14, 15:19)) #move this guy down??
 print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(10:14, 20:24)) #move this guy down ??
 
