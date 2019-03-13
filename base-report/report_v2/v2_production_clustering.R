@@ -1,6 +1,6 @@
 print("hi we made it to clustering")
-install.packages("caret")
-library(caret)
+#install.packages("caret")
+#library(caret)
 #library(useful)
 library(dplyr)
 library(cluster)
