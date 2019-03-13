@@ -6,7 +6,6 @@ library(cluster)
 #library(fpc)
 #library(ggfortify)
 library(ggplot2)
-library(caret)
 library(civis)
 library(grid)
 
