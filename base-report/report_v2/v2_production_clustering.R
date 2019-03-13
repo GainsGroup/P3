@@ -9,8 +9,11 @@ library(ggplot2)
 library(civis)
 library(grid)
 
+Sys.setenv(CIVIS_API_KEY = 'cdd57e940062ebda689520c4882a3024de788987e77709ab94f88c2f0883919c')   
+
+
 ### Get all Data and models needed for new athlete
-new_cluster<- read_civis("report_v2/public.plotting_cluster_data", database = "P3")
+new_cluster<- read_civis("public.plotting_cluster_data", database = "P3")
 cluster_raw_data <- read.csv("report_v2/p3clustering_single.csv", stringsAsFactors = FALSE) %>%
   select(-hawks)
 completed_cluster <- readRDS("report_v2/production_cluster_data_v1.RDS")
