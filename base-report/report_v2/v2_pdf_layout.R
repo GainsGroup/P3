@@ -12,7 +12,6 @@ library(RGraphics)
 source('report/themes.R')
 source('report/draw_objects.R')
 source('report_v2/v2_plotting.R')
-source('report_v2/v2_production_clustering.R')
 
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
@@ -37,6 +36,10 @@ playername <- Sys.getenv("PLAYER_NAME")
 date = Sys.getenv("ASSESSMENT_DATE")
 print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
+
+## Bring in the clustering
+source('report_v2/v2_production_clustering.R')
+
 
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
