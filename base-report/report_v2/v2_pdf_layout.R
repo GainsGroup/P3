@@ -110,14 +110,14 @@ print(get_logo(), vp = vplayout(2, 21:23))
 ## ROW 3/4: summary text and scores
 print(drawtable(bio_stats_df), vp = vplayout(3:6, 2:12))
 print(drawtable(performance_stats_df), vp = vplayout(3:9, 13:24)) #this is directionally right, placement wise 
-print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(10:15, 15:19)) #move this guy down??
-print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(10:15, 20:24)) #move this guy down ??
+print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(10:14, 15:19)) #move this guy down??
+print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(10:14, 20:24)) #move this guy down ??
 
 ## ROW 5-6: lollipop plot and figure
 print(main_page_1_dot_plot(), vp = vplayout(8:15, 2:12))  #pull from right df, move to right area
 
 ### The V man
-print(fig, vp = vplayout(17:28, 13:25))  ### move mroe bottom right 
+print(fig, vp = vplayout(15:28, 13:25))  ### move mroe bottom right 
 
 ## ROW 7-8: 2x2 scatter
 print(cluster_scatter, vp = vplayout(17:28, 2:12)) 
