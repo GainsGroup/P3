@@ -38,7 +38,7 @@ print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
 
 ## Bring in the clustering
-#source('report_v2/v2_production_clustering.R')
+source('report_v2/v2_production_clustering.R')
 
 
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
