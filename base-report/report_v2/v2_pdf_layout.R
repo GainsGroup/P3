@@ -1,4 +1,6 @@
 install.packages("gridExtra")
+install.packages("ReporteRs")
+
 
 library(ggplot2)
 library(dplyr)
