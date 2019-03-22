@@ -127,7 +127,7 @@ print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(10:14, 
 print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(10:14, 20:24)) #move this guy down ??
 
 ## ROW 5-6: lollipop plot and figure
-print(main_page_1_dot_plot(), vp = vplayout(8:15, 2:12))  #pull from right df, move to right area
+print(main_page_1_dot_plot(), vp = vplayout(9:15, 2:12))  #pull from right df, move to right area
 
 ### The V man
 print(fig, vp = vplayout(15:28, 13:25))  ### move mroe bottom right 
