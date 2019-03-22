@@ -49,6 +49,7 @@ clusterplot <- function(athlete_label){
   fill_colors[placement] <- "red"
   outline_colors[placement] <- "red"
   
+  labsize <- 5.5
   
   plot <- autoplot(completed_cluster , data = cluster_raw_data, 
            #label = TRUE, label.label = 'names', ncol =14, label.size = 7, 
@@ -58,13 +59,13 @@ clusterplot <- function(athlete_label){
   scale_color_manual(values = outline_colors) +
   xlab("") +
   ylab("") +
-  annotate("text", x = -.13, y = .06, label = "Traditional Bigs", color = "black", angle = 25, fontface = "bold", size =6) +  ## cluster 1
-  annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =6) + ## cluster 2
-  annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =6) +## cluster 3
-  annotate("text", x = .01, y = .18, label = "Kinematic Movers", color = "black", fontface = "bold", size =6) +## cluster 4
-  annotate("text", x = -.05, y = -.17, label = "Bigs Plus", color = "black", fontface = "bold", size =6) +## cluster 5
-  annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =6) +## cluster 6
-  annotate("text", x = .095, y = .06, label = "Hyper-Athletic Guards", color = "black", angle = -25, fontface = "bold", size =6) + ## cluster 7 
+  annotate("text", x = -.12, y = .06, label = "Traditional Bigs", color = "black", angle = 30, fontface = "bold", size =labsize) +  ## cluster 1
+  annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =labsize) + ## cluster 2
+  annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =labsize) +## cluster 3
+  annotate("text", x = .01, y = .17, label = "Kinematic Movers", color = "black", fontface = "bold", size =labsize) +## cluster 4
+  annotate("text", x = -.05, y = -.17, label = "Bigs Plus", color = "black", fontface = "bold", size =labsize) +## cluster 5
+  annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =labsize) +## cluster 6
+  annotate("text", x = .095, y = .06, label = "Hyper-Athletic Guards", color = "black", angle = -25, fontface = "bold", size =labsize) + ## cluster 7 
   theme_void() +
   theme(legend.position="none",
        panel.border = element_rect(colour = "black", fill = NA, size =1)) 
