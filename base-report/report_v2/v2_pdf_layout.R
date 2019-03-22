@@ -2,6 +2,7 @@ install.packages("gridExtra")
 #install.packages("ReporteRs")
 install.packages("png")
 install.packages("randomForest")
+install.packages("ggfortify")
 
 
 library(ggplot2)
