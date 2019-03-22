@@ -1,5 +1,5 @@
 install.packages("gridExtra")
-install.packages("ReporteRs")
+#install.packages("ReporteRs")
 
 
 library(ggplot2)
@@ -9,7 +9,7 @@ library(extrafont)
 library(gridExtra)
 library(grid)
 library(cowplot)
-library(ReporteRs)
+#library(ReporteRs)
 library(stringr)
 library(grImport)
 library(RGraphics)
