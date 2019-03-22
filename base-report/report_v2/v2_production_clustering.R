@@ -58,13 +58,13 @@ clusterplot <- function(athlete_label){
   scale_color_manual(values = outline_colors) +
   xlab("") +
   ylab("") +
-  annotate("text", x = -.15, y = .05, label = "Traditional Bigs", color = "black", angle = 25, fontface = "bold", size =7) +  ## cluster 1
-  annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =7) + ## cluster 2
-  annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =7) +## cluster 3
-  annotate("text", x = .01, y = .18, label = "Kinematic Movers", color = "black", fontface = "bold", size =7) +## cluster 4
-  annotate("text", x = -.05, y = -.17, label = "Bigs Plus", color = "black", fontface = "bold", size =7) +## cluster 5
-  annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =7) +## cluster 6
-  annotate("text", x = .12, y = .06, label = "Hyper-Athletic Guards", color = "black", angle = -25, fontface = "bold", size =7) + ## cluster 7 
+  annotate("text", x = -.13, y = .05, label = "Traditional Bigs", color = "black", angle = 25, fontface = "bold", size =6) +  ## cluster 1
+  annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =6) + ## cluster 2
+  annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =6) +## cluster 3
+  annotate("text", x = .01, y = .18, label = "Kinematic Movers", color = "black", fontface = "bold", size =6) +## cluster 4
+  annotate("text", x = -.05, y = -.17, label = "Bigs Plus", color = "black", fontface = "bold", size =6) +## cluster 5
+  annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =6) +## cluster 6
+  annotate("text", x = .10, y = .06, label = "Hyper-Athletic Guards", color = "black", angle = -25, fontface = "bold", size =6) + ## cluster 7 
   theme_void() +
   theme(legend.position="none",
        panel.border = element_rect(colour = "black", fill = NA, size =1)) 
