@@ -560,8 +560,8 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
           plot.background = element_rect(fill = "transparent",colour = NA),
-          plot.title = element_text(vjust=20),
-          plot.subtitle = element_text(vjust=20)
+       #   plot.title = element_text(vjust=20),
+       #   plot.subtitle = element_text(vjust=20)
     )
 }
 
