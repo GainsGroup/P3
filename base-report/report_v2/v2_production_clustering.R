@@ -59,7 +59,7 @@ clusterplot <- function(athlete_label){
   scale_color_manual(values = outline_colors) +
   xlab("") +
   ylab("") +
-  annotate("text", x = -.12, y = .06, label = "Traditional Bigs", color = "black", angle = 30, fontface = "bold", size =labsize) +  ## cluster 1
+  annotate("text", x = -.12, y = .07, label = "Traditional Bigs", color = "black", angle = 30, fontface = "bold", size =labsize) +  ## cluster 1
   annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =labsize) + ## cluster 2
   annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =labsize) +## cluster 3
   annotate("text", x = .01, y = .17, label = "Kinematic Movers", color = "black", fontface = "bold", size =labsize) +## cluster 4
