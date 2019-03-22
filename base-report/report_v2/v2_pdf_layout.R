@@ -13,7 +13,7 @@ library(cowplot)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('report/themes.R')
+source('report_v2/v2_themes.R')
 source('report/draw_objects.R')
 source('report_v2/v2_plotting.R')
 
