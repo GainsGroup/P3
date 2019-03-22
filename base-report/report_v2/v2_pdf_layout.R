@@ -2,8 +2,6 @@ install.packages("gridExtra")
 install.packages("png")
 install.packages("randomForest")
 install.packages("ggfortify")
-devtools::install_github('davidgohel/ReporteRsjars')
-devtools::install_github('davidgohel/ReporteRs')
 
 library(ggplot2)
 library(dplyr)
