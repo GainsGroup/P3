@@ -162,7 +162,7 @@ print(drawtext(page_2_detail, header = FALSE), vp = vplayout(12:15, 12:25))
 
 ## ROW 7-8: radar and cluster plots
 #print(radar_plot_athl, vp = vplayout(16:27, 12:26)) 
-print(clusterplot(athlete_label), vp = vplayout(16:17, 12:26))
+print(clusterplot(athlete_label = athlete_prediction), vp = vplayout(16:17, 12:26))
 
 ###########
 ## PAGE 3##
