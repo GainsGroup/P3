@@ -1,3 +1,5 @@
+install.packages("gridExtra")
+
 library(ggplot2)
 library(dplyr)
 library(civis)
