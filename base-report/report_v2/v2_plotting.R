@@ -20,7 +20,6 @@ yellow <<- "#FFFF66"
 green <<- "#228b22"
 pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
-
 get_table_stats <- function(playername, date) {
   print("Retrieving Bio Info")
   athlete_table <- 'public.v2_page_1_bio_info'
@@ -57,7 +56,10 @@ get_table_stats <- function(playername, date) {
   
   performance_df <- rbind(performance_df_player, performance_df_average)
   
-  overall_df <- left_join(stats_df, performance_df, by = "Name")
+  overall_df <- left_join(stats_df, performance_df, by = "Name")%>%
+    rename("Vert Jump (% +/- NBA Avg.)" = "Vert Jump", "Drop Jump (% +/- NBA Avg.)" = "Drop Jump", "Lat Force (% +/- NBA Avg.)" = "Lat Force")
+  
+  colnames(overall_df) <- sapply(colnames(overall_df), function(x) paste(strwrap(x, width = 9),  collapse="\n"))
   
   
   
@@ -65,7 +67,6 @@ get_table_stats <- function(playername, date) {
   
   return(overall_df)
 }
-
 
 
 get_athl_cluster_data <- function(playername,date) {
