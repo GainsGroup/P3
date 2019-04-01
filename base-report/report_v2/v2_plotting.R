@@ -57,14 +57,8 @@ get_table_stats <- function(playername, date) {
   performance_df <- rbind(performance_df_player, performance_df_average)
   
   overall_df <- left_join(stats_df, performance_df, by = "Name")%>%
-    rename("Vert Jump (% +/- NBA Avg.)" = "Vert Jump", "Drop Jump (% +/- NBA Avg.)" = "Drop Jump", "Lat Force (% +/- NBA Avg.)" = "Lat Force")
-  
-  colnames(overall_df) <- sapply(colnames(overall_df), function(x) paste(strwrap(x, width = 9),  collapse="\n"))
-  
-  
-  
-  
-  
+    rename("Vert Jump\n(+/- NBA Avg)" = "Vert Jump", "Drop Jump\n(+/- NBA Avg)" = "Drop Jump", "Lat Force\n(+/- NBA Avg)" = "Lat Force")
+    
   return(overall_df)
 }
 
