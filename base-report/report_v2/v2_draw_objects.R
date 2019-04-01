@@ -156,7 +156,7 @@ drawscore <- function(score, caption, bgcolor = blue) {
 
 
 drawtable_pageone <- function(df, fill_col = NULL, fill = dkgrey, width=NULL) {
-  g2 <- tableGrob(df, rows = NULL, theme = p3_table_theme_page_one())
+  g2 <- tableGrob(df, rows = NULL, theme = p3_table_theme())
   if (!is.null(fill_col)){
     col_index <- grep(fill_col, colnames(df))
     color_func <- colorRampPalette(c('white', fill))
