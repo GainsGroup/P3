@@ -247,7 +247,7 @@ p3_table_theme_page_one <- function(){
                                , fontface=c("plain","plain")
     ),
     bg_params = list(fill = c(white, ltgrey))),
-    colhead = list(fg_params=list(col=c(white, white)
+    colhead = list(fg_params=list(col=c(dkgrey, dkgrey)
                                   , fontface="plain"
                                   , cex = 1
                                   , hjust = 0.5
