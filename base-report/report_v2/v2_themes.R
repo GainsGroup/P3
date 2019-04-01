@@ -246,13 +246,13 @@ p3_table_theme_page_one <- function(){
                                #, x=.05
                                , fontface=c("plain","plain")
     ),
-    bg_params = list(fill = c(white, ltgrey), col = dkgrey)),
+    bg_params = list(fill = c(white, ltgrey), col = "black")),
     colhead = list(fg_params=list(col=c(white, white)
                                   , fontface="plain"
                                   , cex = 1
                                   , hjust = 0.5
                                   #, x=.05
     ),
-    bg_params=list(fill=dkred, col = dkgrey))
+    bg_params=list(fill=dkred, col = "black"))
   )
   return(theme)}
