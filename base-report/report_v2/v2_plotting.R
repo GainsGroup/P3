@@ -24,18 +24,31 @@ pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 get_table_stats <- function(playername, date) {
   print("Retrieving Bio Info")
   athlete_table <- 'public.v2_page_1_bio_info'
-### Table 1 - bio info  
+  ### Table 1 - bio info  
   df <- read_civis(athlete_table, database = "P3") %>%
     filter(name == playername) %>%
-    filter(date == assessmentdate)
-  stats_df <- df[,c(3,6,8,7)]
+    filter(date == assessmentdate) %>%
+    mutate(perc_vert = as.numeric(perc_vert),
+           perc_drop = as.numeric(perc_drop),
+           perc_lat = as.numeric(perc_lat))
+  stats_df <- df[,c(9,12,14,13)]
   colnames(stats_df) <- c("Name","Height","Weight","Reach")
-### Table 2 - performance info
+  ### Table 2 - performance info
   performance_df_player <- df %>%
-    select(display_name, display_vert, display_drop,display_latforce) %>%
+    select(display_name, display_vert, display_drop,display_latforce, perc_vert, perc_drop, perc_lat) %>%
+    mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
+           perc_drop = ifelse(perc_drop >0, paste0("+", perc_drop),perc_drop),
+           perc_lat = ifelse(perc_lat >0, paste0("+", perc_lat),perc_lat)) %>%
     mutate_all(as.character) %>%
-    rename("Name" = display_name, "Vert Jump" = display_vert, "Drop Jump" = display_drop, "Lat Force" = display_latforce)
-  
+    mutate(display_vert = paste(display_vert, 
+                                paste0("(",perc_vert,"%",")")),
+           display_drop = paste(display_drop, 
+                                paste0("(",perc_drop,"%",")")),
+           display_latforce = paste(display_latforce, 
+                                paste0("(",perc_lat,"%",")"))) %>%
+    rename("Name" = display_name, "Vert Jump" = display_vert, "Drop Jump" = display_drop, "Lat Force" = display_latforce) %>%
+    select(-c(perc_vert, perc_drop, perc_lat))
+
   performance_df_average <- df %>%
     select(display_name, average_vert,average_drop,average_latforce) %>%
     mutate_all(as.character) %>%
@@ -46,8 +59,9 @@ get_table_stats <- function(playername, date) {
   
   overall_df <- left_join(stats_df, performance_df, by = "Name")
   
-    
-
+  
+  
+  
   
   return(overall_df)
 }
