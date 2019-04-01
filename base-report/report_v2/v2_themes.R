@@ -235,3 +235,24 @@ p3_table_theme <- function(){
                    bg_params=list(fill=dkred))
   )
   return(theme)}
+
+
+p3_table_theme_page_one <- function(){
+  theme <- ttheme_default(
+    base_size = 11,
+    base_colour = "black",
+    padding = unit(c(4, 3), "mm"),
+    core = list(fg_params=list(hjust = 0.5
+                               #, x=.05
+                               , fontface=c("plain","plain")
+    ),
+    bg_params = list(fill = c(white, ltgrey))),
+    colhead = list(fg_params=list(col=c(white, white)
+                                  , fontface="plain"
+                                  , cex = 1
+                                  , hjust = 0.5
+                                  #, x=.05
+    ),
+    bg_params=list(fill=dkred))
+  )
+  return(theme)}
