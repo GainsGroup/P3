@@ -1,7 +1,4 @@
-install.packages("gridExtra")
-install.packages("png")
-install.packages("randomForest")
-install.packages("ggfortify")
+
 
 library(ggplot2)
 library(dplyr)
