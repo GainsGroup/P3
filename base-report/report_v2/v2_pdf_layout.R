@@ -173,7 +173,7 @@ print(get_logo(), vp = vplayout(2, 23:25))
 ## ROW 3-6 LEFT
 
 ## Man Figure
-print(fig, vp = vplayout(5:24, 10:23))
+print(fig, vp = vplayout(4:20, 10:26))
 ## Low Back
 print(dot_plot1, vp = vplayout(3:7, 1:9))
 ## Left Knee
