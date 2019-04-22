@@ -471,7 +471,7 @@ get_logo <- function(){
 acceleration_bars <- function(df,subtitle) {
   ggplot(df,aes(x=metric,y=value,fill=metric)) +
     geom_bar(stat = 'identity') +
-    labs(title="Acceleration / Deceleration",
+    labs(title="Deceleration / Acceleration",
          subtitle=subtitle) +
     scale_fill_manual("legend",values = c(dkred,dkgrey,dkred,dkgrey,dkred)) +
     coord_flip() +
