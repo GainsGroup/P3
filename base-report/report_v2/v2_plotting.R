@@ -174,7 +174,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
   graph <- ggplot(data, aes(x = average_lateralforcebw, y = predicted, label=playername)) +
     geom_vline(xintercept = 50) + ### position mean, x
     geom_hline(yintercept = 50) + ### position mean, y
-    geom_point(aes(fill=position),size=7, pch =21, alpha=0.5) +  ### overall points
+    geom_point(aes(fill=position),size=5, pch =21, alpha=0.5) +  ### overall points
     geom_point(data = data[data[,1] == playername & data[,2] == assessmentdate , ], size = 12, fill = "black", pch=21, show.legend = FALSE) +  ## point for target athlete
     geom_text(data = data[data[,1] == playername & data[,2] == assessmentdate , ]
               , aes(average_lateralforcebw,predicted,label = paste(substr(word(name),1,1),substr(word(name,2),1,1),sep="")), size = 5, fontface="bold",color="white") +  ## text for target athlete
