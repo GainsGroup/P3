@@ -49,7 +49,7 @@ clusterplot <- function(athlete_label){
   fill_colors[placement] <- "red"
   outline_colors[placement] <- "red"
   
-  labsize <- 5.5
+  labsize <- 5
   
   plot <- autoplot(completed_cluster , data = cluster_raw_data, 
            #label = TRUE, label.label = 'names', ncol =14, label.size = 7, 
@@ -67,8 +67,8 @@ clusterplot <- function(athlete_label){
   annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =labsize) +## cluster 6
   annotate("text", x = .095, y = .06, label = "Hyper-Athletic Guards", color = "black", angle = -25, fontface = "bold", size =labsize) + ## cluster 7 
   theme_void() +
-  theme(legend.position="none",
-       panel.border = element_rect(colour = "black", fill = NA, size =1)) 
+  theme(legend.position="none")
+       #panel.border = element_rect(colour = "black", fill = NA, size =1)) 
    
   return(plot)
 }
