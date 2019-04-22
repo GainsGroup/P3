@@ -527,7 +527,7 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
     rename("label" = variable, "percentile" = value) %>%
     mutate(pos = ifelse(percentile >= 50, TRUE, FALSE))
   
-  overall <- overall[c(3,4,1,2),]
+  overall$label <-   factor(overall$label, levels = levels(overall$label)[c(4,3,1,2)])
   
   
   plot <- ggplot(overall, aes(x=label, y=percentile)) +
