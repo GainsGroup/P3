@@ -175,15 +175,15 @@ print(get_logo(), vp = vplayout(2, 23:25))
 ## Man Figure
 print(fig, vp = vplayout(4:20, 10:26))
 ## Low Back
-print(dot_plot1, vp = vplayout(3:7, 1:9))
+print(dot_plot1, vp = vplayout(3:7, 2:10))
 ## Left Knee
-print(dot_plot2, vp = vplayout(8:12, 1:9))
+print(dot_plot2, vp = vplayout(8:12, 2:10))
 ## Left Foot
-print(dot_plot4, vp = vplayout(13:17, 1:9))
+print(dot_plot4, vp = vplayout(13:17, 2:10))
 ## Right Knee
-print(dot_plot3, vp = vplayout(18:22, 1:9))
+print(dot_plot3, vp = vplayout(18:22, 2:10))
 ## Right Foot
-print(dot_plot5, vp = vplayout(23:27, 1:9))
+print(dot_plot5, vp = vplayout(23:27, 2:10))
 
 ## ROW 7-8 LEFT: training targets and cluster plots
 print(drawtext(training_recs, 'Training Targets', header = FALSE), vp = vplayout(23:27, 11:24))
