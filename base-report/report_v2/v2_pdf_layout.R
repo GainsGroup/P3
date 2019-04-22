@@ -74,9 +74,9 @@ cluster_scatter <- graph_page_2_2x2(playername,date)
 radar_plot_athl <- radar_plot(cluster_athl) 
 dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
 dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
-dot_plot3 <- dot_plot_right(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
+dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
 dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
-dot_plot5 <- dot_plot_right(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
+dot_plot5 <- dot_plot(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
 
 
 ################
