@@ -186,7 +186,7 @@ print(dot_plot3, vp = vplayout(18:22, 1:9))
 print(dot_plot5, vp = vplayout(23:27, 1:9))
 
 ## ROW 7-8 LEFT: training targets and cluster plots
-print(drawtext(training_recs, 'Training Targets', header = FALSE), vp = vplayout(24:28, 11:26))
+print(drawtext(training_recs, 'Training Targets', header = FALSE), vp = vplayout(23:27, 11:24))
 
 dev.off()
 
