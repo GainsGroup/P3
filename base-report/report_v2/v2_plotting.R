@@ -186,7 +186,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
     theme_p3() +
     theme(#axis.text = element_text(size=10, face = "bold"),
       axis.title.x = element_text(size=11,face="bold"),
-      axis.title.y = element_text(size=11,face="bold",angle=90,vjust = 10),
+      axis.title.y = element_text(size=11,face="bold",angle=90),
       legend.position = 'bottom',
       legend.key = element_rect(linetype = "blank"),
       legend.key.size = unit(1,"line"))  +
