@@ -54,7 +54,6 @@ bio_stats_df <- get_table_stats(playername, date)
 #performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
 ad2 <- get_accel_decel_2(playername,date)
-cluster_athl <- get_athl_cluster_data(playername,date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
 percentiles_page3 <- get_percentiles_page_3(playername,date)
 
