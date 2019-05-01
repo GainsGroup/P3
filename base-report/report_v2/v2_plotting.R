@@ -62,105 +62,6 @@ get_table_stats <- function(playername, date) {
   return(overall_df)
 }
 
-
-get_athl_cluster_data <- function(playername,date) {
-  print("Retrieving Athleticism Cluster Data")
-  cluster_athlete_query <- paste("select cluster
-                                 ,avg(imp_1_avg) as imp_1_avg
-                                 ,avg(conc_raw_avg) as conc_raw_avg
-                                 ,avg(dropmaxkneeextensionvelocityavg) as dropmaxkneeextensionvelocityavg
-                                 ,avg(ecc_rel_ff) as ecc_rel_ff
-                                 ,avg(conc_rel_ff) as conc_rel_ff
-                                 ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-                                 ,avg(lateralforceleftbw) as slaveragelateralrfd
-                                 ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
-                                 ,avg(slmaxhipabduction) as slmaxhipabduction
-                                 ,avg(lateralforcerightbw) as sraveragelateralrfd
-                                 ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
-                                 ,avg(srmaxhipabduction) as srmaxhipabduction
-                                 from public.spider_plot_data
-                                 where name = '",playername,"' and assessmentdate = '",date,"' group by 1",sep="")
-  
-  cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
-  cluster_athlete$cluster
-  cluster_avg_sql <- paste("select avg(imp_1_avg) as imp_1_avg
-                           ,avg(conc_raw_avg) as conc_raw_avg
-                           ,avg(dropmaxkneeextensionvelocityavg) as dropmaxkneeextensionvelocityavg
-                           ,avg(ecc_rel_ff) as ecc_rel_ff
-                           ,avg(conc_rel_ff) as conc_rel_ff
-                           ,avg(vertmaxkneeextensionvelocityavg) as vertmaxkneeextensionvelocityavg
-                           ,avg(lateralforceleftbw) as slaveragelateralrfd
-                           ,avg(slmaxhipextensionvelocity) as slmaxhipextensionvelocity
-                           ,avg(slmaxhipabduction) as slmaxhipabduction
-                           ,avg(lateralforcerightbw) as sraveragelateralrfd
-                           ,avg(srmaxhipextensionvelocity) as srmaxhipextensionvelocity
-                           ,avg(srmaxhipabduction) as srmaxhipabduction
-                           from public.spider_plot_data
-                           where cluster = ",cluster_athlete$cluster,sep="")
-  
-  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
-  cluster_athlete_compare <- cluster_athlete[,-1]
-  
-  t_athl_compare <- data.frame(t(cluster_athlete_compare))
-  t_athl_compare <- add_rownames(t_athl_compare,"metric")
-  colnames(t_athl_compare) <- c("metric","score")
-  t_athl_compare$cluster <- 'athlete'
-  t_athl_compare <- t_athl_compare[order(t_athl_compare$metric),]
-  t_cluster_avg <- data.frame(t(cluster_avg))
-  t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
-  colnames(t_cluster_avg) <- c("metric","score")
-  t_cluster_avg$cluster <- 'cluster'
-  t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
-  cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
-  
-  metric <- c("imp_1_avg"
-              ,"dropmaxkneeextensionvelocityavg"
-              ,"conc_raw_avg"
-              ,"ecc_rel_ff"
-              ,"conc_rel_ff"
-              ,"vertmaxkneeextensionvelocityavg"
-              ,"slaveragelateralrfd"
-              ,"slmaxhipextensionvelocity"
-              ,"slmaxhipabduction"
-              ,"sraveragelateralrfd"
-              ,"srmaxhipextensionvelocity"
-              ,"srmaxhipabduction")
-  
-  label <- c("Net Impact 1"
-             ,"Drop Knee Ext. Velocity"
-             ,"Concentric Force"
-             ,"Ecc Rel FF"
-             ,"Conc Rel FF"
-             ,"Vert Knee Ext. Velocity"
-             ,"Lateral Drive (L)"
-             ,"Hip Extension Velocity (L)"
-             ,"Peak Hip Abduction (L)"
-             ,"Lateral Drive (R)"
-             ,"Hip Extension Velocity (R)"
-             ,"Peak Hip Abduction (R)")
-  
-  cl <- data.frame(metric,label)
-  cluster_radar <- merge(cluster_radar,cl,by="metric")
-  cluster_radar$metric <- cluster_radar$label
-  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Vert Knee Ext. Velocity"
-                                                                 ,"Conc Rel FF"
-                                                                 ,"Ecc Rel FF"
-                                                                 ,"Lateral Drive (R)"
-                                                                 ,"Hip Extension Velocity (R)"
-                                                                 ,"Peak Hip Abduction (R)"
-                                                                 ,"Net Impact 1"
-                                                                 ,"Concentric Force"
-                                                                 ,"Drop Knee Ext. Velocity"
-                                                                 ,"Peak Hip Abduction (L)"
-                                                                 ,"Hip Extension Velocity (L)"
-                                                                 ,"Lateral Drive (L)"))
-  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
-  return(cluster_radar)
-  
-}
-
-
-
 graph_page_2_2x2 <- function(playername, assessmentdate){
   print("Retrieving 2x2 Scatter Cluster Data")
   ### Extract the player's position to allow for comparison and to allow for dynamic graph labeling (used below)
@@ -425,7 +326,7 @@ get_percentiles_page_3 <- function(playername,date) {
   
 }  ### This is page 3 
 
-get_fig <- function(playername,date){
+get_fig_page_one <- function(playername,date){
   being_img <-
     rasterGrob(readPNG("p3_wireman.png"))
   print("Retrieving Flag Diagram Data")
@@ -433,7 +334,35 @@ get_fig <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.22, -0.23, 0.05,  0.02, -0.13),
+    x = c(-0.20, -0.21, 0.07,  0.04, -0.09),
+    y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
+    color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
+  )
+  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
+  fig <- ggplot() +
+    annotation_custom(being_img, -1, 1, -1, 1) +
+    xlim(-1, 1) +
+    ylim(-1, 1) +
+    geom_point(data = df,
+               aes(x, y, size = 28, color = color,fill=color),
+               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
+    scale_colour_manual(values = color_map) +
+    scale_fill_manual(values=color_map) +
+    guides(colour = FALSE, size = FALSE) +
+    scale_size(range = c(8,12)) +
+    ggtitle("Injury Risk Stratification")+
+    theme_p3_fig()
+}
+                                           
+get_fig_page_three <- function(playername,date){
+  being_img <-
+    rasterGrob(readPNG("p3_wireman.png"))
+  print("Retrieving Flag Diagram Data")
+  color_sql <- paste("select * from public.page_1_and_3_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  color_frame <- read_civis(sql(color_sql),"P3")
+  df <- data.frame(
+    # R Ankle, R Knee, L Ankle, L Knee, M Back
+    x = c(-0.18, -0.19, 0.09,  0.06, -0.09),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   )
@@ -449,8 +378,9 @@ get_fig <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
+    ggtitle("Injury Risk Stratification")+
     theme_p3_fig()
-}
+}                                           
 
 get_logo <- function(){
   being_img <-
