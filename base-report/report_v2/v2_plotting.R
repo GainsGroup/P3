@@ -350,7 +350,6 @@ get_fig_page_one <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
-    ggtitle("Injury Risk Stratification")+
     theme_p3_fig()
 }
                                            
@@ -378,7 +377,6 @@ get_fig_page_three <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
-    ggtitle("Injury Risk Stratification")+
     theme_p3_fig()
 }                                           
 
@@ -405,31 +403,6 @@ acceleration_bars <- function(df,subtitle) {
     coord_flip() +
     theme_p3() +
     ylim(-100,100)
-}
-
-radar_plot <- function(df.rad) {
-  radar_plot <- ggplot(df.rad, aes(x = metric, y = score/100, color = cluster, group = cluster)) +
-    geom_polygon(aes(color = cluster, fill = cluster), alpha = .2) + geom_point(aes(color = cluster)) +
-    coord_polar(start=-pi/4) +
-    theme_p3() +
-    scale_color_manual(values=c(dkgrey, ltred), guide = FALSE) +
-    scale_fill_manual(values=c(dkgrey, ltred), labels = c("Athlete", 'Cluster'), name = NULL) +
-    labs(title="Performance Factor Comparison",
-         subtitle="Athlete Relative to Cluster") +
-    scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
-    geom_text(aes(x=metric, y=1.20,
-                  label=str_wrap(metric,width=10)),
-              color=dkgrey,size=2) +
-    theme(
-      legend.key = element_blank(),
-      legend.position = 'right',
-      axis.text.x=element_blank(),
-      plot.subtitle = element_text(vjust=12),
-      axis.ticks.y = element_blank(),
-      axis.text.y = element_blank()
-    )
-  return(radar_plot)
-  
 }
 
 
