@@ -312,7 +312,7 @@ get_percentiles_page_3 <- function(playername,date) {
   low_back <- full_table %>%
     select("dropdeltahip_average", "imp2lraw", "imp2rraw", "droptotalmovementimpulseasymmetry")
   low_back <- data.frame(t(low_back))
-  low_back <- rownames_to_column(low_back, "metric")
+  low_back <- add_rownames(low_back, "metric")
   colnames(low_back) <- c("metric","value")
   low_back$type <- 'low back'
   low_back$order <- c(1:4)
@@ -321,7 +321,7 @@ get_percentiles_page_3 <- function(playername,date) {
   left_knee <- full_table %>%
     select("dropmaxrelativerotationleft", "translationl", "dropmaxhipactivedecelerationleft", "dropdeltafemoralrotationleft")
   left_knee <- data.frame(t(left_knee))
-  left_knee <- rownames_to_column(left_knee,"metric")
+  left_knee <- add_rownames(left_knee,"metric")
   colnames(left_knee) <- c("metric","value")
   left_knee$type <- 'left knee'
   left_knee$order <- c(1:4)
@@ -331,7 +331,7 @@ get_percentiles_page_3 <- function(playername,date) {
   right_knee <-full_table %>%
     select("dropmaxrelativerotationright", "translationr", "dropmaxhipactivedecelerationright", "dropdeltafemoralrotationright")
   right_knee <- data.frame(t(right_knee))
-  right_knee <- rownames_to_column(right_knee,"metric")
+  right_knee <- add_rownames(right_knee,"metric")
   colnames(right_knee) <- c("metric","value")
   right_knee$type <- 'right knee'
   right_knee$order <- c(1:4)
@@ -350,7 +350,7 @@ get_percentiles_page_3 <- function(playername,date) {
   right_foot <- full_table %>%
     select("inversionr", "eversionr", "dropankleactivedecelerationright", "droptotalmovementimpulseasymmetry")
   right_foot <- data.frame(t(right_foot))
-  right_foot <- rownames_to_column(right_foot,"metric")
+  right_foot <- add_rownames(right_foot,"metric")
   colnames(right_foot) <- c("metric","value")
   right_foot$type <- 'right foot'
   right_foot$order <- c(1:4)
