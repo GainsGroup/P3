@@ -328,7 +328,7 @@ get_percentiles_page_3 <- function(playername,date) {
 
 get_fig_page_one <- function(playername,date){
   being_img <-
-    rasterGrob(readPNG("p3_wireman.png"))
+    rasterGrob(readPNG("p3_wireman_base.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.page_1_and_3_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")
