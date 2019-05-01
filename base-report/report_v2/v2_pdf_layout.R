@@ -68,7 +68,8 @@ mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$scaled_mech_score)
 ################
 dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
 dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
-fig <- get_fig(playername,date)
+fig_one <- get_fig_page_one(playername,date)
+fig_three <- get_fig_page_three(playername,date)
 accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
 cluster_scatter <- graph_page_2_2x2(playername,date)
 radar_plot_athl <- radar_plot(cluster_athl) 
@@ -121,7 +122,7 @@ print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(9:13, 20:24)
 print(main_page_1_dot_plot(), vp = vplayout(8:14, 2:12))  #pull from right df, move to right area
 
 ### The V man
-print(fig, vp = vplayout(14:27, 13:25))  ### move mroe bottom right 
+print(fig_one, vp = vplayout(14:27, 13:25))  ### move mroe bottom right 
 
 ## ROW 7-8: 2x2 scatter
 print(cluster_scatter, vp = vplayout(16:27, 2:12)) 
@@ -173,7 +174,7 @@ print(get_logo(), vp = vplayout(2, 23:25))
 ## ROW 3-6 LEFT
 
 ## Man Figure
-print(fig, vp = vplayout(4:20, 10:26))
+print(fig_three, vp = vplayout(4:20, 10:26))
 ## Low Back
 print(dot_plot1, vp = vplayout(3:7, 2:10))
 ## Left Knee
