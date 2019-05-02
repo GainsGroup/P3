@@ -334,18 +334,18 @@ get_fig_page_one <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.20, -0.21, 0.07,  0.04, -0.09),
+    x = c(-0.20, -0.18, 0.07,  0.05, -0.09),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   )
-  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
+  color_map <- c("red"="#EE0000","green"="#00FF41","yellow"="#FFE600")
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-1, 1) +
     ylim(-1, 1) +
     geom_point(data = df,
-               aes(x, y, size = 28, color = color,fill=color),
-               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
+               aes(x, y, size = 26, color = "black",fill=color),
+               alpha = .3,stroke=1,shape=21,show_guide=FALSE) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
