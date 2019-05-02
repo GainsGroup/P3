@@ -334,8 +334,8 @@ get_fig_page_one <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.17, -0.17, 0.1,  0.08, -0.07),
-    y = c(-0.78, -0.43, -0.80, -0.45, 0.13),
+    x = c(-0.14, -0.16, 0.13,  0.11, -0.04),
+    y = c(-0.78, -0.43, -0.80, -0.45, 0.08),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
@@ -367,8 +367,8 @@ get_fig_page_three <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.14, -0.15, 0.14,  0.1, -0.05),
-    y = c(-0.78, -0.43, -0.81, -0.45, 0.1),
+    x = c(-0.12, -0.13, 0.14,  0.1, -0.03),
+    y = c(-0.78, -0.43, -0.81, -0.45, 0.08),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
