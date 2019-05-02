@@ -391,7 +391,7 @@ get_fig_page_three <- function(playername,date){
     scale_size(range = c(8,12)) +
     theme_p3_fig()
 }
-}                                           
+                                           
 
 get_logo <- function(){
   being_img <-
