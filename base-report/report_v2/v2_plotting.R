@@ -334,8 +334,8 @@ get_fig_page_one <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.20, -0.18, 0.07,  0.05, -0.09),
-    y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
+    x = c(-0.17, -0.17, 0.1,  0.08, -0.07),
+    y = c(-0.78, -0.43, -0.80, -0.45, 0.13),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
@@ -347,11 +347,11 @@ get_fig_page_one <- function(playername,date){
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     ggtitle("Hello") +
-    geom_text(aes(x = -.51, y=-.88, family = "Abel"), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y=-.2, family = "Abel"), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    geom_text(aes(x = .53, y=-.9, family = "Abel"), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
-    geom_text(aes(x = .51, y=-.2, family = "Abel"), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y= .6, family = "Abel"), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = -.51, y=-.88, family = "Abel", color = dkgrey), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y=-.2, family = "Abel",color = dkgrey), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = .53, y=-.9, family = "Abel",color = dkgrey), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .51, y=-.2, family = "Abel",color = dkgrey), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y= .6, family = "Abel",color = dkgrey), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
@@ -367,8 +367,8 @@ get_fig_page_three <- function(playername,date){
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.15, -0.19, 0.11,  0.08, -0.07),
-    y = c(-0.78, -0.41, -0.81, -0.45, 0.13),
+    x = c(-0.14, -0.15, 0.14,  0.1, -0.05),
+    y = c(-0.78, -0.43, -0.81, -0.45, 0.1),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
