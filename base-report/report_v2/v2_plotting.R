@@ -369,7 +369,7 @@ get_fig_page_three <- function(playername,date){
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.18, -0.19, 0.09,  0.06, -0.09),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
-    color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
+    color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
