@@ -360,11 +360,11 @@ get_fig_page_one <- function(playername,date){
 }
                                            
 get_fig_page_three <- function(playername,date){
-  being_img <-
-    rasterGrob(readPNG("p3_wireman_base.png"))
+ being_img <-
+    rasterGrob(readPNG("best_wireman.png"))
   print("Retrieving Flag Diagram Data")
-  color_sql <- paste("select * from public.page_1_and_3_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")
+  color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.18, -0.19, 0.09,  0.06, -0.09),
@@ -377,13 +377,20 @@ get_fig_page_three <- function(playername,date){
     xlim(-1, 1) +
     ylim(-1, 1) +
     geom_point(data = df,
-               aes(x, y, size = 30, color = color,fill=color),
-               alpha = .4,stroke=2,shape=21,show_guide=FALSE) +
+               aes(x, y, size = 28, color = color,fill=color),
+               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
+    ggtitle("Hello") +
+    geom_text(aes(x = -.5, y=-.86), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y=-.2), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = .5, y=-.89), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .5, y=-.2), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y= .6), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
     theme_p3_fig()
+}
 }                                           
 
 get_logo <- function(){
