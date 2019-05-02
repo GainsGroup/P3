@@ -371,8 +371,8 @@ get_fig_page_three <- function(playername,date){
     xlim(-1, 1) +
     ylim(-1, 1) +
     geom_point(data = df,
-               aes(x, y, size = 30, color = color,fill=color),
-               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
+               aes(x, y, size = 30, color = dkgrey,fill=color),
+               alpha = .4,stroke=2,shape=21,show_guide=FALSE) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
