@@ -347,11 +347,11 @@ get_fig_page_one <- function(playername,date){
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     ggtitle("Hello") +
-    geom_text(aes(x = -.51, y=-.88, family = "Abel", color = dkgrey), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y=-.2, family = "Abel",color = dkgrey), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    geom_text(aes(x = .53, y=-.9, family = "Abel",color = dkgrey), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
-    geom_text(aes(x = .51, y=-.2, family = "Abel",color = dkgrey), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y= .6, family = "Abel",color = dkgrey), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = -.51, y=-.88, color = dkgrey), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y=-.2, color = dkgrey), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = .53, y=-.9, color = dkgrey), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .51, y=-.2, color = dkgrey), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y= .6, color = dkgrey), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
