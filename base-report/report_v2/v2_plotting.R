@@ -8,7 +8,7 @@ library(png)
 loadfonts()
 
 
-dkred <<- '#b11a21'
+dkred <<- '#EE0000'
 ltred <<- '#e0474c'
 blue <<- '#7acfd6'
 ltgrey <<- '#F0F0F0'
@@ -16,8 +16,8 @@ midgrey <<- '#b4b4b4'
 middkgrey <<- '#969696'
 dkgrey <<- '#656565'
 white <<- '#ffffff'
-yellow <<- "#FFFF66"
-green <<- "#228b22"
+yellow <<- "#FFE600"
+green <<- "#00FF41"
 pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
 get_table_stats <- function(playername, date) {
@@ -338,14 +338,14 @@ get_fig_page_one <- function(playername,date){
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
     color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
   )
-  color_map <- c("red"="#EE0000","green"="#00FF41","yellow"="#FFE600")
+  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-1, 1) +
     ylim(-1, 1) +
     geom_point(data = df,
-               aes(x, y, size = 26, color = "black",fill=color),
-               alpha = .3,stroke=1,shape=21,show_guide=FALSE) +
+               aes(x, y, size = 28, color = color,fill=color),
+               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
