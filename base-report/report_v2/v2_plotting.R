@@ -328,15 +328,15 @@ get_percentiles_page_3 <- function(playername,date) {
 
 get_fig_page_one <- function(playername,date){
   being_img <-
-    rasterGrob(readPNG("p3_wireman_base.png"))
+    rasterGrob(readPNG("best_wireman.png"))
   print("Retrieving Flag Diagram Data")
-  color_sql <- paste("select * from public.page_1_and_3_flags where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")
+  color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.20, -0.18, 0.07,  0.05, -0.09),
     y = c(-0.73, -0.41, -0.81, -0.45, 0.15),
-    color = c(as.character(color_frame[,"rightankle_flag"]),as.character(color_frame[,"rightknee_flag"]),as.character(color_frame[,"leftankle_flag"]),as.character(color_frame[,"leftknee_flag"]),as.character(color_frame[,"lowback_flag"]))
+    color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
   fig <- ggplot() +
@@ -346,6 +346,12 @@ get_fig_page_one <- function(playername,date){
     geom_point(data = df,
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
+    ggtitle("Hello") +
+    geom_text(aes(x = -.5, y=-.86), label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y=-.2), label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = .5, y=-.89), label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .5, y=-.2), label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.5, y= .6), label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
