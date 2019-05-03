@@ -270,3 +270,73 @@ p3_table_theme_page_one <- function(){
     bg_params=list(fill=dkred))
   )
   return(theme)}
+
+
+theme_p3_fig_two <- function(base_size = 10,
+                     base_family = "Abel") {
+  theme_grey(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      # Base elements which are not used directly but inherited by others
+      line =              element_line(
+        colour = '#DADADA',
+        size = 0.75,
+        linetype = 1,
+        lineend = "butt"
+      ),
+      rect =              element_rect(
+        fill = "#F0F0F0",
+        colour = "#F0F0F0",
+        size = 0.5,
+        linetype = 1
+      ),
+      text =              element_text(
+        family = base_family,
+        face = "plain",
+        colour = "#656565",
+        size = base_size,
+        hjust = 0.5,
+        vjust = 0.5,
+        angle = 0,
+        lineheight = 1,
+        margin = margin(),
+        debug = FALSE
+      ),
+
+      # Modified inheritance structure of text element
+      plot.title =        element_text(
+        size = rel(1.7),
+        family = "Abel" ,
+        face = 'bold',
+        hjust = 0.5,
+        vjust = 1,
+        colour = '#3B3B3B',
+        margin = margin(
+          t = 0,
+          r = 0,
+          b = 5,
+          l = 0
+        )
+      ),
+      plot.subtitle = element_text(
+        hjust=0.5
+      ),
+      axis.title.x =      element_blank(),
+      axis.title.y =      element_blank(),
+      axis.text =         element_blank(),
+
+      # Modified inheritance structure of line element
+      axis.ticks =        element_blank(),
+      panel.grid =  element_blank(),
+      panel.grid.minor =  element_blank(),
+
+      # Modified inheritance structure of rect element
+      plot.background = element_rect(fill = ltgrey, color = ltgrey),
+      panel.background = element_rect(fill = ltgrey, color = ltgrey),
+      legend.key =        element_blank(),
+
+      # Modifiying legend.position
+      legend.position = 'none',
+
+      complete = TRUE
+    )
+}
