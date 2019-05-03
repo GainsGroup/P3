@@ -166,7 +166,7 @@ print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 
 ## ROW 2: page title
 print(drawtext(intro, 'P3 MECHANICS SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(2, 18:22))
+print(drawscore(mechanics_score, 'Mechanics', dkred), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
 ## ROW 3-6 LEFT
