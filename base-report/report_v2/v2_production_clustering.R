@@ -72,5 +72,14 @@ clusterplot <- function(athlete_label){
 }
 
 
-
+cluster_text <- data.frame(
+    Cluster = c("Traditional Bigs","Specimens","Minus Perimeter","Kinematic Movers","Bigs Plus", "Force Movers", "Hyper-Athletic Guards"),
+    Description = c("Traditional Bigs description blah",
+                    "Specimens description blah",
+                    "Minus Perimeter description blah",
+                    "Kinematic Movers description blah",
+                    "Bigs Plus description blah",
+                    "Force Movers description blah",
+                    "Hyper-Athletic Guards description blah)
+  )
 
