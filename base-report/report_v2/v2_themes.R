@@ -222,7 +222,7 @@ theme_p3_fig <- function(base_size = 18,
           r = 0,
           b = 5,
           l = 0
-        ),
+        )),
       plot.subtitle = element_text(hjust=0.5),
       plot.background = element_rect(fill = ltgrey, color = ltgrey),
       panel.background = element_rect(fill = ltgrey, color = ltgrey)
