@@ -114,7 +114,7 @@ print(get_logo(), vp = vplayout(2, 21:23))
 print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 #print(drawtable(performance_stats_df), vp = vplayout(3:9, 13:24)) #this is directionally right, placement wise 
 print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(9:13, 15:19)) #move this guy down??
-print(drawscore(mechanics_score, 'Mechanics', ltred), vp = vplayout(9:13, 20:24)) #move this guy down ??
+print(drawscore(mechanics_score, 'Mechanics', dkred), vp = vplayout(9:13, 20:24)) #move this guy down ??
 
 ## ROW 5-6: lollipop plot and figure
 print(main_page_1_dot_plot(), vp = vplayout(8:14, 2:12))  #pull from right df, move to right area
