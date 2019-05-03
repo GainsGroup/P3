@@ -214,7 +214,7 @@ drawtext_p2 <- function(s, plot_title = NULL) {
       ymin = .1,
       ymax = .9
     ) +
-    theme_p3_text() + 
+    theme_p3() + 
     labs(x = NULL, y = NULL, title = plot_title)
   
   return(p)
