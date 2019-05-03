@@ -43,7 +43,7 @@ source('report_v2/v2_production_clustering.R')
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
-intro <- Sys.getenv("INTRO")
+intro <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
 page_2_detail <- Sys.getenv("PAGE_2_DETAIL")
 training_recs <- Sys.getenv("TRAINING_RECS")
 
