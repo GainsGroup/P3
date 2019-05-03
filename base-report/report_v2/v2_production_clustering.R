@@ -74,11 +74,11 @@ clusterplot <- function(athlete_label){
 
 cluster_text <- data.frame(
     Cluster = c("Traditional Bigs","Specimens","Minus Perimeter","Kinematic Movers","Bigs Plus", "Force Movers", "Hyper-Athletic Guards"),
-    Description = c("Traditional Bigs description blah",
+    Description = c("Athletes who fall into the 'Traditional Bigs' group typically have size as their dominant characteristic. Generally, athletes here lack explosiveness in the vertical and lateral planes relative to NBA athletes.  The most effective athletes in this cluster combine elite size with at least one other elite skill.",
                     "Specimens description blah",
                     "Minus Perimeter description blah",
                     "Kinematic Movers description blah",
                     "Bigs Plus description blah",
-                    "Force Movers description blah",
+                    "Athletes who fall into the 'Force Movers' group typically rate strongly on generating force and generally possess impressive traditional performance metrics.",
                     "Hyper-Athletic Guards description blah"))
 
