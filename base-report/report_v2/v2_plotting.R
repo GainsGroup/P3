@@ -91,7 +91,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
       legend.position = 'bottom',
       legend.key = element_rect(linetype = "blank"),
       legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(blue, dkred, dkgrey)) +
+    scale_fill_manual(values=c(ltred, dkred, dkgrey)) +
     guides(fill=guide_legend("Position"))
   
   
@@ -347,10 +347,10 @@ get_fig_page_one <- function(playername,date){
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     geom_text(aes(x = -.51, y=-.91), color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y=-.17), color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = -.49, y=-.17), color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
     geom_text(aes(x = .57, y=-.93), color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
     geom_text(aes(x = .51, y=-.17), color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y= .64), color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = -.51, y= .64), color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
@@ -381,10 +381,10 @@ get_fig_page_three <- function(playername,date){
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     labs(title="Injury Risk Stratification", subtitle = "Injury risk factors by location") +
     geom_text(aes(x = -.47, y=-.91),color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
-    geom_text(aes(x = -.45, y=-.19),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = -.45, y=-.18),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
     geom_text(aes(x = .49, y=-.93),color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
     geom_text(aes(x = .49, y=-.18),color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.47, y= .62),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = -.47, y= .64),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
