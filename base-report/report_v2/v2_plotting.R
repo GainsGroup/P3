@@ -380,11 +380,11 @@ get_fig_page_three <- function(playername,date){
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
     ggtitle("Hello") +
-    geom_text(aes(x = -.5, y=-.89),color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
-    geom_text(aes(x = -.48, y=-.19),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
+    geom_text(aes(x = -.45, y=-.89),color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.45, y=-.19),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
     geom_text(aes(x = .49, y=-.9),color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
     geom_text(aes(x = .49, y=-.2),color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.5, y= .58),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = -.46, y= .55),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
