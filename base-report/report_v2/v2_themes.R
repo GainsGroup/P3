@@ -210,6 +210,20 @@ theme_p3_fig <- function(base_size = 18,
       line = element_blank(),
       text = element_blank(),
       title = element_blank(),
+      plot.title =    element_text(
+        size = rel(1.7),
+        family = "Abel" ,
+        face = 'bold',
+        hjust = 0.5,
+        vjust = 1,
+        colour = '#3B3B3B',
+        margin = margin(
+          t = 0,
+          r = 0,
+          b = 5,
+          l = 0
+        ),
+      plot.subtitle = element_text(hjust=0.5),
       plot.background = element_rect(fill = ltgrey, color = ltgrey),
       panel.background = element_rect(fill = ltgrey, color = ltgrey)
     )
