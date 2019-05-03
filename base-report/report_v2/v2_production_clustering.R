@@ -80,6 +80,5 @@ cluster_text <- data.frame(
                     "Kinematic Movers description blah",
                     "Bigs Plus description blah",
                     "Force Movers description blah",
-                    "Hyper-Athletic Guards description blah)
-  )
+                    "Hyper-Athletic Guards description blah"))
 
