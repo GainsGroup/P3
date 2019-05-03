@@ -355,7 +355,7 @@ get_fig_page_one <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
-    ggtitle("Injury Risk Stratification")+
+    ggtitle(title ="Injury Risk Stratification", subtitle = "Hey Hello")+
     theme_p3_fig()
 }
                                            
