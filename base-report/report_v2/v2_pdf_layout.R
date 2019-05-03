@@ -47,7 +47,7 @@ intro_page_one <- paste(playername, "was taken through an assessment by P3 on",d
 intro_page_two <- paste("This page provides a detailed breakdown of the athlete's movement output from a vertical, lateral, acceleration, and deceleration persepective.  Additionally, we show which movement archetype the athletes falls into based on P3's database and research.")
 intro_page_three <- paste("This page examines the athlete's movement efficiency with relation to key injury risk factors identified by P3's kinematic research.  Each area of the body is scored for injury risk based on how the athlete tests in the top four metrics for that area.")
 
-page_2_detail <- Sys.getenv("PAGE_2_DETAIL")
+page_2_detail <- "This athlete falls into cluster X, indicating that he is the man."
 training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
@@ -153,7 +153,7 @@ print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = '
 
 ## ROW 3-5: Accel/Decel plot
 print(accel_plot2, vp = vplayout(3:11, 12:25))
-print(drawtext("This is where we will put text explaining the athlete's cluster", header = FALSE), vp = vplayout(12:15, 12:25))
+print(drawtext(page_2_detail, header = FALSE), vp = vplayout(12:15, 12:25))
 
 ## ROW 7-8: radar and cluster plots
 #print(radar_plot_athl, vp = vplayout(16:27, 12:26)) 
