@@ -196,3 +196,27 @@ drawtable_pageone <- function(df, fill_col = NULL, fill = dkgrey, width=NULL) {
     theme(plot.margin = unit(c(0, .5, 0.5, 0), "lines"))
 }
 
+
+# Draw text on the page
+drawtext_p2 <- function(s, plot_title = NULL) {
+  grob1 <-
+    splitTextGrob(s, gp = gpar(
+      fontfamily = "Abel",
+      col = black,
+      alpha = 0.8,
+      cex = .55
+    ))
+  p <- ggplot() + xlim(0, 1) + ylim(0, 1.1) +
+    annotation_custom(
+      grob = grob1,
+      xmin = 0,
+      xmax = .9,
+      ymin = .1,
+      ymax = .9
+    ) +
+    theme_p3_text() + 
+    labs(x = NULL, y = NULL, title = plot_title)
+  
+  return(p)
+}
+
