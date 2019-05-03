@@ -91,7 +91,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
       legend.position = 'bottom',
       legend.key = element_rect(linetype = "blank"),
       legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(ltred, dkred, dkgrey)) +
+    scale_fill_manual(values=c(white, dkred, dkgrey)) +
     guides(fill=guide_legend("Position"))
   
   
@@ -335,7 +335,7 @@ get_fig_page_one <- function(playername,date){
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.14, -0.11, 0.16,  0.13, -0.04),
-    y = c(-0.83, -0.36, -0.85, -0.40, 0.11),
+    y = c(-.81, -0.38, -.81, -0.40, 0.11),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
