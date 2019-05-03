@@ -50,8 +50,10 @@ intro_page_three <- paste("This page examines the athlete's movement efficiency 
 page_2_detail <- as.character(cluster_text %>%
   filter(Cluster == as.character(athlete_prediction)) %>%
   pull(Description))
+
+
                               
-training_recs <- Sys.getenv("TRAINING_RECS"))
+training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
 ## LOAD DATA  ##
