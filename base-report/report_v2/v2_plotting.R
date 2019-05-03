@@ -335,7 +335,7 @@ get_fig_page_one <- function(playername,date){
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.14, -0.11, 0.16,  0.13, -0.04),
-    y = c(-0.83, -0.38, -0.85, -0.42, 0.14),
+    y = c(-0.83, -0.36, -0.85, -0.40, 0.11),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
@@ -346,11 +346,11 @@ get_fig_page_one <- function(playername,date){
     geom_point(data = df,
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
-    geom_text(aes(x = -.51, y=-.88), color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
+    geom_text(aes(x = -.51, y=-.90), color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
     geom_text(aes(x = -.5, y=-.2), color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    geom_text(aes(x = .57, y=-.9), color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
-    geom_text(aes(x = .51, y=-.2), color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.52, y= .57), color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = .57, y=-.92), color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .51, y=-.18), color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.52, y= .60), color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
@@ -382,9 +382,9 @@ get_fig_page_three <- function(playername,date){
     labs(title="Injury Risk Stratification", subtitle = "Injury risk factors by location") +
     geom_text(aes(x = -.45, y=-.89),color = dkgrey, label = paste0('Right Ankle: ', round(color_frame$rightankle,0)), size = 3 ) +
     geom_text(aes(x = -.45, y=-.19),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    geom_text(aes(x = .49, y=-.9),color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
-    geom_text(aes(x = .49, y=-.2),color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    geom_text(aes(x = -.46, y= .55),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
+    geom_text(aes(x = .49, y=-.92),color = dkgrey, label = paste0('Left Ankle: ', round(color_frame$leftankle,0)), size = 3 ) +
+    geom_text(aes(x = .49, y=-.18),color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
+    geom_text(aes(x = -.46, y= .59),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
     scale_colour_manual(values = color_map) +
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
