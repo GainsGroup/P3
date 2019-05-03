@@ -7,7 +7,7 @@ library(png)
 
 loadfonts()
 
-
+black<- "#000000"
 dkred <<- '#EE0000'
 ltred <<- '#e0474c'
 blue <<- '#7acfd6'
@@ -91,7 +91,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
       legend.position = 'bottom',
       legend.key = element_rect(linetype = "blank"),
       legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(white, dkred, dkgrey)) +
+    scale_fill_manual(values=c(black, dkred, dkgrey)) +
     guides(fill=guide_legend("Position"))
   
   
@@ -335,7 +335,7 @@ get_fig_page_one <- function(playername,date){
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.14, -0.11, 0.16,  0.13, -0.04),
-    y = c(-0.80, -0.40, -0.82, -0.45, 0.09),
+    y = c(-0.83, -0.38, -0.85, -0.42, 0.14),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
   color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
@@ -355,7 +355,7 @@ get_fig_page_one <- function(playername,date){
     scale_fill_manual(values=color_map) +
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
-    labs(title ="Injury Risk Stratification", subtitle = "Injury risk factors by location")+
+    labs(title ="Injury Risk Stratification", subtitle = "Injury risk factor by location")+
     theme_p3_fig_two()
 }
                                            
