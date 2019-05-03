@@ -158,7 +158,7 @@ print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = '
 
 ## ROW 3-5: Accel/Decel plot
 print(accel_plot2, vp = vplayout(3:11, 12:25))
-print(drawtext(page_2_detail, header = FALSE), vp = vplayout(12:15, 12:25))
+print(drawtext(page_2_detail, "Archetype Analysis", header = FALSE), vp = vplayout(12:15, 12:25))
 
 ## ROW 7-8: radar and cluster plots
 #print(radar_plot_athl, vp = vplayout(16:27, 12:26)) 
