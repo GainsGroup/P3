@@ -47,7 +47,9 @@ intro_page_one <- paste(playername, "was taken through an assessment by P3 on",d
 intro_page_two <- paste("This page provides a detailed breakdown of the athlete's movement output from a vertical, lateral, acceleration, and deceleration persepective.  Additionally, we show which movement archetype the athletes falls into based on P3's database and research.")
 intro_page_three <- paste("This page examines the athlete's movement efficiency with relation to key injury risk factors identified by P3's kinematic research.  Each area of the body is scored for injury risk based on how the athlete tests in the top four metrics for that area.")
 
-page_2_detail <- "This athlete falls into cluster X, indicating that he is the man."
+page_2_detail <- cluster_text %>%
+  filter(Cluster == athlete_prediction) %>%
+  pull(Description)
 training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
