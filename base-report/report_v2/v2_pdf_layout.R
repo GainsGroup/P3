@@ -43,7 +43,10 @@ source('report_v2/v2_production_clustering.R')
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
-intro <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
+intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
+intro_page_two <- paste("This page provides a detailed breakdown of the athlete's movement output from a vertical, lateral, acceleration, and deceleration persepective.  Additionally, we show which movement archetype the athletes falls into based on P3's database and research.")
+intro_page_three <- paste("This page examines the athlete's movement efficiency with relation to key injury risk factors identified by P3's kinematic research.  Each area of the body is scored for injury risk based on how the athlete tests in the top four metrics for that area.")
+
 page_2_detail <- Sys.getenv("PAGE_2_DETAIL")
 training_recs <- Sys.getenv("TRAINING_RECS")
 
@@ -107,7 +110,7 @@ newpage(grid)
 print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 3:25))
 
 ## ROW 2: page title
-print(drawtext(intro, pagetitle, header = TRUE), vp = vplayout(2, 3:20))
+print(drawtext(intro_page_one, pagetitle, header = TRUE), vp = vplayout(2, 3:20))
 print(get_logo(), vp = vplayout(2, 21:23))
 
 ## ROW 3/4: summary text and scores
@@ -135,7 +138,7 @@ newpage(grid)
 ## Page header: date
 print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 ## ROW 2: page title
-print(drawtext(intro, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
+print(drawtext(intro_page_two, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
 print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
@@ -165,7 +168,7 @@ newpage(grid)
 print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 
 ## ROW 2: page title
-print(drawtext(intro, 'P3 MECHANICS SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
+print(drawtext(intro_page_three, 'P3 MECHANICS SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
 print(drawscore(mechanics_score, 'Mechanics', dkred), vp = vplayout(2, 18:22))
 print(get_logo(), vp = vplayout(2, 23:25))
 
