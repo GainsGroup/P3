@@ -44,8 +44,8 @@ accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's 
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
 intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
-intro_page_two <- paste("This page provides a detailed breakdown of the athlete's movement output from a vertical, lateral, acceleration, and deceleration persepective.  Additionally, we show which movement archetype the athletes falls into based on P3's database and research.")
-intro_page_three <- paste("This page examines the athlete's movement efficiency with relation to key injury risk factors identified by P3's kinematic research.  Each area of the body is scored for injury risk based on how the athlete tests in the top four metrics for that area.")
+intro_page_two <- paste0("Page 2 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to his athleticism. Research-derived performance variables populate the left side of the page. The right side of the page contains a detailed breakdown of Deceleration/Acceleration abilities and information from P3's Cluster Analysis.")
+intro_page_three <- paste0("Page 3 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to potential injury-risk. In-house research has pointed to the importance of the variables listed below. There variables are used to score joint risk on a red/yellow/green scale - red areas warrant close attention.")
 
 page_2_detail <- as.character(cluster_text %>%
   filter(Cluster == as.character(athlete_prediction)) %>%
