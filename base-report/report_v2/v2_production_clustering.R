@@ -74,11 +74,11 @@ clusterplot <- function(athlete_label){
 
 cluster_text <- data.frame(
     Cluster = c("Traditional Bigs","Specimens","Minus Perimeter","Kinematic Movers","Bigs Plus", "Force Movers", "Hyper-Athletic Guards"),
-    Description = c("Athletes who fall into the 'Traditional Bigs' group typically have size as their dominant characteristic. Generally, athletes here lack explosiveness in the vertical and lateral planes relative to NBA athletes.  The most effective athletes in this cluster combine elite size with at least one other elite skill.",
-                    "Specimens description blah",
-                    "Minus Perimeter description blah",
-                    "Kinematic Movers description blah",
-                    "Bigs Plus description blah",
-                    "Athletes who fall into the 'Force Movers' group typically rate strongly on generating force and generally possess impressive traditional performance metrics.",
-                    "Hyper-Athletic Guards description blah"))
+    Description = c("Traditional Big: Size tends to be the dominant physical characteristic of athletes in this cluster. Both Height and Length considerably outpace the typical NBA athlete. Improved power output - either vertically or laterally - can push an athlete into the Big Plus category.",
+                    "Specimen: Generally, athletes in this cluster possess an impressive mix of size for their position and power output. Force production in all planes can be classified as 'elite', and this quality is paired with above-average kinematic efficiency - suggesting that athletes in this cluster are able to take advantage of their endemic power.",
+                    "Minus Perimeter: Athletes in this cluster possess adequate Height and Length measures relative to the NBA population, but fail to pair these metrics with 'plus' movement skills. Both force production and kinematic variables grade-out at as below-average in all planes.",
+                    "Kinematic Movers: While these athletes possess middling traditional performance  measures (and force output), they possess elite kinematic measures. Lateral plane movement efficiency generally stands out as a strength for athletes in this cluster.",
+                    "Big Plus: While anthropometric measures tend to be the dominant physical traits of this group, Big Plus athletes pair impressive size with league-average vertical and lateral force production. 'Plus' size alongside adequate movement skills can lead to physical advantages for the athletes in this category.",
+                    "Force Mover: Force production - in all planes of movement - separate this group from the other clusters. While these athletes do possess impressive power output - leading to elite traditional performance measures - they lack kinematic efficiency.",
+                    "Hyper-Athletic Guards: Athletes in this cluster tend to lack the typical Height and Length of the typical NBA athlete. That said, they make up for these anthropometric measures with elite force production and kinematic efficiency. The rare athlete in this cluster with NBA-average Height and Length will possess a series of physical advantages"))
 
