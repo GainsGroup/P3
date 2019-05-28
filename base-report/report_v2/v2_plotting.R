@@ -561,3 +561,5 @@ training_recs <- data.frame(
 
   training_recs <- training_recs %>%
           filter(Parameter_Name == TRUE)
+  
+  print(training_recs)
