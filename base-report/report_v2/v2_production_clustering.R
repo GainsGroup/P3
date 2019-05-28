@@ -48,7 +48,7 @@ clusterplot <- function(athlete_label){
   labsize <- 5
   
   plot <- autoplot(completed_cluster , data = cluster_raw_data, 
-           #label = TRUE, label.label = 'names', ncol =14, label.size = 7, 
+           label = FALSE, #label.label = 'names', ncol =14, label.size = 7, 
            shape = FALSE,
            frame = TRUE,
            frame.type = "norm") +
