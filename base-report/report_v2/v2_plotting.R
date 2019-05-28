@@ -558,3 +558,6 @@ training_recs <- data.frame(
                   "- The athlete's vertical plane power output can be improved with consistent training.",
                   " - The athlete's lateral plane force production warrants development.",
                   "- The athlete's strength properties warrant development."))
+
+  training_recs <- training_recs %>%
+          filter(Parameter_Name == TRUE)
