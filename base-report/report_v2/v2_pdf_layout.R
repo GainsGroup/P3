@@ -180,7 +180,7 @@ print(get_logo(), vp = vplayout(2, 23:25))
 ## ROW 3-6 LEFT
 
 ## Man Figure
-print(fig_three, vp = vplayout(4:20, 10:26))
+print(drawtable_pagethree(df =percentiles_page3, area = 'low back',fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(4:20, 10:26))
 ## Low Back
 print(dot_plot1, vp = vplayout(3:7, 2:10))
 ## Left Knee
