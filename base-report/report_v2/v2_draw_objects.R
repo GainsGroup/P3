@@ -115,7 +115,7 @@ drawtable <- function(df, fill_col = NULL, fill = dkgrey, width=NULL) {
 drawtable_pagethree <- function(df, fill_col = NULL, fill = dkgrey, width=NULL,area, title) {
   header <- as.character(title)
   
-  df <- df %>% filter(type == area) %>% select(label, percentile) %>%rename(header = label, "Percentile" = percentile)
+  df <- df %>% filter(type == area) %>% select(label, percentile) %>% rename("Percentile" = percentile)
   
   g2 <- tableGrob(df, rows = NULL, theme = p3_table_theme())
   if (!is.null(fill_col)){
