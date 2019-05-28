@@ -1,9 +1,7 @@
 print("hi we made it to clustering")
 library(caret)
-#library(useful)
 library(dplyr)
 library(cluster)
-#library(fpc)
 library(ggfortify)
 library(ggplot2)
 library(civis)
@@ -44,15 +42,16 @@ clusterplot <- function(athlete_label){
   fill_colors <- rep("gray", 7)
   outline_colors <- rep("gray", 7)
   
-  fill_colors[placement] <- "red"
-  outline_colors[placement] <- "red"
+  fill_colors[placement] <- "black"
+  outline_colors[placement] <- "black"
   
   labsize <- 5
   
   plot <- autoplot(completed_cluster , data = cluster_raw_data, 
            #label = TRUE, label.label = 'names', ncol =14, label.size = 7, 
-           shape = TRUE,
-           frame = TRUE) +
+           shape = FALSE,
+           frame = TRUE,
+           frame.type = "norm") +
   scale_fill_manual(values = fill_colors) +
   scale_color_manual(values = outline_colors) +
   xlab("") +
