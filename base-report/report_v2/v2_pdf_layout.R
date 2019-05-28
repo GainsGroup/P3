@@ -53,7 +53,7 @@ page_2_detail <- as.character(cluster_text %>%
 
 
                               
-training_recs <- Sys.getenv("TRAINING_RECS")
+#training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
 ## LOAD DATA  ##
