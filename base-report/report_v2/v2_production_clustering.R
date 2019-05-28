@@ -50,8 +50,7 @@ clusterplot <- function(athlete_label){
   plot <- autoplot(completed_cluster , data = cluster_raw_data, 
            label = FALSE, #label.label = 'names', ncol =14, label.size = 7, 
            shape = FALSE,
-           frame = TRUE,
-           frame.type = "norm") +
+           frame = TRUE) +
   scale_fill_manual(values = fill_colors) +
   scale_color_manual(values = outline_colors) +
   xlab("") +
