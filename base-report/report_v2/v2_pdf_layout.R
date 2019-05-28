@@ -185,17 +185,25 @@ print(fig_three, vp = vplayout(4:20, 10:26))
 
 ## Low Back
 #print(dot_plot1, vp = vplayout(3:7, 2:10))
-print(drawtable_pagethree(percentiles_page3, fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'low back', title = "Low Back"), 
+print(drawtable_pagethree(percentiles_page3 %>%rename("Low Back" = label), fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'low back', title = "Low Back"), 
       vp = vplayout(3:7, 2:10))
 
 ## Left Knee
-print(dot_plot2, vp = vplayout(8:12, 2:10))
+#print(dot_plot2, vp = vplayout(8:12, 2:10))
+print(drawtable_pagethree(percentiles_page3 %>%rename("Left Knee" = label), fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'left knee', title = "Low Back"), 
+      vp = vplayout(8:12, 2:10))
 ## Left Foot
-print(dot_plot4, vp = vplayout(13:17, 2:10))
+#print(dot_plot4, vp = vplayout(13:17, 2:10))
+print(drawtable_pagethree(percentiles_page3 %>%rename("Left Foot" = label), fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'left foot', title = "Low Back"), 
+      vp = vplayout(13:17, 2:10))
 ## Right Knee
-print(dot_plot3, vp = vplayout(18:22, 2:10))
+#print(dot_plot3, vp = vplayout(18:22, 2:10))
+print(drawtable_pagethree(percentiles_page3 %>%rename("Right Knee" = label), fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'right knee', title = "Low Back"), 
+      vp = vplayout(18:22, 2:10))
 ## Right Foot
-print(dot_plot5, vp = vplayout(23:27, 2:10))
+#print(dot_plot5, vp = vplayout(23:27, 2:10))
+print(drawtable_pagethree(percentiles_page3 %>%rename("Right Foot" = label), fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'right foot', title = "Low Back"), 
+      vp = vplayout(23:27, 2:10))
 
 ## ROW 7-8 LEFT: training targets and cluster plots
 print(drawtext(training_recs, 'Training Targets', header = FALSE), vp = vplayout(23:27, 12:24))
