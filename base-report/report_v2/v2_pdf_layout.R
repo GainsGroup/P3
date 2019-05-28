@@ -185,7 +185,7 @@ print(fig_three, vp = vplayout(4:20, 10:26))
 
 ## Low Back
 #print(dot_plot1, vp = vplayout(3:7, 2:10))
-print(drawtable_pagethree(percentiles_page3, fill_col = 'Percentile', fill = dkgrey, width = NULL, area = 'low back', title = "Low Back"), 
+print(drawtable_pagethree(percentiles_page3, fill_col = 'Percentile', fill = dkgrey, width = 'fill', area = 'low back', title = "Low Back"), 
       vp = vplayout(3:7, 2:10))
 
 ## Left Knee
