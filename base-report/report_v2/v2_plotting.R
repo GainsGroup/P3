@@ -455,7 +455,7 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="NBA Percentile Rank") +
-    scale_colour_manual(values=c("FALSE"=white,"TRUE"=dkgrey)) +
+    scale_colour_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
@@ -480,7 +480,7 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="NBA Percentile Rank") +
-    scale_colour_manual(values=c("FALSE"=white,"TRUE"=dkgrey)) +
+    scale_colour_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
