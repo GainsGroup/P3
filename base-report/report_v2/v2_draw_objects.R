@@ -250,7 +250,7 @@ drawtext_p2 <- function(s, plot_title = NULL) {
       fontfamily = "Abel",
       col = dkgrey,
       alpha = 0.8,
-      cex = .59
+      cex = .8
     ))
   p <- ggplot() + xlim(0, 1) + ylim(0, 1.1) +
     annotation_custom(
