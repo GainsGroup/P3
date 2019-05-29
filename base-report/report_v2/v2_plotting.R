@@ -456,7 +456,6 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
     labs(title=title,
          subtitle="NBA Percentile Rank") +
     scale_colour_manual(values=c("FALSE"=white,"TRUE"=dkgrey)) +
-    scale_fill_manual(values=c("FALSE"=black,"TRUE"=black)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
@@ -482,7 +481,6 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     labs(title=title,
          subtitle="NBA Percentile Rank") +
     scale_colour_manual(values=c("FALSE"=white,"TRUE"=dkgrey)) +
-    scale_fill_manual(values=c("FALSE"=black,"TRUE"=black)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
