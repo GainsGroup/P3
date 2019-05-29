@@ -256,7 +256,7 @@ drawtext_p2 <- function(s, plot_title = NULL) {
     annotation_custom(
       grob = grob1,
       xmin = 0,
-      xmax = .95,
+      xmax = .985,
       ymin = .1,
       ymax = .9
     ) +
