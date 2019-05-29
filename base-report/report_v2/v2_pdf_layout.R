@@ -206,8 +206,8 @@ print(drawtable_pagethree(percentiles_page3 , fill_col = 'Percentile', fill = dk
       vp = vplayout(23:27, 2:10))
 
 ## ROW 7-8 LEFT: training targets and cluster plots
-print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(21:24, 12:24))
-print(drawtext(paste(rec_two, rec_three, sep = "\n"), title = NULL, header = FALSE), vp = vplayout(25:27, 12:24))
+print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(21:23, 12:24))
+print(drawtext(paste(rec_two, rec_three, sep = "\n"), title = NULL, header = FALSE), vp = vplayout(24:27, 12:24))
 
 dev.off()
 
