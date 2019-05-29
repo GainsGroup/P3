@@ -248,15 +248,15 @@ drawtext_p2 <- function(s, plot_title = NULL) {
   grob1 <-
     splitTextGrob(s, gp = gpar(
       fontfamily = "Abel",
-      col = black,
+      col = dkgrey,
       alpha = 0.8,
-      cex = .55
+      cex = .59
     ))
   p <- ggplot() + xlim(0, 1) + ylim(0, 1.1) +
     annotation_custom(
       grob = grob1,
       xmin = 0,
-      xmax = .9,
+      xmax = .95,
       ymin = .1,
       ymax = .9
     ) +
