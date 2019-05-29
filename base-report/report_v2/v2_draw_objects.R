@@ -36,7 +36,7 @@ drawtext <- function(s, title = NULL, header = FALSE) {
     annotation_custom(
       grob = grob1,
       xmin = 0,
-      xmax = .9,
+      xmax = .95,
       ymin = .1,
       ymax = .9
     ) +
