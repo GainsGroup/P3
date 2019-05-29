@@ -249,8 +249,8 @@ drawtext_p2 <- function(s, plot_title = NULL) {
     splitTextGrob(s, gp = gpar(
       fontfamily = "Abel",
       col = dkgrey,
-      alpha = 0.8,
-      cex = .8
+      alpha = 0.85,
+      cex = .75
     ))
   p <- ggplot() + xlim(0, 1) + ylim(0, 1.1) +
     annotation_custom(
