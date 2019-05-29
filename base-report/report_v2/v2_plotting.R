@@ -549,7 +549,7 @@ training_recs <- data.frame(
                   "- During the Drop Jump, the athlete rotates excessively through the foot.",
                   "- During the Drop Jump, the athlete reaches excessive Eversion.",
                   "- During the Drop Jump, the athlete contacts the ground in an excessively plantar flexed position.",
-                  "- The athlete struggles to appropriately control the ankle as it moves into dorsi flexion.",
+                  "-The athlete struggles to appropriately control the ankle as it moves into dorsi flexion.",
                   "- During a series of vertical movement, the athlete passes through only minimal range of motion at the hip and knee.",
                   "- When completing a series of vertical movements, the athlete passes through only minimal range of motion at the hip.",
                   "- The athlete demonstrates the tendency to pass considerably more force across one limb during double-leg movements.",
@@ -564,6 +564,4 @@ training_recs <- data.frame(
                                            
 rec_one <- paste0("1. ", training_recs$Rec[1], training_recs$Description[1])                                           
 rec_two <- paste0("2. ", training_recs$Rec[2], training_recs$Description[2])                                           
-rec_three <- paste0("3. ", training_recs$Rec[3], training_recs$Description[3])                                           
-  
-print(rec_one)
+rec_three <- paste0("3. ", training_recs$Rec[3], training_recs$Description[3])        
