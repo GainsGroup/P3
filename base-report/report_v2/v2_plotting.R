@@ -561,5 +561,9 @@ training_recs <- data.frame(
 
   training_recs <- training_recs %>%
           filter(Parameter_Name == "true")
+                                           
+rec_one <- paste0("1. ", training_recs$Rec[1], training_recs$Description[1])                                           
+rec_two <- paste0("2. ", training_recs$Rec[2], training_recs$Description[2])                                           
+rec_three <- paste0("3. ", training_recs$Rec[3], training_recs$Description[3])                                           
   
-  print(training_recs)
+print(rec_one)
