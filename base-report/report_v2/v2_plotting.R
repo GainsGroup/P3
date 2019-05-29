@@ -445,7 +445,7 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
   
   
   plot <- ggplot(overall, aes(x=label, y=percentile)) +
-    geom_point(aes(color=pos, fill =pos), size=4, pch=21) +   # Draw points
+    geom_point(aes(col = pos, fill = pos), size=4, pch=21) +   # Draw points
     geom_segment(aes(x=label,
                      xend=label,
                      y=0,
