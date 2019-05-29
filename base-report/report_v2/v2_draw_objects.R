@@ -28,6 +28,7 @@ drawtext <- function(s, title = NULL, header = FALSE) {
     splitTextGrob(s, gp = gpar(
       fontfamily = "Abel",
       col = dkgrey,
+      just = c("left", "bottom"),
       alpha = 0.8,
       cex = .8
     ))
