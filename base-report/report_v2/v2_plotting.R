@@ -480,7 +480,8 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="NBA Percentile Rank") +
-    scale_colour_manual(values=c("FALSE"=dkred,"TRUE"=dkgrey)) +
+    scale_colour_manual(values=c("FALSE"=white,"TRUE"=dkgrey)) +
+    scale_colour_manual(values=c("FALSE"=black,"TRUE"=black)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
