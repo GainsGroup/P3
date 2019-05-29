@@ -455,8 +455,8 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
     geom_hline(yintercept=50, size = .5) +
     labs(title=title,
          subtitle="NBA Percentile Rank") +
-    scale_color_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
-    scale_fill_manual(values=c("FALSE"=black,"TRUE"=black)) +
+    scale_fill_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
+    scale_color_manual(values=c("FALSE"=black,"TRUE"=black)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
@@ -471,7 +471,7 @@ main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
 dot_plot <-  function(overall, type = 'lateral',title='Graph') {
   df <- overall %>% filter_(paste0('type == "', type, '"'))
   ggplot(df, aes(x=label, y=percentile)) +
-    geom_point(aes(col=pos), size=4, pch=21) +   # Draw points
+    geom_point(aes(col=pos, fill=pos), size=4, pch=21) +   # Draw points
     geom_segment(aes(x=label,
                      xend=label,
                      y=0,
@@ -482,7 +482,7 @@ dot_plot <-  function(overall, type = 'lateral',title='Graph') {
     labs(title=title,
          subtitle="NBA Percentile Rank") +
     scale_fill_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
-    scale_colour_manual(values=c("FALSE"=black,"TRUE"=black)) +
+    scale_color_manual(values=c("FALSE"=black,"TRUE"=black)) +
     theme_p3() +
     coord_flip() +
     theme(panel.background = element_rect(fill = "transparent",colour = NA),
