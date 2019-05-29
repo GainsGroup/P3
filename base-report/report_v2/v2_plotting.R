@@ -527,7 +527,7 @@ training_recs <- data.frame(
                      Sys.getenv("ANKLE_MOBILITY"),
                      Sys.getenv("LE_POWER"),
                      Sys.getenv("LAT_DRIVE"),
-                     Sys.getenv("LE_STRENGTH"),
+                     Sys.getenv("LE_STRENGTH")),
   Rec = c("Hip Stability",
               "Trunk Stability",
               "Inversion",
