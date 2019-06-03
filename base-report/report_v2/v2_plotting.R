@@ -360,7 +360,8 @@ get_fig_page_one <- function(playername,date){
 }
                                            
 get_fig_page_three <- function(playername,date){
- being_img <-
+ print("drawing page 3 image")
+  being_img <-
     rasterGrob(readPNG("p3_black_wireman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
