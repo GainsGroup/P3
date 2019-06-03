@@ -51,6 +51,7 @@ page_2_detail <- as.character(cluster_text %>%
   filter(Cluster == as.character(athlete_prediction)) %>%
   pull(Description))
 
+print(page_2_detail)
 
                               
 #training_recs <- Sys.getenv("TRAINING_RECS")
