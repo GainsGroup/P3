@@ -28,6 +28,7 @@ names(single_athlete) <- names(cluster_raw_data)
 ### Sort the athlete and pull out his predicted cluster
 athlete_prediction <- predict(model, single_athlete)
 
+print(athlete_prediction)
 
 ### Input the cluster the athlete is in into the funciton, which returns a "lighted up" cluster for his, and gray for others 
 clusterplot <- function(athlete_label){
