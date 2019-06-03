@@ -31,7 +31,7 @@ athlete_prediction <- predict(model, single_athlete)
 
 ### Input the cluster the athlete is in into the funciton, which returns a "lighted up" cluster for his, and gray for others 
 clusterplot <- function(athlete_label){
- 
+ print("doing cluster plot")
   placement <- ifelse(athlete_label == "Traditional Big", 1,
                                 ifelse(athlete_label == "Specimen", 2,
                                        ifelse(athlete_label == "Minus Perimeter", 3,
