@@ -69,7 +69,7 @@ athl_score_sql <- paste("select * from public.v2_athl_score where name = '",play
 athletecism_score <- round(read_civis(sql(athl_score_sql),"P3")$scaled_athl_score)
 mech_score_sql <- paste("select * from public.v2_mech_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
 mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$scaled_mech_score)
-
+print("Load DATA complete")
 ################
 ## GET PLOTS ##
 ################
@@ -84,7 +84,7 @@ dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Me
 dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
 dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
 dot_plot5 <- dot_plot(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
-
+print("load plots complete")
 
 ################
 ## PAGE SETUP ##
@@ -99,6 +99,7 @@ margins = c(.75,.4,.75,.75) # top, right, bottom, left margin
 
 grid <- get_grid(width, height, ncols, nrows, title_height, margins)
 
+print("now printing report")
 pdf(
   output,
   family = "Abel",
