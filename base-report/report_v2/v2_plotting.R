@@ -328,7 +328,7 @@ get_percentiles_page_3 <- function(playername,date) {
 
 get_fig_page_one <- function(playername,date){
   being_img <-
-    rasterGrob(readPNG("best_wireman.png"))
+    rasterGrob(readPNG("p3_black_wireman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
@@ -361,7 +361,7 @@ get_fig_page_one <- function(playername,date){
                                            
 get_fig_page_three <- function(playername,date){
  being_img <-
-    rasterGrob(readPNG("best_wireman.png"))
+    rasterGrob(readPNG("p3_black_wireman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
