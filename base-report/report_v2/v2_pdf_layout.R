@@ -157,6 +157,8 @@ print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col
 skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
 print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(19:26, 2:11), newpage=FALSE)
 
+print(drawtext_p2("*Note: Anything above 85 or below 15 is exceptionally above/below average"), vp = vplayout(26:27, 2:11))
+
 
 ## ROW 3-5: Accel/Decel plot
 print(accel_plot2, vp = vplayout(3:11, 12:25))
