@@ -72,7 +72,7 @@ clusterplot <- function(athlete_label){
 
 
 cluster_text <- data.frame(
-    Cluster = c("Traditional Big","Specimens","Minus Perimeter","Kinematic Movers","Bigs Plus", "Force Movers", "Hyper-Athletic Guards"),
+    Cluster = c("Traditional Big","Specimen","Minus Perimeter","Kinematic Movers","Bigs Plus", "Force Movers", "Hyper-Athletic Guards"),
     Description = c("Traditional Big: Size tends to be the dominant physical characteristic of athletes in this cluster. Both Height and Length considerably outpace the typical NBA athlete. Improved power output - either vertically or laterally - can push an athlete into the Big Plus category.",
                     "Specimen: Generally, athletes in this cluster possess an impressive mix of size for their position and power output. Force production in all planes is 'elite', and this quality is paired with above-average kinematic efficiency - suggesting that athletes in this cluster are able to take advantage of their endemic power.",
                     "Minus Perimeter: Athletes in this cluster possess adequate Height and Length measures relative to the NBA population, but fail to pair these metrics with 'plus' movement skills. Both force production and kinematic variables grade-out at as below-average in all planes.",
