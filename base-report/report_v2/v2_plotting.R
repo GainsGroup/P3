@@ -573,7 +573,7 @@ rec_three <- paste0("3. ", training_recs$Rec[3], training_recs$Description[3])
                                            
 get_glossary <- function(){
   being_img <-
-    rasterGrob(readPNG("p3_glossary_2.0.PNG"))
+    rasterGrob(readPNG("p3_glossary_2.0.png"))
   
   fig <- ggplot() +
     annotation_custom(being_img)+
