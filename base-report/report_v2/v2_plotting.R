@@ -356,8 +356,7 @@ get_fig_page_one <- function(playername,date){
     guides(colour = FALSE, size = FALSE) +
     scale_size(range = c(8,12)) +
     labs(title ="Injury Risk Stratification", subtitle = "Injury risk factor by location")+
-    theme(panel.border = element_rect(colour = "black", fill = NA, size =1)) +
-    theme_p3_fig_two()
+    theme_p3_fig_two(panel.border = element_rect(colour = "black", fill = NA, size =2))
 }
                                            
 get_fig_page_three <- function(playername,date){
