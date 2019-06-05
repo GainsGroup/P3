@@ -214,6 +214,13 @@ print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayo
 print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(24:25, 12:24))
 print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(26:27, 12:24))
 
+##############
+## GLOSSARY###
+##############
+
+newpage(grid)
+
+print(get_glossary(), vp=vplayout(1:26,1:26))
 
 dev.off()
 
