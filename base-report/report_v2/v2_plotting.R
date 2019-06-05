@@ -569,3 +569,17 @@ training_recs <- data.frame(
 rec_one <- paste0("1. ", training_recs$Rec[1], training_recs$Description[1])                                           
 rec_two <- paste0("2. ", training_recs$Rec[2], training_recs$Description[2])                                           
 rec_three <- paste0("3. ", training_recs$Rec[3], training_recs$Description[3])        
+                                           
+                                           
+get_glossary <- function(){
+  being_img <-
+    rasterGrob(readPNG("p3_glossary_2.0.png"))
+  
+  fig <- ggplot() +
+    annotation_custom(being_img)+
+    scale_colour_manual(values = c(dkred, blue)) +
+    guides(colour = FALSE, size = FALSE) +
+    theme_p3_fig()
+  
+}
+                                           
