@@ -213,6 +213,7 @@ get_percentiles_page_2 <- function(playername, date,players_position) {
                                              ,"R - Hip Abduction"
                                              ,"R - Hip Ext. Velocity"))
   ff2 <- ff2[order(ff2$metric),]
+  ff2$Percentile <- as.numeric(as.character(ff2$Percentile))
   return(ff2)
 }  ### This is page 2 kpis -- dont touch
 
