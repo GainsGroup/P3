@@ -102,7 +102,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
 
 get_kpis <- function(playername, date) {
   print("Retrieving Page 1 Percentiles")
-  std_sql <- paste("select * from public.page_1_summary_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
+  std_sql <- paste("select * from public.v2_page_1_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   std <- read_civis(sql(std_sql),"P3")
   std <- add_rownames(data.frame(t(std[,3:length(std)])),"metric")
   colnames(std) <- c("metric","percentile")
