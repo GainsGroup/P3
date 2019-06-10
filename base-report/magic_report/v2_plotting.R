@@ -37,7 +37,7 @@ get_table_stats <- function(playername, date) {
     select(display_name, display_vert, display_drop,display_latforce, 
            wing_vert_perc, big_vert_perc, guard_vert_perc,
            wing_drop_perc, big_drop_perc, guard_drop_perc,
-           wing_lat_perc, big_drop_perc, guard_drop_perc) %>%
+           wing_lat_perc, big_lat_perc, guard_lat_perc) %>%
     select_if(~ !any(is.na(.))) %>%
     rename("perc_vert" = !!names(.[5]),
            "perc_drop" = !!names(.[6]),
