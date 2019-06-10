@@ -324,6 +324,8 @@ get_percentiles_page_3 <- function(playername,date) {
   percent_merged_frame <- merge(percent_frame,column_labels,by="metric")
   return(percent_merged_frame)
   
+  print(percent_merged_frame)                               
+  
 }  ### This is page 3 
 
 get_fig_page_one <- function(playername,date){
