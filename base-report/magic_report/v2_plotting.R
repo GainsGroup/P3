@@ -33,8 +33,15 @@ get_table_stats <- function(playername, date) {
   stats_df <- df[,c(9,12,14,13)]
   colnames(stats_df) <- c("Name","Height","Weight","Reach")
   ### Table 2 - performance info
-  performance_df_player <- df %>%
-    select(display_name, display_vert, display_drop,display_latforce, perc_vert, perc_drop, perc_lat) %>%
+ performance_df_player <- df %>%
+    select(display_name, display_vert, display_drop,display_latforce, 
+           wing_vert_perc, big_vert_perc, guard_vert_perc,
+           wing_drop_perc, big_drop_perc, guard_drop_perc,
+           wing_lat_perc, big_drop_perc, guard_drop_perc) %>%
+    select_if(~ !any(is.na(.))) %>%
+    rename("perc_vert" = !!names(.[5]),
+           "perc_drop" = !!names(.[6]),
+           "perc_lat" = !!names(.[7])) %>%
     mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
            perc_drop = ifelse(perc_drop >0, paste0("+", perc_drop),perc_drop),
            perc_lat = ifelse(perc_lat >0, paste0("+", perc_lat),perc_lat)) %>%
@@ -44,7 +51,7 @@ get_table_stats <- function(playername, date) {
            display_drop = paste(display_drop, 
                                 paste0("(",perc_drop,"%",")")),
            display_latforce = paste(display_latforce, 
-                                paste0("(",perc_lat,"%",")"))) %>%
+                                    paste0("(",perc_lat,"%",")"))) %>%
     rename("Name" = display_name, "Vert Jump" = display_vert, "Drop Jump" = display_drop, "Lat Force" = display_latforce) %>%
     select(-c(perc_vert, perc_drop, perc_lat))
 
