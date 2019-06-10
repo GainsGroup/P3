@@ -78,6 +78,11 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
     select(position) %>%
     pull("position")
   
+  player_position <<- data %>%
+    filter(name == as.character(playername)) %>%
+    select(position) %>%
+    pull("position")
+  
   
   graph <- ggplot(data, aes(x = average_lateralforcebw, y = predicted, label=playername)) +
     geom_vline(xintercept = 50) + ### position mean, x
@@ -170,7 +175,7 @@ get_accel_decel_2 <- function(playername,date) {
 
 get_percentiles_page_2 <- function(playername, date) {
   print("Retrieving Page 2 Percentiles Data")
-  percentile_sql <- paste("select * from public.page_2_percentiles where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+  percentile_sql <- paste("select * from public.magic_page_2_percentiles_",player_position, "where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   full_table <- read_civis(sql(percentile_sql),"P3")
   values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
   percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
