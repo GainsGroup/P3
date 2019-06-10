@@ -239,7 +239,7 @@ get_percentiles_page_3 <- function(playername,date) {
   right_knee$metric <- factor(right_knee$metric, levels = right_knee$metric[order(right_knee$order)])
   
   left_foot <- full_table %>% 
-    select("inversionl", "eversionl", "dropankleactivedecelerationleft", "droptotalmovementimpulseasymmetry")
+    select("inversionl", "translationl", "dropankleactivedecelerationleft", "drop.ankleflexionatt0left")
   left_foot <- data.frame(t(left_foot))
   left_foot <- add_rownames(left_foot,"metric")
   colnames(left_foot) <- c("metric","value")
@@ -249,7 +249,7 @@ get_percentiles_page_3 <- function(playername,date) {
   
   
   right_foot <- full_table %>%
-    select("inversionr", "eversionr", "dropankleactivedecelerationright", "droptotalmovementimpulseasymmetry")
+    select("inversionr", "translationr", "dropankleactivedecelerationright", "drop.ankleflexionatt0right")
   right_foot <- data.frame(t(right_foot))
   right_foot <- add_rownames(right_foot,"metric")
   colnames(right_foot) <- c("metric","value")
@@ -279,13 +279,13 @@ get_percentiles_page_3 <- function(playername,date) {
               ,"dropdeltarelativerotationright"
               ,"translationr"
               ,"dropankleactivedecelerationright"
-              ,"droptotalmovementimpulseasymmetry"
+              ,"drop.ankleflexionatt0left"
               ,"inversionl"
-              ,"eversionl"
+              ,"translationl"
               ,"dropankleactivedecelerationleft"
-              ,"droptotalmovementimpulseasymmetry"
+              ,"drop.ankleflexionatt0right"
               ,"inversionr"
-              ,"eversionr"
+              ,"translationr"
               ,"dropankleactivedecelerationright"
               ,"droptotalmovementimpulseasymmetry"
               ,"dropmaxhipactivedecelerationleft"
@@ -306,13 +306,13 @@ get_percentiles_page_3 <- function(playername,date) {
              ,"Delta Rel. Rot."
              ,"Translation"
              ,"Ankle Act Decel"
-             ,"Impulse Asym"
+             ,"Active Dorsi."
              ,"Inversion"
-             ,"Eversion"
+             ,"Translation"
              ,"Ankle Act Decel"
-             ,"Impulse Asym"
+             ,"Active Dorsi."
              ,"Inversion"
-             ,"Eversion"
+             ,"Translation"
              ,"Ankle Act Decel"
              ,"Impulse Asym"
              ,"Hip Decel."
