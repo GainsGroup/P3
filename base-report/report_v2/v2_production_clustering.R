@@ -58,7 +58,7 @@ clusterplot <- function(athlete_label){
   ylab("") +
   annotate("text", x = -.12, y = .07, label = "Traditional Bigs", color = "black", angle = 30, fontface = "bold", size =labsize) +  ## cluster 1
   annotate("text", x = .08, y = -.12, label = "Specimens", color = "black", angle = 35, fontface = "bold", size =labsize) + ## cluster 2
-  annotate("text", x = -.05, y = .09, label = "Minus Perimeter", color = "black", angle = 35, fontface = "bold", size =labsize) +## cluster 3
+  annotate("text", x = -.05, y = .09, label = "Misc. Perimeter", color = "black", angle = 35, fontface = "bold", size =labsize) +## cluster 3
   annotate("text", x = .01, y = .17, label = "Kinematic Movers", color = "black", fontface = "bold", size =labsize) +## cluster 4
   annotate("text", x = -.05, y = -.17, label = "Bigs Plus", color = "black", fontface = "bold", size =labsize) +## cluster 5
   annotate("text", x = 0, y = 0.01, label = "Force Movers", color = "black",angle = 15, fontface = "bold", size =labsize) +## cluster 6
