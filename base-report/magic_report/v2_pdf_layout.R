@@ -63,7 +63,9 @@ bio_stats_df <- get_table_stats(playername, date)
 #performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
 ad2 <- get_accel_decel_2(playername,date)
-percentiles_page2 <- get_percentiles_page_2(playername,date)
+cluster_scatter <- graph_page_2_2x2(playername,date)
+print(position)
+percentiles_page2 <- get_percentiles_page_2(playername,date, position)
 percentiles_page3 <- get_percentiles_page_3(playername,date)
 
 athl_score_sql <- paste("select * from public.v2_athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
@@ -79,7 +81,6 @@ dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors
 fig_one <- get_fig_page_one(playername,date)
 fig_three <- get_fig_page_three(playername,date)
 accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
-cluster_scatter <- graph_page_2_2x2(playername,date)
 dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
 dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
 dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
