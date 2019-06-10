@@ -8,9 +8,9 @@ library(cowplot)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('report_v2/v2_themes.R')
-source('report_v2/v2_draw_objects.R')
-source('report_v2/v2_plotting.R')
+source('magic_report/v2_themes.R')
+source('magic_report/v2_draw_objects.R')
+source('magic_report/v2_plotting.R')
 
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
@@ -37,7 +37,7 @@ print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
 
 ## Bring in the clustering
-source('report_v2/v2_production_clustering.R')
+source('magic_report/v2_production_clustering.R')
 
 
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
