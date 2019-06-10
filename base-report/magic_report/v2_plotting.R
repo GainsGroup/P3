@@ -30,7 +30,7 @@ get_table_stats <- function(playername, date) {
     mutate(perc_vert = as.numeric(perc_vert),
            perc_drop = as.numeric(perc_drop),
            perc_lat = as.numeric(perc_lat))
-  stats_df <- df[,c(9,12,14,13)]
+  stats_df <- df[,c(28,31,33,32)]
   colnames(stats_df) <- c("Name","Height","Weight","Reach")
   ### Table 2 - performance info
  performance_df_player <- df %>%
