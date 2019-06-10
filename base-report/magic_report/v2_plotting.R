@@ -194,12 +194,51 @@ get_percentiles_page_2 <- function(playername, date,players_position) {
   tests <- c("Standing Vertical","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Drop Jump","Standing Vertical")
   var_tests <- data.frame(vars,tests)
   
-  final_frame <- merge(values_frame[,3:4],percentiles_frame[,3:4],by="label")
-  final_frame <- merge(values_frame,percentiles_frame[,2:4],by="values")
+  final_frame <- (percentiles_frame[,1:4])
   ff2 <- merge(final_frame,var_tests,by.x="percentiles",by.y="vars")
-  ff2 <- ff2[c("label.x","value.x","value.y","tests")]
-  colnames(ff2) <- c("metric","value","Percentile","test_type")
-  ff2$value <- round(ff2$value,2)
+  ff2 <- ff2[,c(3:5)]
+  colnames(ff2) <- c("metric","Percentile","test_type")
+  ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
+                                             ,"Knee Ext Velocity"
+                                             ,"Net Impact 1"
+                                             ,"Net Impact 2(L)"
+                                             ,"Net Impact 2(R)"
+                                             ,"Net Rel. Conc Force"
+                                             ,"Conc Rel FF"
+                                             ,"Load Rel. FF"
+                                             ,"Ankle Ext Accel"
+                                             ,"L - Lateral Drive"
+                                             ,"L - Hip Abduction"
+                                             ,"L - Hip Ext. Velocity"
+                                             ,"R - Lateral Drive"
+                                             ,"R - Hip Abduction"
+                                             ,"R - Hip Ext. Velocity"))
+  ff2 <- ff2[order(ff2$metric),]
+  return(ff2)
+}get_percentiles_page_2 <- function(playername, date,players_position) {
+  print("Retrieving Page 2 Percentiles Data")
+  percentile_sql <- paste("select * from public.magic_page_2_percentiles_",players_position, " where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+  print(percentile_sql)
+  full_table <- read_civis(sql(percentile_sql),"P3")
+  values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
+  percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
+  label <- c("Net Impact 1","Net Impact 2(L)","Net Impact 2(R)","Conc Rel FF","Knee Ext Velocity","Knee Ext Accel","Load Rel. FF","Ankle Ext Accel","Knee Ext Velocity","Knee Ext Accel","L - Load Rel. FF ","R - Load Rel FF","L - Lateral Drive","L - Hip Ext. Velocity","L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction","Net Rel. Conc Force")
+  percentile_labels <- data.frame(values,percentiles,label)
+  athlete_percentiles <- full_table[,3:length(full_table)]
+  athlete_percentiles <- data.frame(t(athlete_percentiles))
+  athlete_percentiles <- add_rownames(athlete_percentiles,"metric")
+  colnames(athlete_percentiles) <- c("metric","value")
+  values_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("values"),by.y=c("metric"))
+  percentiles_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("percentiles"),by.y=c("metric"))
+  
+  vars <- c("percconc_rel_ff","percdropmaxkneeextensionaccelerationavg","percdropmaxkneeextensionvelocityavg","percdroppeakconcentricforceleft","percdroppeakconcentricforceright","percimp_1_avg","percimp2lraw","percimp2rraw","perclateralforceleftbw","percslmaxhipabduction","percslmaxhipextensionvelocity","perclateralforcerightbw","percsrmaxhipabduction","percsrmaxhipextensionvelocity","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","percnet_rel_conc_force","percload_rel_ff")
+  tests <- c("Standing Vertical","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Drop Jump","Standing Vertical")
+  var_tests <- data.frame(vars,tests)
+  
+  final_frame <- (percentiles_frame[,1:4])
+  ff2 <- merge(final_frame,var_tests,by.x="percentiles",by.y="vars")
+  ff2 <- ff2[,c(3:5)]
+  colnames(ff2) <- c("metric","Percentile","test_type")
   ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
                                              ,"Knee Ext Velocity"
                                              ,"Net Impact 1"
