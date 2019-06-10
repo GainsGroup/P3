@@ -78,10 +78,12 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
     select(position) %>%
     pull("position")  
   
-  position <<- data %>%
+  blah <- data %>%
     filter(name == as.character(playername)) %>%
     select(position) %>%
     pull("position")  
+  
+  position <<- blah[1]
   
   graph <- ggplot(data, aes(x = average_lateralforcebw, y = predicted, label=playername)) +
     geom_vline(xintercept = 50) + ### position mean, x
