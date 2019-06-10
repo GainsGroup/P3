@@ -176,7 +176,7 @@ get_accel_decel_2 <- function(playername,date) {
 
 get_percentiles_page_2 <- function(playername, date,players_position) {
   print("Retrieving Page 2 Percentiles Data")
-  percentile_sql <- paste("select * from public.magic_page_2_percentiles_",players_position, "where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+  percentile_sql <- paste("select * from public.magic_page_2_percentiles_",players_position, " where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   print(percentile_sql)
   full_table <- read_civis(sql(percentile_sql),"P3")
   values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
