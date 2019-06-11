@@ -145,6 +145,7 @@ get_kpis <- function(playername, date) {
             ,"lateral")
   std_merge <- data.frame(metric,label,type)
   kpis <- merge(std,std_merge,by="metric")
+  colnames(kpis)[3] <-"perc_two"
   kpis$percentile <- as.numeric(as.character(kpis$percentile))
   kpis$metric <- factor(kpis$label,levels=rev(label))
   kpis$pos <- FALSE
