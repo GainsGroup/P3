@@ -117,6 +117,7 @@ get_kpis <- function(playername, date) {
   print("Retrieving Page 1 Percentiles")
   std_sql <- paste("select * from public.v2_page_1_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
   std <- read_civis(sql(std_sql),"P3")
+  std <- std[1,]
   std <- add_rownames(data.frame(t(std[,3:length(std)])),"metric")
   colnames(std) <- c("metric","percentile")
   metric <- c("vertmaxkneeextensionvelocityavg"
@@ -145,7 +146,6 @@ get_kpis <- function(playername, date) {
             ,"lateral")
   std_merge <- data.frame(metric,label,type)
   kpis <- merge(std,std_merge,by="metric")
-  colnames(kpis)[3] <-"perc_two"
   kpis$percentile <- as.numeric(as.character(kpis$percentile))
   kpis$metric <- factor(kpis$label,levels=rev(label))
   kpis$pos <- FALSE
