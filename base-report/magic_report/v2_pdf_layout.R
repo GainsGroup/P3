@@ -78,6 +78,7 @@ print("Load DATA complete")
 ################
 dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
 dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
+print("got past Kpis")
 fig_one <- get_fig_page_one(playername,date)
 fig_three <- get_fig_page_three(playername,date)
 accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
