@@ -79,7 +79,7 @@ drawtable <- function(df, fill_col = NULL, fill = dkgrey, width=NULL) {
     color_func <- colorRampPalette(c('white', fill))
     pal <- color_func(100)
     for (n in 1:nrow(df)) {
-      val <- df$Percentile[n]
+      val <- df$'Pos. Percentile'[n]
       print(val)
       fill <- pal[val]
       print(fill)
