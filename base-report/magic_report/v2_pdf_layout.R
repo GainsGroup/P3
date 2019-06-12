@@ -66,6 +66,7 @@ ad2 <- get_accel_decel_2(playername,date)
 cluster_scatter <- graph_page_2_2x2(playername,date)
 print(position)
 percentiles_page2 <- get_percentiles_page_2(playername,date, position)
+print(colnames(percentiles_page2))
 percentiles_page3 <- get_percentiles_page_3(playername,date)
 
 athl_score_sql <- paste("select * from public.v2_athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
