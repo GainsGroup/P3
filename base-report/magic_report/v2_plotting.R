@@ -64,7 +64,7 @@ get_table_stats <- function(playername, date) {
   performance_df <- rbind(performance_df_player, performance_df_average)
   
   overall_df <- left_join(stats_df, performance_df, by = "Name")%>%
-    rename("Vert Jump\n(+/- NBA Avg)" = "Vert Jump", "Drop Jump\n(+/- NBA Avg)" = "Drop Jump", "Lat Force\n(+/- NBA Avg)" = "Lat Force")
+    rename("Vert Jump\n(+/- Pos. Avg)" = "Vert Jump", "Drop Jump\n(+/- Pos. Avg)" = "Drop Jump", "Lat Force\n(+/- Pos. Avg)" = "Lat Force")
     
   return(overall_df)
 }
@@ -197,7 +197,7 @@ get_percentiles_page_2 <- function(playername, date,players_position) {
   final_frame <- (percentiles_frame[,1:4])
   ff2 <- merge(final_frame,var_tests,by.x="percentiles",by.y="vars")
   ff2 <- ff2[,c(3:5)]
-  colnames(ff2) <- c("metric","Percentile","test_type")
+  colnames(ff2) <- c("metric","Pos. Percentile","test_type")
   ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
                                              ,"Knee Ext Velocity"
                                              ,"Net Impact 1"
@@ -214,7 +214,7 @@ get_percentiles_page_2 <- function(playername, date,players_position) {
                                              ,"R - Hip Abduction"
                                              ,"R - Hip Ext. Velocity"))
   ff2 <- ff2[order(ff2$metric),]
-  ff2$Percentile <- as.numeric(as.character(ff2$Percentile))
+  ff2$'Pos. Percentile' <- as.numeric(as.character(ff2$'Pos. Percentile'))
   return(ff2)
 }  ### This is page 2 kpis -- dont touch
 
