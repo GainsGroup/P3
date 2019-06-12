@@ -152,11 +152,11 @@ print(drawscore(athletecism_score, 'Athleticism', dkgrey), vp = vplayout(2, 18:2
 print(get_logo(), vp = vplayout(2, 23:25))
 
 ## ROW 3-6: Table
-drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
+drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, 'Pos. Percentile')
 print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Pos. Percentile', fill = dkgrey, width='fill'), vp = vplayout(3:10, 2:11), newpage=FALSE)
-st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
+st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, 'Pos. Percentile')
 print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Pos. Percentile', fill = dkgrey, width='fill'), vp = vplayout(11:18, 2:11), newpage=FALSE)
-skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
+skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, 'Pos. Percentile')
 print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = 'Pos. Percentile', fill = dkgrey, width='fill'), vp = vplayout(19:26, 2:11), newpage=FALSE)
 
 print(drawtext_p2("*Cell-shade darkens as the percent-rank increases"), vp = vplayout(27:28, 1:15))
