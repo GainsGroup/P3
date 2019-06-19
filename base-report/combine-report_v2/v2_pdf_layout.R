@@ -35,6 +35,7 @@ output <- 'example_p3_report.pdf'
 pagetitle <- 'P3 ASSESSMENT SUMMARY'
 playername <- Sys.getenv("PLAYER_NAME")
 date = Sys.getenv("ASSESSMENT_DATE")
+covertitle <- "P3 - NBA Combine Report"
 print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
 
