@@ -43,7 +43,7 @@ source('combine-report_v2/v2_production_clustering.R')
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
-intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
+intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to create his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
 intro_page_two <- paste0("Page 2 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to his athleticism. Research-derived performance variables populate the left side of the page. The right side of the page contains more detail on Deceleration/Acceleration abilities and information from P3's Cluster Analysis.")
 intro_page_three <- paste0("Page 3 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to potential injury-risk. In-house research has pointed to the importance of the variables listed below. There variables are used to score joint risk on a red/yellow/green scale - red areas warrant close attention.")
 
