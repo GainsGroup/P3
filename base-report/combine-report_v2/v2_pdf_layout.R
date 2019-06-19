@@ -11,6 +11,8 @@ library(RGraphics)
 source('report_v2/v2_themes.R')
 source('report_v2/v2_draw_objects.R')
 source('combine-report_v2/v2_plotting.R')
+source('combine-report_v2/cover_page.R')
+
 
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
