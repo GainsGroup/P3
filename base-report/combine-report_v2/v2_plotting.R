@@ -383,7 +383,7 @@ get_fig_page_three <- function(playername,date){
     geom_point(data = df,
                aes(x, y, size = 28, color = color,fill=color),
                alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
-    labs(title="Injury Risk Stratification", subtitle = "Injury risk factors by location") +
+    labs(title="Mechanics", subtitle = "Mechanical efficiency by location") +
     #geom_text(aes(x = -.47, y=-.91),color = dkgrey, label = paste0('Right Foot: ', round(color_frame$rightankle,0)), size = 3 ) +
     #geom_text(aes(x = -.45, y=-.18),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
     #geom_text(aes(x = .49, y=-.93),color = dkgrey, label = paste0('Left Foot: ', round(color_frame$leftankle,0)), size = 3 ) +
