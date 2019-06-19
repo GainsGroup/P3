@@ -81,7 +81,7 @@ graph_page_2_2x2 <- function(playername, assessmentdate){
               , aes(average_lateralforcebw,predicted,label = paste(substr(word(name),1,1),substr(word(name,2),1,1),sep="")), size = 5, fontface="bold",color="white") +  ## text for target athlete
     xlab("Lateral Ability") +
     ylab("Vertical Ability") +
-    labs(title="Vertical/Lateral Ability",
+    labs(title="Vertical/Lateral Performance",
          subtitle="Axes represent average for all P3 tested athletes\nFill color indicates position") +
     theme_minimal() +
     theme_p3() +
