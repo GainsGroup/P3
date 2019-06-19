@@ -108,6 +108,17 @@ pdf(
   height = height
 )
 
+##########
+## COVER##
+##########
+newpage(grid_cover)
+
+print(drawtitle(covertitle), vp = vplayout(2, 3:25))
+print(get_logo(), vp = vplayout(3:8, 9:18))
+print(draw_preamble(preamble_text1), vp = vplayout(10:15,3:24))
+print(draw_preamble(preamble_text2), vp = vplayout(16:21,3:24))
+print(draw_preamble(preamble_text3), vp = vplayout(23:26,3:24))
+
 ###########
 ## PAGE 1##
 ###########
