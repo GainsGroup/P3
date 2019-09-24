@@ -340,7 +340,7 @@ get_fig_page_one <- function(playername,date){
     y = c(-.81, -0.38, -.82, -0.39, 0.16),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
-  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
+  color_map <- c("red"='#b11a21',"green"=green,"yellow"=yellow)
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-1, 1) +
@@ -375,7 +375,7 @@ get_fig_page_three <- function(playername,date){
     y = c(-0.8, -0.45, -0.81, -0.45, 0.13),
     color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
   )
-  color_map <- c("red"=dkred,"green"=green,"yellow"=yellow)
+  color_map <- c("red"='#b11a21',"green"=green,"yellow"=yellow)
   fig <- ggplot() +
     annotation_custom(being_img, -1, 1, -1, 1) +
     xlim(-1, 1) +
