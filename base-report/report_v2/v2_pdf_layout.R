@@ -16,8 +16,8 @@ source('report_v2/v2_plotting.R')
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
 loadfonts()
-
-dkred <- '#b11a21'
+#5A2D81
+dkred <- '#5a2d81'
 ltred <- '#e0474c'
 blue <- '#656565'
 ltgrey <- '#F0F0F0'
