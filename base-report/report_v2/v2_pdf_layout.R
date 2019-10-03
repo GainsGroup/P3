@@ -15,9 +15,12 @@ source('report_v2/v2_plotting.R')
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
-loadfonts()
-#5A2D81 is kings purp. switch the dkred to hex code for whatever accent we want
-dkred <- '#b11a21'
+loadfonts() 
+#switch the dkred to hex code for whatever accent we want
+# #5A2D81 is kings purp.
+# #B3A369 is ga tech
+# #b11a21 is P3 red (standard)
+dkred <- '#B3A369'
 ltred <- '#e0474c'
 blue <- '#656565'
 ltgrey <- '#F0F0F0'
