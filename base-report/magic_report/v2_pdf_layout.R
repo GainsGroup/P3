@@ -17,7 +17,7 @@ extrafont::font_import(prompt=FALSE,pattern='Abel')
 
 loadfonts()
 
-dkred <- '#0077C0'
+dkred <- '#5A2D81'
 ltred <- '#e0474c'
 blue <- '#656565'
 ltgrey <- '#F0F0F0'
