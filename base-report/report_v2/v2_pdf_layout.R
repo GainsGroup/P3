@@ -20,7 +20,7 @@ loadfonts()
 # #5A2D81 is kings purp.
 # #B3A369 is ga tech
 # #b11a21 is P3 red (standard)
-dkred <- '#5A2D81'
+dkred <- '#b11a21'
 ltred <- '#e0474c'
 blue <- '#656565'
 ltgrey <- '#F0F0F0'
