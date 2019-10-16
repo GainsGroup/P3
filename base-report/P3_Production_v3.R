@@ -439,40 +439,7 @@ new_cluster <- master %>%
             Delta_Vert, Delta_Drop,vert.maxkneeextensionvelocityavg,drop.maxkneeextensionaccelerationavg)) %>%
   na.omit()
 
-### OLD Page 2 Clustering  ######
-cluster_data <- master %>%
-  select(name,assessmentdate, bodyweightkg, Delta_Vert, Delta_Drop,LateralForceRightBW,LateralForceLeftBW,
-         Imp_1_Avg, drop.maxkneeextensionvelocityavg, Conc_Raw_Avg,
-         Conc_Rel_FF, Ecc_Rel_FF,vert.maxkneeextensionvelocityavg,
-         sl.averagelateralrfd, sl.maxhipextensionvelocity,sl.maxhipabduction,
-         sr.averagelateralrfd, sr.maxhipextensionvelocity,sr.maxhipabduction) %>%
-  mutate_if(is.numeric, percentile_function) %>% 
-  mutate(Imp_1_Avg = abs(100 - Imp_1_Avg),
-         sl.maxhipextensionvelocity = abs(100 - sl.maxhipextensionvelocity),
-         sr.maxhipextensionvelocity = abs(100 - sr.maxhipextensionvelocity)) %>%
-  na.omit()
 
-### Find optimal number of clusters 
-set.seed(2713)  ## ensure repeatability
-optimal_clustering <- FitKMeans(cluster_data[,-c(1,2)], max.clusters = 8, nstart = 25,
-                                seed = 2713)  ## Find the best amount of clusters
-
-completed_cluster <- kmeans(x = cluster_data[,-c(1:2)], centers = 5)
-
-
-### Get cluster averages for athletes 
-cluster_centers <- as.data.frame(completed_cluster$centers)
-cluster_centers$name <- paste("cluster",row.names(cluster_centers),"average",sep="") 
-cluster_centers$assesmentdate <- "NA"
-cluster_centers <- cluster_centers[,c(18, 19,1:17)]
-
-
-### Get data frame for spider plot 
-cluster_data$assessmentdate <- as.character(cluster_data$assessmentdate)
-names(cluster_centers) <- names(cluster_data)
-clusters_binding <- c(completed_cluster$cluster, rep("NA", each = max(completed_cluster$cluster)))
-spider_plot_cluster_avg <- as.data.frame(rbind(cluster_data,cluster_centers))
-spider_plot_cluster_avg$cluster <- clusters_binding
 
 ##### PAGE 3 DEVELOPMENT ###
 page_3 <- master %>%
