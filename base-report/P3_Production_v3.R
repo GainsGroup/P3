@@ -1,7 +1,6 @@
 library(civis)
 library(lubridate)
 library(scales)
-library(useful)
 library(stringr)
 library(caret)
 library(tibble)
