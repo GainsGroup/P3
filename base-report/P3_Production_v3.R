@@ -502,7 +502,6 @@ write_civis(full_scatter_viz, tablename="public.v2_scatter_model_data", database
 #### Page 2 
 write_civis(page_2_percentiles, tablename="public.v2_page_2_percentiles", database="P3", if_exists="drop")
 write_civis(page_2_accel_decel, tablename="public.v2_page_2_accel_decel", database="P3", if_exists="drop")
-write_civis(spider_plot_cluster_avg, tablename="public.v2_spider_plot_data", database="P3", if_exists="drop")
 write_civis(new_cluster, tablename = "public.v2_plotting_cluster_data", database = "P3", if_exists = "drop") 
 
 #### Page 2 -- MAGIC
