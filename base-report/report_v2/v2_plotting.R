@@ -144,7 +144,7 @@ get_kpis <- function(playername, date) {
 
 get_accel_decel_2 <- function(playername,date) {
   print("Retrieving Page 2 Accel Decel Data")
-  accel_decel_sql <- paste("select * from public.page_2_accel_decel
+  accel_decel_sql <- paste("select * from public.v2_page_2_accel_decel
                            where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   accel_decel <- read_civis(sql(accel_decel_sql),"P3")
   accel_decel_1 <- accel_decel[,3:7]
