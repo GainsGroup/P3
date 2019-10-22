@@ -147,7 +147,7 @@ get_accel_decel_2 <- function(playername,date) {
   accel_decel_sql <- paste("select * from public.v2_page_2_accel_decel
                            where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
   accel_decel <- read_civis(sql(accel_decel_sql),"P3")
-  accel_decel_1 <- accel_decel[,c(3:6,8)]
+  accel_decel_1 <- accel_decel[,c(3:5,7:8)]
   colnames(accel_decel_1)[which(names(accel_decel_1) == "ecc_rel_ff")] <- "Ecc. Force"
   colnames(accel_decel_1)[which(names(accel_decel_1) == "conc_rel_ff")] <- "Rel Conc Force"
   colnames(accel_decel_1)[which(names(accel_decel_1) == "skater_lat_drive_avg")] <- "Lat. Drive - Avg."
