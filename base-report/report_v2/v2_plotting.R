@@ -150,7 +150,7 @@ get_accel_decel_2 <- function(playername,date) {
   accel_decel_1 <- accel_decel[,c(3:5,7:8)]
   colnames(accel_decel_1)[which(names(accel_decel_1) == "ecc_rel_ff")] <- "Ecc. Force"
   colnames(accel_decel_1)[which(names(accel_decel_1) == "conc_rel_ff")] <- "Rel Conc Force"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "skater_lat_drive_avg")] <- "Lat. Drive - Avg."
+  colnames(accel_decel_1)[which(names(accel_decel_1) == "average_lateralforcebw")] <- "Lat. Drive - Avg."
   colnames(accel_decel_1)[which(names(accel_decel_1) == "vertmaxkneeextensionaccelerationavg")] <- "Knee Ext Accel"
   colnames(accel_decel_1)[which(names(accel_decel_1) == "ankle_act_dec_avg")] <- "Ank. Active Decel"
   accel_decel_1 <- data.frame(t(accel_decel_1))
