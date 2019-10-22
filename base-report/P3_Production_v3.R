@@ -379,7 +379,7 @@ page_2_accel_decel <- master %>%
   select(name, assessmentdate, Conc_Rel_FF,LateralForceLeftBW,LateralForceRightBW,vert.maxkneeextensionaccelerationavg,
          Ecc_Rel_FF,Load_Rel_FF,drop.ankleactivedecelerationright, Average_LateralForceBW, drop.ankleactivedecelerationleft) %>%
   mutate(ankle_act_dec_avg = (drop.ankleactivedecelerationleft + drop.ankleactivedecelerationright)/2) %>%
-  select(name, assessmentdate, vert.maxkneeextensionaccelerationavg, Ecc_Rel_FF, Load_Rel_FF, ankle_act_dec_avg, Average_LateralForceBW) %>%
+  select(name, assessmentdate, vert.maxkneeextensionaccelerationavg, Ecc_Rel_FF, Conc_Rel_FF, Load_Rel_FF, ankle_act_dec_avg, Average_LateralForceBW) %>%
   mutate_if(is.numeric, percentile_function) %>% 
   mutate(accel_total = percentile_function(vert.maxkneeextensionaccelerationavg + Load_Rel_FF + Average_LateralForceBW),
          decel_total = percentile_function(ankle_act_dec_avg + Ecc_Rel_FF)) %>%
