@@ -8,9 +8,9 @@ library(cowplot)
 library(stringr)
 library(grImport)
 library(RGraphics)
-source('report_v2/v2_themes.R')
-source('report_v2/v2_draw_objects.R')
-source('report_v2/v2_plotting.R')
+source('baseball-report/v2_themes.R')
+source('baseball-report/v2_draw_objects.R')
+source('baseball-report/v2_plotting.R')
 
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
