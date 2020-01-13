@@ -129,16 +129,16 @@ print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 
 # 3 Vert-Lat 2x2
 ## ROW 7-8: 2x2 scatter
-print(cluster_scatter, vp = vplayout(15:26, 2:12)) ### Make this top right (currently bottom left)
+print(cluster_scatter, vp = vplayout(4:20, 12:24)) ### Make this top right (currently bottom left)
 
 # 4 Spider Plot 
 #print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
 
 # 5 Table 
 drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
-print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(3:10, 2:11), newpage=FALSE)
+print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(4:11, 2:11), newpage=FALSE)
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
-print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(11:18, 2:11), newpage=FALSE)
+print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(12:19, 2:11), newpage=FALSE)
 skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
 
 # 6 Training Targets 
