@@ -142,9 +142,9 @@ print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col
 skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
 
 # 6 Training Targets 
-print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:24, 2:11))
-print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(25:26, 2:11))
-print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 2:11))
+print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:25, 2:11))
+print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(26:27, 2:11))
+#print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 2:11))
 
 
 dev.off()
