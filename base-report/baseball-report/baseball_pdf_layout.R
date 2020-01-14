@@ -136,15 +136,15 @@ print(cluster_scatter, vp = vplayout(7:20, 12:24)) ### Make this top right (curr
 
 # 5 Table 
 drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
-print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(8:15, 2:11), newpage=FALSE)
+print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(7:14, 2:11), newpage=FALSE)
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
-print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(16:23, 2:11), newpage=FALSE)
+print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(15:22, 2:11), newpage=FALSE)
 skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
 
 # 6 Training Targets 
-print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:25, 2:11))
-print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(26:27, 2:11))
-print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(28:29, 2:11))
+print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(22:24, 2:11))
+print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(25:26, 2:11))
+print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 2:11))
 
 
 dev.off()
