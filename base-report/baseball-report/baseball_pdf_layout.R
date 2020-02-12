@@ -31,7 +31,6 @@ pal <- c(dkred, ltred, blue, ltgrey, dkgrey)
 #####################
 ## REPORT INPUTS  ##
 ###################
-
 output <- 'example_p3_report.pdf'
 pagetitle <- 'P3 ASSESSMENT SUMMARY'
 playername <- Sys.getenv("PLAYER_NAME")
@@ -42,7 +41,6 @@ print(paste('Assessment Date',date))
 
 intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
                       
-#training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
 ## LOAD DATA  ##
@@ -50,14 +48,8 @@ intro_page_one <- paste(playername, "was taken through an assessment by P3 on",d
 bio_stats_df <- get_table_stats(playername, date)
 #performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
-#ad2 <- get_accel_decel_2(playername,date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
-#percentiles_page3 <- get_percentiles_page_3(playername,date)
 
-#athl_score_sql <- paste("select * from public.v2_athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-#athletecism_score <- round(read_civis(sql(athl_score_sql),"P3")$scaled_athl_score)
-#mech_score_sql <- paste("select * from public.v2_mech_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-#mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$scaled_mech_score)
 print("Load DATA complete")
 ################
 ## GET PLOTS ##
