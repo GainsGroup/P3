@@ -46,10 +46,7 @@ intro_page_one <- paste(playername, "was taken through an assessment by P3 on",d
 ## LOAD DATA  ##
 ################
 bio_stats_df <- get_table_stats(playername, date)
-#performance_stats_df <- get_table_stats(playername, date)[[2]]
-kpis <- get_kpis(playername, date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
-
 spider_data <- get_athl_cluster_data(playername,date)
 
 
@@ -57,20 +54,8 @@ print("Load DATA complete")
 ################
 ## GET PLOTS ##
 ################
-
 radar_plot_athl <- radar_plot(spider_data) 
 
-#dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
-#dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
-#fig_one <- get_fig_page_one(playername,date)
-#fig_three <- get_fig_page_three(playername,date)
-#accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
-#cluster_scatter <- graph_page_2_2x2(playername,date)
-#dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
-#dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
-#dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
-#dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
-#dot_plot5 <- dot_plot(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
 print("load plots complete")
 
 ################
@@ -110,12 +95,8 @@ print(get_logo(), vp = vplayout(2, 21:23))
 ## ROW 3/4: summary text and scores
 print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 
-# 3 Vert-Lat 2x2
-## ROW 7-8: 2x2 scatter
-#print(cluster_scatter, vp = vplayout(7:20, 12:24)) ### Make this top right (currently bottom left)
-
 # 4 Spider Plot 
-#print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
+print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
 
 # 5 Table 
 drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
