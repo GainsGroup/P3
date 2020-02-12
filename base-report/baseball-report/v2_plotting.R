@@ -22,7 +22,7 @@ pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 
 get_table_stats <- function(playername, date) {
   print("Retrieving Bio Info")
-  athlete_table <- 'public.v2_page_1_bio_info'
+  athlete_table <- 'public.baseball_page_1_bio_info'
   ### Table 1 - bio info  
   df <- read_civis(athlete_table, database = "P3") %>%
     filter(name == playername) %>%
@@ -65,7 +65,7 @@ get_table_stats <- function(playername, date) {
 
 get_percentiles_page_2 <- function(playername, date) {
   print("Retrieving Page 2 Percentiles Data")
-percentile_sql_v2 <- paste("select * from public.v2_page_2_percentiles where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+percentile_sql_v2 <- paste("select * from public.baseball_page_2_percentile where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
 full_table_v2 <- read_civis(sql(percentile_sql_v2),"P3")
 values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
 percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
