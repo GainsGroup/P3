@@ -50,10 +50,16 @@ bio_stats_df <- get_table_stats(playername, date)
 kpis <- get_kpis(playername, date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
 
+spider_data <- get_athl_cluster_data(playername,date)
+
+
 print("Load DATA complete")
 ################
 ## GET PLOTS ##
 ################
+
+radar_plot_athl <- radar_plot(spider_data) 
+
 #dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
 #dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
 #fig_one <- get_fig_page_one(playername,date)
