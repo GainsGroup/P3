@@ -62,104 +62,6 @@ get_table_stats <- function(playername, date) {
   return(overall_df)
 }
 
-graph_page_2_2x2 <- function(playername, assessmentdate){
-  print("Retrieving 2x2 Scatter Cluster Data")
-  ### Extract the player's position to allow for comparison and to allow for dynamic graph labeling (used below)
-  data <- read_civis('public.v2_scatter_model_data','P3')
-  players_position <- data %>%
-    filter(name == as.character(playername)) %>%
-    select(position) %>%
-    pull("position")
-  
-  
-  graph <- ggplot(data, aes(x = average_lateralforcebw, y = predicted, label=playername)) +
-    geom_vline(xintercept = 50) + ### position mean, x
-    geom_hline(yintercept = 50) + ### position mean, y
-    geom_point(aes(fill=position),size=5, pch =21, alpha=0.5) +  ### overall points
-    geom_point(data = data[data[,1] == playername & data[,2] == assessmentdate , ], size = 12, fill = "black", pch=21, show.legend = FALSE) +  ## point for target athlete
-    geom_text(data = data[data[,1] == playername & data[,2] == assessmentdate , ]
-              , aes(average_lateralforcebw,predicted,label = paste(substr(word(name),1,1),substr(word(name,2),1,1),sep="")), size = 5, fontface="bold",color="white") +  ## text for target athlete
-    xlab("Lateral Ability") +
-    ylab("Vertical Ability") +
-    labs(title="Vertical/Lateral Ability",
-         subtitle="Axes represent average for all P3 tested athletes\nFill color indicates position") +
-    theme_minimal() +
-    theme_p3() +
-    theme(#axis.text = element_text(size=10, face = "bold"),
-      axis.title.x = element_text(size=11,face="bold"),
-      axis.title.y = element_text(size=11,face="bold",angle=90),
-      legend.position = 'bottom',
-      legend.key = element_rect(linetype = "blank"),
-      legend.key.size = unit(1,"line"))  +
-    scale_fill_manual(values=c(white, dkred, dkgrey)) +
-    guides(fill=guide_legend("Position"))
-  
-  
-  return(graph)
-  
-}
-
-
-get_kpis <- function(playername, date) {
-  print("Retrieving Page 1 Percentiles")
-  std_sql <- paste("select * from public.v2_page_1_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  std <- read_civis(sql(std_sql),"P3")
-  std <- add_rownames(data.frame(t(std[,3:length(std)])),"metric")
-  colnames(std) <- c("metric","percentile")
-  metric <- c("vertmaxkneeextensionvelocityavg"
-              ,"conc_rel_ff"
-              ,"dropmaxkneeextensionvelocityavg"
-              ,"imp_1_avg"
-              ,"slmaxhipabduction"
-              ,"srmaxhipabduction"
-              ,"slmaxhipextensionvelocity"
-              ,"srmaxhipextensionvelocity")
-  label <- factor(c("Knee Ext Vel (SV)"
-                    ,"Conc Rel FF (SV)"
-                    ,"Knee Ext Vel (DV)"
-                    ,"Net Imp 1 (DV)"
-                    ,"Max Hip Abd. (L SK)"
-                    ,"Max Hip Abd. (R SK)"
-                    ,"Hip Ext Vel (L SK)"
-                    ,"Hip Ext Vel (R SK)"))
-  type <- c("vertical"
-            ,"vertical"
-            ,"vertical"
-            ,"vertical"
-            ,"lateral"
-            ,"lateral"
-            ,"lateral"
-            ,"lateral")
-  std_merge <- data.frame(metric,label,type)
-  kpis <- merge(std,std_merge,by="metric")
-  kpis$percentile <- as.numeric(as.character(kpis$percentile))
-  kpis$metric <- factor(kpis$label,levels=rev(label))
-  kpis$pos <- FALSE
-  over_50 <- function(x) {
-    ifelse(is.na(x),FALSE,x>50)
-  }
-  kpis$pos <- as.character(lapply(kpis$percentile, function(x) over_50(x)))
-  return(kpis)
-}   ### This is page 1 percentiles 
-
-get_accel_decel_2 <- function(playername,date) {
-  print("Retrieving Page 2 Accel Decel Data")
-  accel_decel_sql <- paste("select * from public.v2_page_2_accel_decel
-                           where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-  accel_decel <- read_civis(sql(accel_decel_sql),"P3")
-  accel_decel_1 <- accel_decel[,c(3:5,7:8)]
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "ecc_rel_ff")] <- "Ecc. Force"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "conc_rel_ff")] <- "Rel Conc Force"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "average_lateralforcebw")] <- "Lat. Drive - Avg."
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "vertmaxkneeextensionaccelerationavg")] <- "Knee Ext Accel"
-  colnames(accel_decel_1)[which(names(accel_decel_1) == "ankle_act_dec_avg")] <- "Ank. Active Decel"
-  accel_decel_1 <- data.frame(t(accel_decel_1))
-  accel_decel_1 <- add_rownames(accel_decel_1,"metric")
-  colnames(accel_decel_1) <- c("metric","value")
-  accel_decel_1$metric <- factor(accel_decel_1$metric,levels = c("Lat. Drive - Avg.","Ecc. Force","Knee Ext Accel","Ank. Active Decel","Rel Conc Force"))
-  return(accel_decel_1)
-}  ### This is page 2 accel decel
-
 
 get_percentiles_page_2 <- function(playername, date) {
   print("Retrieving Page 2 Percentiles Data")
@@ -202,198 +104,6 @@ ff2 <- ff2[order(ff2$metric),]
   return(ff2)
 }  ### This is page 2 kpis -- dont touch
 
-get_percentiles_page_3 <- function(playername,date) {
-  print("Retrieving Page 3 Dot Plot Percentiles")
-  percentile_sql <- paste("select * from public.v2_page_3_percentiles
-                          where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-  full_table <- read_civis(sql(percentile_sql),"P3")
-  low_back <- full_table %>%
-    select("dropdeltahip_average", "imp2lraw", "imp2rraw", "droptotalmovementimpulseasymmetry")
-  low_back <- data.frame(t(low_back))
-  low_back <- add_rownames(low_back, "metric")
-  colnames(low_back) <- c("metric","value")
-  low_back$type <- 'low back'
-  low_back$order <- c(1:4)
-  low_back$metric <- factor(low_back$metric, levels = low_back$metric[order(low_back$order)])
-  
-  left_knee <- full_table %>%
-    select("dropmaxrelativerotationleft", "translationl", "dropmaxhipactivedecelerationleft", "dropdeltafemoralrotationleft")
-  left_knee <- data.frame(t(left_knee))
-  left_knee <- add_rownames(left_knee,"metric")
-  colnames(left_knee) <- c("metric","value")
-  left_knee$type <- 'left knee'
-  left_knee$order <- c(1:4)
-  left_knee$metric <- factor(left_knee$metric, levels = left_knee$metric[order(left_knee$order)])
-  
-  
-  right_knee <-full_table %>%
-    select("dropmaxrelativerotationright", "translationr", "dropmaxhipactivedecelerationright", "dropdeltafemoralrotationright")
-  right_knee <- data.frame(t(right_knee))
-  right_knee <- add_rownames(right_knee,"metric")
-  colnames(right_knee) <- c("metric","value")
-  right_knee$type <- 'right knee'
-  right_knee$order <- c(1:4)
-  right_knee$metric <- factor(right_knee$metric, levels = right_knee$metric[order(right_knee$order)])
-  
-  left_foot <- full_table %>% 
-    select("inversionl", "translationl", "dropankleactivedecelerationleft", "dropankleflexionatt0left")
-  left_foot <- data.frame(t(left_foot))
-  left_foot <- add_rownames(left_foot,"metric")
-  colnames(left_foot) <- c("metric","value")
-  left_foot$type <- 'left foot'
-  left_foot$order <- c(1:4)
-  left_foot$metric <- factor(left_foot$metric, levels = left_foot$metric[order(left_foot$order)])
-  
-  
-  right_foot <- full_table %>%
-    select("inversionr", "translationr", "dropankleactivedecelerationright", "dropankleflexionatt0right")
-  right_foot <- data.frame(t(right_foot))
-  right_foot <- add_rownames(right_foot,"metric")
-  colnames(right_foot) <- c("metric","value")
-  right_foot$type <- 'right foot'
-  right_foot$order <- c(1:4)
-  right_foot$metric <- factor(right_foot$metric, levels = right_foot$metric[order(right_foot$order)])
-  
-  percent_frame <- bind_rows(low_back,left_knee, left_foot, right_knee, right_foot)
-  colnames(percent_frame) <- c("metric","percentile","type","order")
-  percent_frame$pos <- FALSE
-  percent_frame$percentile <- percent_frame$percentile
-  over_50 <- function(x) {
-    ifelse(is.na(x),FALSE,x>50)
-  }
-  percent_frame$pos <- as.character(lapply(percent_frame$percentile, function(x) over_50(x)))
-  
-  metric <- c("dropdeltahip_average"
-              ,"imp2lraw"
-              ,"imp2rraw"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropmaxrelativerotationleft"
-              ,"dropdeltarelativerotationleft"
-              ,"translationl"
-              ,"dropankleactivedecelerationleft"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropmaxrelativerotationright"
-              ,"dropdeltarelativerotationright"
-              ,"translationr"
-              ,"dropankleactivedecelerationright"
-              ,"dropankleflexionatt0left"
-              ,"inversionl"
-              ,"translationl"
-              ,"dropankleactivedecelerationleft"
-              ,"dropankleflexionatt0right"
-              ,"inversionr"
-              ,"translationr"
-              ,"dropankleactivedecelerationright"
-              ,"droptotalmovementimpulseasymmetry"
-              ,"dropmaxhipactivedecelerationleft"
-              ,"dropmaxhipactivedecelerationright"
-              ,"dropdeltafemoralrotationright"
-              ,"dropdeltafemoralrotationleft")
-  
-  label <- c("Delta Hip Flex."
-             ,"Impact 2 (L)"
-             ,"Impact 2 (R)"
-             ,"Impulse Asym"
-             ,"Rel. Rotation"
-             ,"Delta Rel. Rot."
-             ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym"
-             ,"Rel. Rotation"
-             ,"Delta Rel. Rot."
-             ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Active Dorsi."
-             ,"Inversion"
-             ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Active Dorsi."
-             ,"Inversion"
-             ,"Translation"
-             ,"Ankle Act Decel"
-             ,"Impulse Asym"
-             ,"Hip Decel."
-             ,"Hip Decel."
-             ,"Femoral Rotation"
-             ,"Femoral Rotation")
-  
-  column_labels <- unique(data.frame(metric,label))
-  percent_merged_frame <- merge(percent_frame,column_labels,by="metric")
-  return(percent_merged_frame)
-  
-  print(percent_merged_frame)                               
-  
-}  ### This is page 3 
-
-get_fig_page_one <- function(playername,date){
-  being_img <-
-    rasterGrob(readPNG("p3_black_wireman.png"))
-  print("Retrieving Flag Diagram Data")
-  color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
-  df <- data.frame(
-    # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.15, -0.13, 0.14,  0.10, -0.04),
-    y = c(-.81, -0.38, -.82, -0.39, 0.16),
-    color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
-  )
-  color_map <- c("red"='#b11a21',"green"=green,"yellow"=yellow)
-  fig <- ggplot() +
-    annotation_custom(being_img, -1, 1, -1, 1) +
-    xlim(-1, 1) +
-    ylim(-1, 1) +
-    geom_point(data = df,
-               aes(x, y, size = 28, color = color,fill=color),
-               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
-    #geom_text(aes(x = -.51, y=-.91), color = dkgrey, label = paste0('Right Foot: ', round(color_frame$rightankle,0)), size = 3 ) +
-    #geom_text(aes(x = -.49, y=-.17), color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    #geom_text(aes(x = .57, y=-.93), color = dkgrey, label = paste0('Left Foot: ', round(color_frame$leftankle,0)), size = 3 ) +
-    #geom_text(aes(x = .51, y=-.17), color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    #geom_text(aes(x = -.51, y= .64), color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
-    scale_colour_manual(values = color_map) +
-    scale_fill_manual(values=color_map) +
-    guides(colour = FALSE, size = FALSE) +
-    scale_size(range = c(8,12)) +
-    labs(title ="Injury Risk Stratification", subtitle = "Injury risk factor by location")+
-    theme_p3_fig_two() #+
-    #theme(panel.background = element_rect(colour = "black", fill = NA, size =.5))
-}
-                                           
-get_fig_page_three <- function(playername,date){
- print("drawing page 3 image")
-  being_img <-
-    rasterGrob(readPNG("p3_black_wireman.png"))
-  print("Retrieving Flag Diagram Data")
-  color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
-  df <- data.frame(
-    # R Ankle, R Knee, L Ankle, L Knee, M Back
-    x = c(-0.13, -0.13, 0.11,  0.09, -0.03),
-    y = c(-0.8, -0.45, -0.81, -0.45, 0.13),
-    color = c(as.character(color_frame[,"flag_rightankle"]),as.character(color_frame[,"flag_rightknee"]),as.character(color_frame[,"flag_leftankle"]),as.character(color_frame[,"flag_leftknee"]),as.character(color_frame[,"flag_back"]))
-  )
-  color_map <- c("red"='#b11a21',"green"=green,"yellow"=yellow)
-  fig <- ggplot() +
-    annotation_custom(being_img, -1, 1, -1, 1) +
-    xlim(-1, 1) +
-    ylim(-1, 1) +
-    geom_point(data = df,
-               aes(x, y, size = 28, color = color,fill=color),
-               alpha = .4,stroke=1,shape=21,show_guide=FALSE) +
-    labs(title="Injury Risk Stratification", subtitle = "Injury risk factors by location") +
-    #geom_text(aes(x = -.47, y=-.91),color = dkgrey, label = paste0('Right Foot: ', round(color_frame$rightankle,0)), size = 3 ) +
-    #geom_text(aes(x = -.45, y=-.18),color = dkgrey, label = paste0('Right Knee: ', round(color_frame$rightknee,0)), size =3 ) +
-    #geom_text(aes(x = .49, y=-.93),color = dkgrey, label = paste0('Left Foot: ', round(color_frame$leftankle,0)), size = 3 ) +
-    #geom_text(aes(x = .49, y=-.18),color = dkgrey, label = paste0('Left Knee: ', round(color_frame$leftknee,0)), size = 3 ) +
-    #geom_text(aes(x = -.47, y= .64),color = dkgrey, label = paste0('Lower Back: ', round(color_frame$lowback,0)), size =3 ) +
-    scale_colour_manual(values = color_map) +
-    scale_fill_manual(values=color_map) +
-    guides(colour = FALSE, size = FALSE) +
-    scale_size(range = c(8,12)) +
-    theme_p3_fig_two()
-}
-                                           
-
 get_logo <- function(){
   being_img <-
     rasterGrob(readPNG("P3 logo.png"))
@@ -408,112 +118,8 @@ get_logo <- function(){
     theme_p3_fig()
 }
 
-acceleration_bars <- function(df,subtitle) {
-  ggplot(df,aes(x=metric,y=value,fill=metric)) +
-    geom_bar(stat = 'identity') +
-    labs(title="Deceleration / Acceleration",
-         subtitle=subtitle) +
-    scale_fill_manual("legend",values = c(dkred,dkgrey,dkred,dkgrey,dkred)) +
-    coord_flip() +
-    theme_p3() +
-    ylim(-100,100)
-}
 
 
-main_page_1_dot_plot <-  function(title='Overall Performance Factors') {
-  vert_lat_table <- 'public.v2_scatter_model_data'
-  accel_decel_table <- 'public.v2_page_2_accel_decel'
-
-  ### Vert_Lat
-  vl_df <- read_civis(vert_lat_table, database = "P3") %>%
-    filter(name == playername) %>%
-    filter(date == assessmentdate) %>%
-    select(-position)
-  ### Accel Decel
-  ad_df <- read_civis(accel_decel_table, database = "P3") %>%
-    filter(name == playername) %>%
-    filter(date == assessmentdate) %>%
-    select(name, assessmentdate, accel_total, decel_total)
-  
-  overall <- full_join(vl_df, ad_df, by = c("name", "assessmentdate")) %>%
-    rename("Vertical" = predicted,"Lateral" = average_lateralforcebw,  "Acceleration" = accel_total, "Deceleration" = decel_total) %>%
-    melt() %>%
-    select(variable, value) %>%
-    rename("label" = variable, "percentile" = value) %>%
-    mutate(pos = ifelse(percentile >= 50, TRUE, FALSE))
-  
-  overall$label <-   factor(overall$label, levels = levels(overall$label)[c(4,3,1,2)])
-  
-  
-  plot <- ggplot(overall, aes(x=label, y=percentile)) +
-    geom_point(aes(col = pos, fill = pos), size=4, pch=21) +   # Draw points
-    geom_segment(aes(x=label,
-                     xend=label,
-                     y=0,
-                     yend=100),
-                 linetype="dashed",
-                 size=0.1) +   # Draw dashed lines
-    geom_hline(yintercept=50, size = .5) +
-    labs(title=title,
-         subtitle="NBA Percentile Rank") +
-    scale_fill_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
-    scale_color_manual(values=c("FALSE"=black,"TRUE"=black)) +
-    theme_p3() +
-    coord_flip() +
-    theme(panel.background = element_rect(fill = "transparent",colour = NA),
-          plot.background = element_rect(fill = "transparent",colour = NA),
-          #plot.title = element_text(vjust=20),
-          #plot.subtitle = element_text(vjust=20)
-    )
-  
-  return(plot)
-}
-
-dot_plot <-  function(overall, type = 'lateral',title='Graph') {
-  df <- overall %>% filter_(paste0('type == "', type, '"'))
-  ggplot(df, aes(x=label, y=percentile)) +
-    geom_point(aes(col=pos, fill=pos), size=4, pch=21) +   # Draw points
-    geom_segment(aes(x=label,
-                     xend=label,
-                     y=0,
-                     yend=100),
-                 linetype="dashed",
-                 size=0.1) +   # Draw dashed lines
-    geom_hline(yintercept=50, size = .5) +
-    labs(title=title,
-         subtitle="NBA Percentile Rank") +
-    scale_fill_manual(values=c("FALSE"=ltgrey,"TRUE"=dkgrey)) +
-    scale_color_manual(values=c("FALSE"=black,"TRUE"=black)) +
-    theme_p3() +
-    coord_flip() +
-    theme(panel.background = element_rect(fill = "transparent",colour = NA),
-          plot.background = element_rect(fill = "transparent",colour = NA),
-       #   plot.title = element_text(vjust=20),
-       #   plot.subtitle = element_text(vjust=20)
-    )
-}
-
-dot_plot_right <-  function(overall, type = 'lateral',title='Graph') {
-  df <- overall %>% filter_(paste0('type == "', type, '"'))
-  ggplot(df, aes(x=label, y=percentile)) +
-    geom_point(aes(col=pos), size=4) +   # Draw points
-    geom_segment(aes(x=label,
-                     xend=label,
-                     y=0,
-                     yend=100),
-                 linetype="dashed",
-                 size=0.1) +   # Draw dashed lines
-    geom_hline(yintercept=50, size = .5) +
-    labs(title=title,
-         subtitle="NBA Percentile Rank") +
-    scale_colour_manual(values=c(dkred, dkgrey)) +
-    theme_p3() +
-    coord_flip() +
-    scale_x_discrete(position="top") +
-    theme(panel.background = element_rect(fill = "transparent",colour = NA),
-          plot.background = element_rect(fill = "transparent",colour = NA)
-    )
-}
                                            
 training_recs <- data.frame(
   Parameter_Name = c(Sys.getenv("HIP_STABILITY"),
@@ -567,7 +173,7 @@ training_recs <- data.frame(
                                            
 rec_one <- paste0("1. ", training_recs$Rec[1], training_recs$Description[1])                                           
 rec_two <- paste0("2. ", training_recs$Rec[2], training_recs$Description[2])                                           
-rec_three <- ifelse(nrow(training_recs) >2,paste0("3. ", training_recs$Rec[3], training_recs$Description[3]),"         ")        
+rec_three <- ifelse(nrow(training_recs) >2,paste0("3. ", training_recs$Rec[3], training_recs$Description[3]),"         ")     
                                            
                                            
 get_glossary <- function(){
@@ -580,5 +186,30 @@ get_glossary <- function(){
     guides(colour = FALSE, size = FALSE) +
     theme_p3_fig()
   
+}
+
+radar_plot <- function(df.rad) {
+  radar_plot <- ggplot(df.rad, aes(x = metric, y = score/100, color = cluster, group = cluster)) +
+    geom_polygon(aes(color = cluster, fill = cluster), alpha = .2) + geom_point(aes(color = cluster)) +
+    coord_polar(start=-pi/4) +
+    theme_p3() +
+    scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
+    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Avg. P3 BB Male'), name = NULL) +
+    labs(title="Performance Factor Comparison",
+         subtitle="Athlete Relative to Avg. P3 Baseball Male") +
+    scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
+    geom_text(aes(x=metric, y=1.20,
+                  label=str_wrap(metric,width=10)),
+              color=dkgrey,size=2) +
+    theme(
+          legend.key = element_blank(),
+          legend.position = 'right',
+          axis.text.x=element_blank(),
+          plot.subtitle = element_text(vjust=1, size=12),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank()
+    )
+  return(radar_plot)
+
 }
                                            
