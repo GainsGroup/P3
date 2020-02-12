@@ -188,6 +188,86 @@ get_glossary <- function(){
   
 }
 
+get_athl_cluster_data <- function(playername,date) {
+  print("Retrieving Athleticism Cluster Data")
+  cluster_athlete_query <- paste("select *
+    from public.baseball_spider_data
+    where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+
+  cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
+
+  cluster_avg_sql <- paste("select *
+    from public.soccer_spider_plot_data
+    where name = 'Average DFB Male' and assessmentdate = '2018-08-21'",sep="")
+
+  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
+  
+  cluster_avg <- cluster_avg[,-c(1:2)]
+  cluster_athlete_compare <- cluster_athlete[,-c(1:2)]
+
+  t_athl_compare <- data.frame(t(cluster_athlete_compare))
+  t_athl_compare <- add_rownames(t_athl_compare,"metric")
+  colnames(t_athl_compare) <- c("metric","score")
+  t_athl_compare$cluster <- 'athlete'
+  t_athl_compare <- t_athl_compare[order(t_athl_compare$metric),]
+  t_cluster_avg <- data.frame(t(cluster_avg))
+  t_cluster_avg <- add_rownames(t_cluster_avg,"metric")
+  colnames(t_cluster_avg) <- c("metric","score")
+  t_cluster_avg$cluster <- 'comparison'
+  t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
+  cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
+
+  metric <- c("avg_total_movement_time",
+              "conc_rel_ff",
+              "ecc_rel_ff",                         
+              "lateralforceleftbw",
+              "lateralforcerightbw",
+              "relativepower",                      
+              "slmaxhipabduction",
+              "slmaxhipextensionvelocity",
+              "srmaxhipabduction",                  
+              "srmaxhipextensionvelocity",
+              "vertmaxkneeextensionaccelerationavg",
+              "vertmaxkneeextensionvelocityavg")
+
+  label <- c("Avg. Total Mvmt. Time"
+             ,"Conc Rel FF"
+             ,"Ecc Rel FF"
+             ,"Lateral Drive (L)"
+             ,"Lateral Drive (R)"
+             ,"Relative Power"
+             ,"Peak Hip Abduction (L)"
+             ,"Hip Extension Velocity (L)"
+             ,"Peak Hip Abduction (R)"
+             ,"Hip Extension Velocity (R)"
+             ,"Knee Ext. Accel."
+             ,"Knee Ext. Velocity")
+
+  cl <- data.frame(metric,label)
+  cluster_radar <- merge(cluster_radar,cl,by="metric")
+  cluster_radar$metric <- cluster_radar$label
+  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Relative Power"
+                                                                 ,"Conc Rel FF"
+                                                                 ,"Ecc Rel FF"
+                                                                 ,"Lateral Drive (R)"
+                                                                 ,"Hip Extension Velocity (R)"
+                                                                 ,"Peak Hip Abduction (R)"
+                                                                 ,"Knee Ext. Velocity"
+                                                                 ,"Avg. Total Mvmt. Time"
+                                                                 ,"Knee Ext. Accel."
+                                                                 ,"Peak Hip Abduction (L)"
+                                                                 ,"Hip Extension Velocity (L)"
+                                                                 ,"Lateral Drive (L)"))
+  cluster_radar <- cluster_radar[order(cluster_radar$metric),]
+  return(cluster_radar)
+
+}   ### DONE
+
+
+
+
+
+
 radar_plot <- function(df.rad) {
   radar_plot <- ggplot(df.rad, aes(x = metric, y = score/100, color = cluster, group = cluster)) +
     geom_polygon(aes(color = cluster, fill = cluster), alpha = .2) + geom_point(aes(color = cluster)) +
