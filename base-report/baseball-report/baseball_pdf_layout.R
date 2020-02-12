@@ -39,24 +39,9 @@ date = Sys.getenv("ASSESSMENT_DATE")
 print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
 
-## Bring in the clustering
-source('report_v2/v2_production_clustering.R')
-
-
-accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
-accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
 intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
-intro_page_two <- paste0("Page 2 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to his athleticism. Research-derived performance variables populate the left side of the page. The right side of the page contains more detail on Deceleration/Acceleration abilities and information from P3's Cluster Analysis.")
-intro_page_three <- paste0("Page 3 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to potential injury-risk. In-house research has pointed to the importance of the variables listed below. There variables are used to score joint risk on a red/yellow/green scale - red areas warrant close attention.")
-
-page_2_detail <- as.character(cluster_text %>%
-  filter(Cluster == as.character(athlete_prediction)) %>%
-  pull(Description))
-
-print(page_2_detail)
-
-                              
+                      
 #training_recs <- Sys.getenv("TRAINING_RECS")
 
 ################
@@ -65,29 +50,29 @@ print(page_2_detail)
 bio_stats_df <- get_table_stats(playername, date)
 #performance_stats_df <- get_table_stats(playername, date)[[2]]
 kpis <- get_kpis(playername, date)
-ad2 <- get_accel_decel_2(playername,date)
+#ad2 <- get_accel_decel_2(playername,date)
 percentiles_page2 <- get_percentiles_page_2(playername,date)
-percentiles_page3 <- get_percentiles_page_3(playername,date)
+#percentiles_page3 <- get_percentiles_page_3(playername,date)
 
-athl_score_sql <- paste("select * from public.v2_athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-athletecism_score <- round(read_civis(sql(athl_score_sql),"P3")$scaled_athl_score)
-mech_score_sql <- paste("select * from public.v2_mech_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$scaled_mech_score)
+#athl_score_sql <- paste("select * from public.v2_athl_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+#athletecism_score <- round(read_civis(sql(athl_score_sql),"P3")$scaled_athl_score)
+#mech_score_sql <- paste("select * from public.v2_mech_score where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+#mechanics_score <- round(read_civis(sql(mech_score_sql),"P3")$scaled_mech_score)
 print("Load DATA complete")
 ################
 ## GET PLOTS ##
 ################
-dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
-dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
-fig_one <- get_fig_page_one(playername,date)
-fig_three <- get_fig_page_three(playername,date)
-accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
-cluster_scatter <- graph_page_2_2x2(playername,date)
-dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
-dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
-dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
-dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
-dot_plot5 <- dot_plot(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
+#dot_plot6 <- dot_plot(kpis, type = 'vertical', title='Vertical Performance Factors')
+#dot_plot7 <- dot_plot(kpis, type = 'lateral', title='Lateral Performance Factors')
+#fig_one <- get_fig_page_one(playername,date)
+#fig_three <- get_fig_page_three(playername,date)
+#accel_plot2 <- acceleration_bars(ad2 %>% arrange(desc(metric)),accel_subtitle_2)
+#cluster_scatter <- graph_page_2_2x2(playername,date)
+#dot_plot1 <- dot_plot(percentiles_page3, type = 'low back', title='Low Back Mechanics')
+#dot_plot2 <- dot_plot(percentiles_page3, type = 'left knee', title='Left Knee Mechanics')
+#dot_plot3 <- dot_plot(percentiles_page3, type = 'right knee', title='Right Knee Mechanics')
+#dot_plot4 <- dot_plot(percentiles_page3, type = 'left foot', title='Left Foot Mechanics')
+#dot_plot5 <- dot_plot(percentiles_page3, type = 'right foot', title='Right Foot Mechanics')
 print("load plots complete")
 
 ################
@@ -129,7 +114,7 @@ print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 
 # 3 Vert-Lat 2x2
 ## ROW 7-8: 2x2 scatter
-print(cluster_scatter, vp = vplayout(7:20, 12:24)) ### Make this top right (currently bottom left)
+#print(cluster_scatter, vp = vplayout(7:20, 12:24)) ### Make this top right (currently bottom left)
 
 # 4 Spider Plot 
 #print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
