@@ -96,7 +96,7 @@ print(get_logo(), vp = vplayout(2, 21:23))
 print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 
 # 4 Spider Plot 
-print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
+print(radar_plot_athl, vp = vplayout(7:14, 12:26))  ## Make middle right 
 
 # 5 Table 
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
@@ -105,11 +105,13 @@ skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(met
 print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(14:21, 2:11), newpage=FALSE)
 upper <- percentiles_page2 %>% filter(test_type=="Upper Extremity") %>% select(metric, Percentile)
 print(drawtable(upper %>% dplyr::rename("Upper Extrem."=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(22:25, 2:11), newpage=FALSE)
+strength <- percentiles_page2 %>% filter(test_type=="Strength") %>% select(metric, Percentile)
+print(drawtable(upper %>% dplyr::rename("Strength"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(26:27, 2:11), newpage=FALSE)
 
 
 # 6 Training Targets 
-print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:25, 2:11))
-print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(26:27, 2:11))
+print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:25, 12:26))
+print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(26:27, 12:26))
 #print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 2:11))
 
 
