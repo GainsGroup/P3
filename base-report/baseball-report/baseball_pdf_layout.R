@@ -99,11 +99,13 @@ print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 print(radar_plot_athl, vp = vplayout(16:27, 12:26))  ## Make bottom left 
 
 # 5 Table 
-drop_jump <- percentiles_page2 %>% filter(test_type=="Drop Jump") %>% select(metric, Percentile)
-print(drawtable(drop_jump %>% dplyr::rename("Vertical: Drop Jump"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(7:14, 2:11), newpage=FALSE)
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
-print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(15:22, 2:11), newpage=FALSE)
+print(drawtable(st_vert %>% dplyr::rename("Vertical: Standing"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(7:13, 2:11), newpage=FALSE)
 skater <- percentiles_page2 %>% filter(test_type=="1 Off Skater") %>% select(metric, Percentile)
+print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(14:21, 2:11), newpage=FALSE)
+upper <- percentiles_page2 %>% filter(test_type=="Upper Extremity") %>% select(metric, Percentile)
+print(drawtable(upper %>% dplyr::rename("Upper Extrem."=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(22:25, 2:11), newpage=FALSE)
+
 
 # 6 Training Targets 
 print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(23:25, 2:11))
