@@ -96,7 +96,7 @@ print(get_logo(), vp = vplayout(2, 21:23))
 print(drawtable_pageone(bio_stats_df), vp = vplayout(3:6, 6:20))
 
 # 4 Spider Plot 
-print(radar_plot_athl, vp = vplayout(7:14, 12:26))  ## Make middle right 
+print(radar_plot_athl, vp = vplayout(7:16, 12:26))  ## Make middle right 
 
 # 5 Table 
 st_vert <- percentiles_page2 %>% filter(test_type=="Standing Vertical") %>% select(metric, Percentile)
