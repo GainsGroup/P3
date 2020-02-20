@@ -7,6 +7,7 @@ library(png)
 
 loadfonts()
 
+
 black<- "#000000"
 dkred <<- '#EE0000'
 ltred <<- '#e0474c'
@@ -23,84 +24,89 @@ pal <<- c(dkred, ltred, blue, ltgrey, dkgrey)
 get_table_stats <- function(playername, date) {
   print("Retrieving Bio Info")
   athlete_table <- 'public.baseball_page_1_bio_info'
+  
   ### Table 1 - bio info  
   df <- read_civis(athlete_table, database = "P3") %>%
     filter(name == playername) %>%
-    filter(date == assessmentdate) %>%
+    filter(assessmentdate == date) %>%
     mutate(perc_vert = as.numeric(perc_vert),
-           perc_drop = as.numeric(perc_drop),
            perc_lat = as.numeric(perc_lat))
-  stats_df <- df[,c(28,31,33,32)]
-  colnames(stats_df) <- c("Name","Height","Weight","Reach")
+  stats_df <- df[,c(8,10,11,3)]
+  colnames(stats_df) <- c("Name","Height","Weight", "Pos.")
+  
   ### Table 2 - performance info
   performance_df_player <- df %>%
-    select(display_name, display_vert, display_drop,display_latforce, perc_vert, perc_drop, perc_lat) %>%
+    select(display_name, display_vert, display_latforce, perc_vert, perc_lat) %>%
     mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
-           perc_drop = ifelse(perc_drop >0, paste0("+", perc_drop),perc_drop),
            perc_lat = ifelse(perc_lat >0, paste0("+", perc_lat),perc_lat)) %>%
     mutate_all(as.character) %>%
     mutate(display_vert = paste(display_vert, 
                                 paste0("(",perc_vert,"%",")")),
-           display_drop = paste(display_drop, 
-                                paste0("(",perc_drop,"%",")")),
            display_latforce = paste(display_latforce, 
-                                paste0("(",perc_lat,"%",")"))) %>%
-    rename("Name" = display_name, "Vert Jump" = display_vert, "Drop Jump" = display_drop, "Lat Force" = display_latforce) %>%
-    select(-c(perc_vert, perc_drop, perc_lat))
-
+                                    paste0("(",perc_lat,"%",")"))) %>%
+    rename("Name" = display_name, "Vert Jump" = display_vert,"Lat Force" = display_latforce) %>%
+    select(-c(perc_vert, perc_lat))
+  
   performance_df_average <- df %>%
-    select(display_name, average_vert,average_drop,average_latforce) %>%
+    select(display_name, average_vert,average_latforce) %>%
     mutate_all(as.character) %>%
-    mutate(display_name = "NBA Avg.") %>%
-    rename("Name" = display_name, "Vert Jump" = average_vert, "Drop Jump" = average_drop, "Lat Force" = average_latforce)
+    mutate(display_name = "MLB Avg.") %>%
+    rename("Name" = display_name, "Vert Jump" = average_vert,"Lat Force" = average_latforce)
   
   performance_df <- rbind(performance_df_player, performance_df_average)
   
   overall_df <- left_join(stats_df, performance_df, by = "Name")%>%
-    rename("Vert Jump\n(+/- NBA Avg)" = "Vert Jump", "Drop Jump\n(+/- NBA Avg)" = "Drop Jump", "Lat Force\n(+/- NBA Avg)" = "Lat Force")
-    
+    rename("Vert Jump\n(+/- MLB Avg)" = "Vert Jump", "Lat Force\n(+/- MLB Avg)" = "Lat Force")
+  
   return(overall_df)
 }
+  
 
 
 get_percentiles_page_2 <- function(playername, date) {
   print("Retrieving Page 2 Percentiles Data")
-percentile_sql_v2 <- paste("select * from public.baseball_page_2_percentile where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-full_table_v2 <- read_civis(sql(percentile_sql_v2),"P3")
-values <- c("imp_1_avg","imp2lraw","imp2rraw","conc_rel_ff","dropmaxkneeextensionvelocityavg","dropmaxkneeextensionaccelerationavg","load_rel_ff","vertmaxankleplantarflexionaccelerationavg","vertmaxkneeextensionvelocityavg","vertmaxkneeextensionaccelerationavg","vertrelativefreefallforceleft","vertrelativefreefallforceright","lateralforceleftbw","slmaxhipextensionvelocity","slmaxhipabduction","lateralforcerightbw","srmaxhipextensionvelocity","srmaxhipabduction","net_rel_conc_force")
-percentiles <- c("percimp_1_avg","percimp2lraw","percimp2rraw","percconc_rel_ff","percdropmaxkneeextensionvelocityavg","percdropmaxkneeextensionaccelerationavg","percload_rel_ff","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction","perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","percnet_rel_conc_force")
-label <- c("Net Impact 1","Net Impact 2(L)","Net Impact 2(R)","Conc Rel FF","Knee Ext Velocity","Knee Ext Accel","Load Rel. FF","Ankle Ext Accel","Knee Ext Velocity","Knee Ext Accel","L - Load Rel. FF ","R - Load Rel FF","L - Lateral Drive","L - Hip Ext. Velocity","L - Hip Abduction","R - Lateral Drive","R - Hip Ext. Velocity","R - Hip Abduction","Net Rel. Conc Force")
-percentile_labels <- data.frame(values,percentiles,label)
-athlete_percentiles <- full_table_v2[,3:length(full_table_v2)]
-athlete_percentiles <- data.frame(t(athlete_percentiles))
-athlete_percentiles <- add_rownames(athlete_percentiles,"metric")
-colnames(athlete_percentiles) <- c("metric","value")
-values_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("values"),by.y=c("metric"))
-percentiles_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("percentiles"),by.y=c("metric"))
-
-vars <- c("percconc_rel_ff","percdropmaxkneeextensionaccelerationavg","percdropmaxkneeextensionvelocityavg","percdroppeakconcentricforceleft","percdroppeakconcentricforceright","percimp_1_avg","percimp2lraw","percimp2rraw","perclateralforceleftbw","percslmaxhipabduction","percslmaxhipextensionvelocity","perclateralforcerightbw","percsrmaxhipabduction","percsrmaxhipextensionvelocity","percvertmaxankleplantarflexionaccelerationavg","percvertmaxkneeextensionaccelerationavg","percvertmaxkneeextensionvelocityavg","percvertrelativefreefallforceleft","percvertrelativefreefallforceright","percnet_rel_conc_force","percload_rel_ff")
-tests <- c("Standing Vertical","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","Drop Jump","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Drop Jump","Standing Vertical")
-var_tests <- data.frame(vars,tests)
-
-ff2 <- merge(percentiles_frame,var_tests,by.x="percentiles",by.y="vars")
-ff2 <- ff2[c("label","value","tests")]
-colnames(ff2) <- c("metric","Percentile","test_type")
-ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
-                                           ,"Knee Ext Velocity"
-                                           ,"Net Impact 1"
-                                           ,"Net Impact 2(L)"
-                                           ,"Net Impact 2(R)"
-                                           ,"Net Rel. Conc Force"
-                                           ,"Conc Rel FF"
-                                           ,"Load Rel. FF"
-                                           ,"Ankle Ext Accel"
-                                           ,"L - Lateral Drive"
-                                           ,"L - Hip Abduction"
-                                           ,"L - Hip Ext. Velocity"
-                                           ,"R - Lateral Drive"
-                                           ,"R - Hip Abduction"
-                                           ,"R - Hip Ext. Velocity"))
-ff2 <- ff2[order(ff2$metric),]
+  percentile_sql_v2 <- paste("select * from public.baseball_page_2_percentiles where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
+  full_table_v2 <- read_civis(sql(percentile_sql_v2),"P3")
+  percentiles <- c("percvertmaxkneeextensionvelocityavg","percvertmaxkneeextensionaccelerationavg","percconc_rel_ff","percload_rel_ff","percpeakpowercmj",
+                   "perclateralforceleftbw","percslmaxhipextensionvelocity","percslmaxhipabduction",
+                   "perclateralforcerightbw","percsrmaxhipextensionvelocity","percsrmaxhipabduction","perclpeakpowerrotary",
+                   "percrpeakpowerrotary","percpeakfzleft_ash","percpeakfzright_ash","perctbcmj")
+  label <- c("Knee Ext Velocity", "Knee Ext Accel", "Conc Rel FF", "Load Rel FF", "Peak Power",
+             "L - Lateral Drive", "L - Hip Ext. Velocity","L - Hip Abduction",
+             "R - Lateral Drive", "R - Hip Ext. Velocity","R - Hip Abduction", "L - Rot.",
+             "R - Rot.", "L - ASH", "R - ASH", "TBCMJ")
+  percentile_labels <- data.frame(percentiles,label)
+  athlete_percentiles <- full_table_v2[,3:length(full_table_v2)]
+  athlete_percentiles <- data.frame(t(athlete_percentiles))
+  athlete_percentiles <- add_rownames(athlete_percentiles,"metric")
+  colnames(athlete_percentiles) <- c("metric","value")
+  percentiles_frame <- merge(percentile_labels,athlete_percentiles,by.x=c("percentiles"),by.y=c("metric"))
+  tests <- c("Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical","Standing Vertical",
+             "1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater","1 Off Skater",
+             "Upper Extremity","Upper Extremity","Upper Extremity","Upper Extremity",
+             "Strength")
+  var_tests <- data.frame(percentiles,tests)
+  
+  ff2 <- merge(percentiles_frame,var_tests,by.x="percentiles")
+  ff2 <- ff2[c("label","value","tests")]
+  colnames(ff2) <- c("metric","Percentile","test_type")
+  ff2$metric <- factor(ff2$metric,levels = c("Knee Ext Accel"
+                                             ,"Knee Ext Velocity"
+                                             ,"Conc Rel FF"
+                                             ,"Load Rel FF"
+                                             ,"Peak Power"
+                                             ,"L - Lateral Drive"
+                                             ,"L - Hip Abduction"
+                                             ,"L - Hip Ext. Velocity"
+                                             ,"R - Lateral Drive"
+                                             ,"R - Hip Abduction"
+                                             ,"R - Hip Ext. Velocity"
+                                             ,"L - Rot."
+                                             ,"R - Rot."
+                                             ,"L - ASH"
+                                             ,"R - ASH"
+                                             ,"TBCMJ"))
+  ff2 <- ff2[order(ff2$metric),]
   return(ff2)
 }  ### This is page 2 kpis -- dont touch
 
@@ -120,7 +126,7 @@ get_logo <- function(){
 
 
 
-                                           
+
 training_recs <- data.frame(
   Parameter_Name = c(Sys.getenv("HIP_STABILITY"),
                      Sys.getenv("TRUNK_STABILITY"),
@@ -138,20 +144,20 @@ training_recs <- data.frame(
                      Sys.getenv("LAT_DRIVE"),
                      Sys.getenv("LE_STRENGTH")),
   Rec = c("Hip Stability",
-              "Trunk Stability",
-              "Inversion",
-              "Translation",
-              "Eversion",
-              "Active Dorsiflexion", 
-              "Ankle Stiffness",
-              "Yielding",
-              "Posterior Yielding",
-              "Impulse Asym.",
-              "Hip Mobility",
-              "Ankle Mobility",
-              "LE Power",
-              "Lateral Drive",
-              "LE Strength"),
+          "Trunk Stability",
+          "Inversion",
+          "Translation",
+          "Eversion",
+          "Active Dorsiflexion", 
+          "Ankle Stiffness",
+          "Yielding",
+          "Posterior Yielding",
+          "Impulse Asym.",
+          "Hip Mobility",
+          "Ankle Mobility",
+          "LE Power",
+          "Lateral Drive",
+          "LE Strength"),
   Description = c("- The athlete exhibited notable internal rotation of the femur during double-leg movements.",
                   "- During lateral plane actions, the athlete struggled to control the trunk in the sagittal plane.",
                   "- During the Drop Jump, the athlete contacts the ground with the bottom of the foot rotated inward.",
@@ -168,14 +174,14 @@ training_recs <- data.frame(
                   " - The athlete's lateral plane force production warrants development.",
                   "- The athlete's strength properties warrant development."))
 
-  training_recs <- training_recs %>%
-          filter(Parameter_Name == "true")
-                                           
+training_recs <- training_recs %>%
+  filter(Parameter_Name == "true")
+
 rec_one <- paste0("1. ", training_recs$Rec[1], training_recs$Description[1])                                           
 rec_two <- paste0("2. ", training_recs$Rec[2], training_recs$Description[2])                                           
 rec_three <- ifelse(nrow(training_recs) >2,paste0("3. ", training_recs$Rec[3], training_recs$Description[3]),"         ")     
-                                           
-                                           
+
+
 get_glossary <- function(){
   being_img <-
     rasterGrob(readPNG("p3_glossary_2.0.png"))
@@ -193,18 +199,18 @@ get_athl_cluster_data <- function(playername,date) {
   cluster_athlete_query <- paste("select *
     from public.baseball_spider_data
     where name = '",playername,"' and assessmentdate = '",date,"'",sep="")
-
+  
   cluster_athlete <- read_civis(sql(cluster_athlete_query),"P3")
-
+  
   cluster_avg_sql <- paste("select *
-    from public.soccer_spider_plot_data
-    where name = 'Average DFB Male' and assessmentdate = '2018-08-21'",sep="")
-
+    from public.baseball_spider_data
+    where name = 'Average' and assessmentdate = '2019-02-19'",sep="")
+  
   cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
   
   cluster_avg <- cluster_avg[,-c(1:2)]
   cluster_athlete_compare <- cluster_athlete[,-c(1:2)]
-
+  
   t_athl_compare <- data.frame(t(cluster_athlete_compare))
   t_athl_compare <- add_rownames(t_athl_compare,"metric")
   colnames(t_athl_compare) <- c("metric","score")
@@ -216,51 +222,52 @@ get_athl_cluster_data <- function(playername,date) {
   t_cluster_avg$cluster <- 'comparison'
   t_cluster_avg <- t_cluster_avg[order(t_cluster_avg$metric),]
   cluster_radar <- bind_rows(t_athl_compare,t_cluster_avg)
-
-  metric <- c("avg_total_movement_time",
-              "conc_rel_ff",
-              "ecc_rel_ff",                         
-              "lateralforceleftbw",
-              "lateralforcerightbw",
-              "relativepower",                      
-              "slmaxhipabduction",
-              "slmaxhipextensionvelocity",
-              "srmaxhipabduction",                  
-              "srmaxhipextensionvelocity",
-              "vertmaxkneeextensionaccelerationavg",
-              "vertmaxkneeextensionvelocityavg")
-
-  label <- c("Avg. Total Mvmt. Time"
-             ,"Conc Rel FF"
-             ,"Ecc Rel FF"
-             ,"Lateral Drive (L)"
-             ,"Lateral Drive (R)"
-             ,"Relative Power"
-             ,"Peak Hip Abduction (L)"
-             ,"Hip Extension Velocity (L)"
-             ,"Peak Hip Abduction (R)"
-             ,"Hip Extension Velocity (R)"
+  
+  metric <-   c("peakpowercmj",
+                "vertmaxkneeextensionaccelerationavg",
+                "srmaxhipextensionvelocity",
+                "lateralforcerightbw",
+                "rpeakpowerrotary",
+                "conc_rel_ff",
+                "tbcmj",
+                "ecc_rel_ff",
+                "lpeakpowerrotary",
+                "lateralforceleftbw",
+                "slmaxhipextensionvelocity",
+                "vertmaxkneeextensionvelocityavg")
+  
+  
+  label <- c("Peak Pwr."
              ,"Knee Ext. Accel."
+             ,"Hip Ext. Velocity (R)"
+             ,"Lateral Drive (R)"
+             ,"Rot. (R)"
+             ,"Conc Rel FF"
+             ,"TBCMJ"
+             ,"Ecc Rel FF"
+             ,"Rot. (L)"
+             ,"Lateral Drive (L)"
+             ,"Hip Ext. Velocity (L)"
              ,"Knee Ext. Velocity")
-
+  
   cl <- data.frame(metric,label)
   cluster_radar <- merge(cluster_radar,cl,by="metric")
   cluster_radar$metric <- cluster_radar$label
-  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Relative Power"
-                                                                 ,"Conc Rel FF"
-                                                                 ,"Ecc Rel FF"
-                                                                 ,"Lateral Drive (R)"
-                                                                 ,"Hip Extension Velocity (R)"
-                                                                 ,"Peak Hip Abduction (R)"
-                                                                 ,"Knee Ext. Velocity"
-                                                                 ,"Avg. Total Mvmt. Time"
+  cluster_radar$metric <- factor(cluster_radar$metric,levels = c("Knee Ext. Velocity"
+                                                                 ,"Peak Pwr."
                                                                  ,"Knee Ext. Accel."
-                                                                 ,"Peak Hip Abduction (L)"
-                                                                 ,"Hip Extension Velocity (L)"
-                                                                 ,"Lateral Drive (L)"))
+                                                                 ,"Hip Ext. Velocity (R)"
+                                                                 ,"Lateral Drive (R)"
+                                                                 ,"Rot. (R)"
+                                                                 ,"Conc Rel FF"
+                                                                 ,"TBCMJ"
+                                                                 ,"Ecc Rel FF"
+                                                                 ,"Rot. (L)"
+                                                                 ,"Lateral Drive (L)"
+                                                                 ,"Hip Ext. Velocity (L)"))
   cluster_radar <- cluster_radar[order(cluster_radar$metric),]
   return(cluster_radar)
-
+  
 }   ### DONE
 
 
@@ -282,14 +289,13 @@ radar_plot <- function(df.rad) {
                   label=str_wrap(metric,width=10)),
               color=dkgrey,size=2) +
     theme(
-          legend.key = element_blank(),
-          legend.position = 'right',
-          axis.text.x=element_blank(),
-          plot.subtitle = element_text(vjust=1, size=12),
-          axis.ticks.y = element_blank(),
-          axis.text.y = element_blank()
+      legend.key = element_blank(),
+      legend.position = 'right',
+      axis.text.x=element_blank(),
+      plot.subtitle = element_text(vjust=1, size=12),
+      axis.ticks.y = element_blank(),
+      axis.text.y = element_blank()
     )
   return(radar_plot)
-
+  
 }
-                                           
