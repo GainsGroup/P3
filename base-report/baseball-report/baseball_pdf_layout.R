@@ -112,7 +112,7 @@ print(drawtable(strength %>% dplyr::rename("Strength"=metric), fill_col = 'Perce
 # 6 Training Targets 
 print(drawtext(paste0(rec_one), 'Training Targets', header = FALSE), vp = vplayout(22:24, 12:26))
 print(drawtext(paste0(rec_two), title = NULL, header = FALSE), vp = vplayout(25:26, 12:26))
-print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 2:11))
+print(drawtext(paste0(rec_three), title = NULL, header = FALSE), vp = vplayout(27:28, 12:26))
 
 
 dev.off()
