@@ -106,7 +106,7 @@ print(drawtable(skater %>% dplyr::rename("Lateral: Skater"=metric), fill_col = '
 upper <- percentiles_page2 %>% filter(test_type=="Upper Extremity") %>% select(metric, Percentile)
 print(drawtable(upper %>% dplyr::rename("Upper Extrem."=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(22:25, 2:11), newpage=FALSE)
 strength <- percentiles_page2 %>% filter(test_type=="Strength") %>% select(metric, Percentile)
-print(drawtable(upper %>% dplyr::rename("Strength"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(26:27, 2:11), newpage=FALSE)
+print(drawtable(strength %>% dplyr::rename("Strength"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(26:27, 2:11), newpage=FALSE)
 
 
 # 6 Training Targets 
