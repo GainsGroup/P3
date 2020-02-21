@@ -31,8 +31,8 @@ get_table_stats <- function(playername, date) {
     filter(assessmentdate == date) %>%
     mutate(perc_vert = as.numeric(perc_vert),
            perc_lat = as.numeric(perc_lat))
-  stats_df <- df[,c(8,10,11,3)]
-  colnames(stats_df) <- c("Name","Height","Weight", "Pos.")
+  stats_df <- df[,c(8,10,11,12,3)]
+  colnames(stats_df) <- c("Name","Height", "Reach", "Weight", "Pos.")
   
   ### Table 2 - performance info
   performance_df_player <- df %>%
