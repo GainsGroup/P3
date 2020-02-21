@@ -39,7 +39,7 @@ print(paste('Report for ',playername))
 print(paste('Assessment Date',date))
 
 
-intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 600 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
+intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to capture his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of MLB and MiLB players.  For additional information please reach out to P3 at any time.",sep =" ")
                       
 
 ################
