@@ -287,7 +287,7 @@ radar_plot <- function(df.rad) {
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
-              color=dkgrey,size=4) +
+              color=dkgrey,size=3) +
     theme(
       legend.key = element_blank(),
       legend.position = 'bottom',
