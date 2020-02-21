@@ -281,9 +281,9 @@ radar_plot <- function(df.rad) {
     coord_polar(start=-pi/4) +
     theme_p3() +
     scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
-    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", ' Baseball Avg.'), name = NULL) +
+    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'P3 Baseball Avg.'), name = NULL) +
     labs(title="Performance Factor Comparison",
-         subtitle="Athlete Relative to Avg. P3 Baseball Male") +
+         subtitle="Athlete Relative to P3 Baseball Average") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
