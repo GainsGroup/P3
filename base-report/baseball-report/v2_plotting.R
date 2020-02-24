@@ -38,14 +38,18 @@ get_table_stats <- function(playername, date) {
   performance_df_player <- df %>%
     select(display_name, display_vert, display_latforce, perc_vert, perc_lat) %>%
     mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
-           perc_lat = ifelse(perc_lat >0, paste0("+", perc_lat),perc_lat)) %>%
+           perc_l_lat = ifelse(perc_l_lat >0, paste0("+", perc_l_lat),perc_l_lat),
+           perc_r_lat = ifelse(perc_r_lat >0, paste0("+", perc_r_lat),perc_r_lat)) %>%
     mutate_all(as.character) %>%
     mutate(display_vert = paste(display_vert, 
                                 paste0("(",perc_vert,"%",")")),
-           display_latforce = paste(display_latforce, 
-                                    paste0("(",perc_lat,"%",")"))) %>%
-    rename("Name" = display_name, "Vert Jump" = display_vert,"Lat Force" = display_latforce) %>%
-    select(-c(perc_vert, perc_lat))
+           display_l_latforce = paste(display_l_latforce, 
+                                    paste0("(",perc_l_lat,"%",")")),
+          display_r_latforce = paste(display_r_latforce, 
+                                    paste0("(",perc_r_lat,"%",")"))) %>%
+    rename("Name" = display_name, "Vert Jump" = display_vert,"Lat Force - L" = display_l_latforce,
+          "Lat Force - R" = display_r_latforce) %>%
+    select(-c(perc_vert, perc_l_lat, perc_r_lat))
   
   performance_df_average <- df %>%
     select(display_name, average_vert,average_latforce) %>%
