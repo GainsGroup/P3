@@ -53,7 +53,7 @@ get_table_stats <- function(playername, date) {
     select(-c(perc_vert, perc_l_lat, perc_r_lat))
   
   performance_df_average <- df %>%
-    select(display_name, average_vert,average_latforce) %>%
+    select(display_name, average_vert,average_l_latforce, average_r_latforce) %>%
     mutate_all(as.character) %>%
     mutate(display_name = "MLB Avg.") %>%
     rename("Name" = display_name, "Vert Jump" = average_vert,"Lat Force - L" = average_l_latforce,
