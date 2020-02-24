@@ -37,7 +37,7 @@ get_table_stats <- function(playername, date) {
   
   ### Table 2 - performance info
   performance_df_player <- df %>%
-    select(display_name, display_vert, display_latforce, perc_vert, perc_lat) %>%
+    select(display_name, display_vert, display_l_latforce, display_r_latforce, perc_vert, perc_lat) %>%
     mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
            perc_l_lat = ifelse(perc_l_lat >0, paste0("+", perc_l_lat),perc_l_lat),
            perc_r_lat = ifelse(perc_r_lat >0, paste0("+", perc_r_lat),perc_r_lat)) %>%
@@ -56,12 +56,14 @@ get_table_stats <- function(playername, date) {
     select(display_name, average_vert,average_latforce) %>%
     mutate_all(as.character) %>%
     mutate(display_name = "MLB Avg.") %>%
-    rename("Name" = display_name, "Vert Jump" = average_vert,"Lat Force" = average_latforce)
+    rename("Name" = display_name, "Vert Jump" = average_vert,"Lat Force - L" = average_l_latforce,
+          "Lat Force - R" = average_r_latforce)
   
   performance_df <- rbind(performance_df_player, performance_df_average)
   
   overall_df <- left_join(stats_df, performance_df, by = "Name")%>%
-    rename("Vert Jump\n(+/- MLB Avg)" = "Vert Jump", "Lat Force\n(+/- MLB Avg)" = "Lat Force")
+    rename("Vert Jump\n(+/- MLB Avg)" = "Vert Jump", "Lat Force L\n(+/- MLB Avg)" = "Lat Force - L",
+          "Lat Force R\n(+/- MLB Avg)" = "Lat Force - R")
   
   return(overall_df)
 }
