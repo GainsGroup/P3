@@ -37,7 +37,7 @@ get_table_stats <- function(playername, date) {
   
   ### Table 2 - performance info
   performance_df_player <- df %>%
-    select(display_name, display_vert, display_l_latforce, display_r_latforce, perc_vert, perc_lat) %>%
+    select(display_name, display_vert, display_l_latforce, display_r_latforce, perc_vert, perc_l_lat, perc_r_lat) %>%
     mutate(perc_vert = ifelse(perc_vert >0, paste0("+", perc_vert),perc_vert),
            perc_l_lat = ifelse(perc_l_lat >0, paste0("+", perc_l_lat),perc_l_lat),
            perc_r_lat = ifelse(perc_r_lat >0, paste0("+", perc_r_lat),perc_r_lat)) %>%
