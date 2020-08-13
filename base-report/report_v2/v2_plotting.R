@@ -330,7 +330,7 @@ get_fig_page_one <- function(playername,date){
     rasterGrob(readPNG("p3_black_wireman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:34)]
+  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.15, -0.13, 0.14,  0.10, -0.04),
@@ -365,7 +365,7 @@ get_fig_page_three <- function(playername,date){
     rasterGrob(readPNG("p3_black_wireman.png"))
   print("Retrieving Flag Diagram Data")
   color_sql <- paste("select * from public.v2_page_3_percentiles where name = '",playername,"'and assessmentdate = '",date,"'",sep="")
-  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:34)]
+  color_frame <- read_civis(sql(color_sql),"P3")[,c(1,2,24:33)]
   df <- data.frame(
     # R Ankle, R Knee, L Ankle, L Knee, M Back
     x = c(-0.13, -0.13, 0.11,  0.09, -0.03),
