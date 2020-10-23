@@ -221,8 +221,8 @@ scatter_viz <- master %>%
                                   ifelse(height > 81, "Big", "Error")))) %>%
   na.omit() %>%
   select(-height) %>% 
-  filter(assessmentdate != "2018-10-04") %>%  # Filter out guys from 10/4/18 - that was the USA testing date in Colorado    
-  filter(assessmentdate != "2018-07-05") %>% # Filter out guys from 7/5/18  -- random european teen kids
+  #filter(assessmentdate != "2018-10-04") %>%  # Filter out guys from 10/4/18 - that was the USA testing date in Colorado    
+  #filter(assessmentdate != "2018-07-05") %>% # Filter out guys from 7/5/18  -- random european teen kids
   filter(name != "Curt Haywood") %>%
   filter(name != "TJ Howard") %>%
   filter(name != "Filip Novotny") %>%
