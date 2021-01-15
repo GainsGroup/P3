@@ -240,7 +240,7 @@ scatter_viz <- master %>%
   filter(name != "Mamadou N'Diaye") %>%
   filter(assessmentdate > "2013-09-30") %>%    # Filter out super early tests ... all before 9/20/2013
   filter(name != "Solomon Hill") %>%
-  filter(name != "JaQuori McLaughlin") %>%
+  #filter(name != "JaQuori McLaughlin") %>%
   filter(name != "Peashon Howard") %>%  #### Clean Up Outliers
   filter(name != "Damien Jones") %>%
   filter(name != "Nikola Jokic") 
