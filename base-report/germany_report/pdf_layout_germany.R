@@ -134,7 +134,7 @@ newpage(grid)
 print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 ## ROW 2: page title
 print(drawtext(intro, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(get_eagle(), vp = vplayout(2, 17:21))
+#print(get_eagle(), vp = vplayout(2, 17:21))
 print(get_logo(), vp = vplayout(2, 22:24))
 
 ## ROW 3-6: Table
@@ -166,7 +166,7 @@ print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 2:25))
 
 ## ROW 2: page title
 print(drawtext(intro, 'P3 MECHANICS SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(get_eagle(), vp = vplayout(2, 17:21))
+#print(get_eagle(), vp = vplayout(2, 17:21))
 print(get_logo(), vp = vplayout(2, 22:24))
 
 ## ROW 3-6 LEFT
