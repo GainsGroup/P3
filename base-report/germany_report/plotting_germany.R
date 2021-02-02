@@ -45,7 +45,7 @@ get_athl_cluster_data <- function(playername,date) {
     from public.soccer_spider_plot_data
     where name = 'Average DFB Male' and assessmentdate = '2018-08-21'",sep="")
 
-  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3") %>% mutate(name = "Avg. Academy Grad")
+  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3") 
   
   cluster_avg <- cluster_avg[,-c(1:2)]
   cluster_athlete_compare <- cluster_athlete[,-c(1:2)]
@@ -503,9 +503,9 @@ radar_plot <- function(df.rad) {
     coord_polar(start=-pi/4) +
     theme_p3() +
     scale_color_manual(values=c(dkgrey, dkred), guide = FALSE) +
-    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Avg. DFB Male'), name = NULL) +
+    scale_fill_manual(values=c(dkgrey, dkred), labels = c("Athlete", 'Avg. Academy Grad'), name = NULL) +
     labs(title="Performance Factor Comparison",
-         subtitle="Athlete Relative to Avg. DFB Male") +
+         subtitle="Athlete Relative to Avg. Academy Graduate") +
     scale_y_continuous(limits = c(0,1.20),expand=c(0,0.0)) +
     geom_text(aes(x=metric, y=1.20,
                   label=str_wrap(metric,width=10)),
