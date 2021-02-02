@@ -104,7 +104,7 @@ print(drawtext(paste0('Assessment Date: ', date)), vp = vplayout(1, 3:25))
 
 ## ROW 2: page title
 print(drawtext(intro, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2, 2:16))
-print(get_eagle(), vp = vplayout(2:3, 17:21))
+#print(get_eagle(), vp = vplayout(2:3, 17:21))
 print(get_logo(), vp = vplayout(2:3, 22:25))
 
 ## ROW 3/4: summary text and scores
