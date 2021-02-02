@@ -45,7 +45,7 @@ get_athl_cluster_data <- function(playername,date) {
     from public.soccer_spider_plot_data
     where name = 'Average DFB Male' and assessmentdate = '2018-08-21'",sep="")
 
-  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3")
+  cluster_avg <- read_civis(sql(cluster_avg_sql),"P3") %>% mutate(name = "Avg. Academy Grad")
   
   cluster_avg <- cluster_avg[,-c(1:2)]
   cluster_athlete_compare <- cluster_athlete[,-c(1:2)]
