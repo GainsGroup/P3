@@ -13,7 +13,7 @@ Sys.setenv(CIVIS_API_KEY = 'cdd57e940062ebda689520c4882a3024de788987e77709ab94f8
 ### Load in the data 
 vertical_jump<- read_civis("public.athlete_vertical_template_master", database = "P3")
 drop_jump<- read_civis("public.athlete_drop_jump_template_master", database = "P3")
-master<- read_civis("public.athlete_information_master", database = "P3")
+master<- read_civis("public.athlete_information_master", database = "P3") %>% select(-x)
 skater_left<- read_civis("public.athlete_right_skater_template_master", database = "P3")   #### this will need to be updated (naming convention)
 skater_right<- read_civis("public.athlete_left_skater_template_master", database = "P3")   #### this will need to be updated (naming convention)
 
