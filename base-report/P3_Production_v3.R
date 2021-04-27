@@ -57,6 +57,7 @@ master <- cbind(master1,master2)
 master$Delta_Vert <- master$standingvertical1 - master$reach
 master$Delta_Drop <- master$doublelegdrop1 - master$reach
 master$Delta_TwoStep <- master$fullapproach1 - master$reach
+master <- master %>% select(-starts_with("x"))                                
 master <- master[,c(1:6,60,61,62,7:59)]
 
 ### Force for Skater left, right (force/BW)
