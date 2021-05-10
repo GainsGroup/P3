@@ -88,7 +88,7 @@ master$Ecc_Raw_Avg <- ((master$peakloadingforceleft + master$peakloadingforcerig
 master$Imp_1_Avg <- ((master$imp1lraw + master$imp1rraw)/master$bodyweightkg)
 master$Ecc_Rel_FF <- ((master$peakloadingforceleft + master$peakloadingforceright) - (master$freefallforceleft + master$freefallforceright))/ master$bodyweightkg
 master$Conc_Rel_FF <- ((master$peakconcentricforceleft + master$peakconcentricforceright) - (master$freefallforceleft + master$freefallforceright)) / master$bodyweightkg
-master$Net_Rel_Conc_Force <- ((master$peakconcentricforceleft + master$peakconcentricforceright)/master$bodyweightkg) ### If standing vert, its conc_rel_ff, if drop jump we dont do freefall
+master$Net_Rel_Conc_Force <- ((master$conclraw + master$concrraw)/master$bodyweightkg) ### If standing vert, its conc_rel_ff, if drop jump we dont do freefall
 master$Load_Rel_FF <- ((master$peakloadingforceleft + master$peakloadingforceright)-(master$freefallforceleft + master$freefallforceright))/ master$bodyweightkg  #### LOAD REL FF = ECC REL FF 
 drop_jump$ankleactivedecelerationleft <- -1 * drop_jump$ankleactivedecelerationleft #### 10/2/18 this needs to inverse, so just changed sign
 drop_jump$ankleactivedecelerationright <- -1 * drop_jump$ankleactivedecelerationright #### 10/2/18 this needs to inverse, so just changed sign
