@@ -46,7 +46,7 @@ source('combine-report_v2/v2_production_clustering.R')
 accel_subtitle_1 <- "The graph below provides a brief snapshot of the athlete's \nacceleration and deceleration capabilities"
 accel_subtitle_2 <- "The graph below contains a series of metrics related to the \nathlete's acceleration and deceleration capabilities"
 
-intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to create his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 500 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
+intro_page_one <- paste(playername, "was taken through an assessment by P3 on",date, "to create his biomechanical profile.  The report contains metrics that have been derived from P3's dataset of over 700 NBA players.  For additional information please reach out to P3 at any time.",sep =" ")
 intro_page_two <- paste0("Page 2 provides a more detailed breakdown of ", playername, "'s biomechanical make-up as it relates to his performance. In-house, research-derived variables populate the left side of the page. The right side of the page contains a breakdown of Deceleration/Acceleration abilities and information from P3's Cluster Analysis.")
 intro_page_three <- paste0("Page 3 provides a more detailed breakdown of ", playername, "'s assessment as it relates to his biomechanics. In-house research has pointed to the importance of the variables listed on the left side of the page for mechanical efficiency.")
 
