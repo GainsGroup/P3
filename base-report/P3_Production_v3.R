@@ -225,7 +225,6 @@ scatter_viz <- master %>%
   #filter(assessmentdate != "2018-10-04") %>%  # Filter out guys from 10/4/18 - that was the USA testing date in Colorado    
   #filter(assessmentdate != "2018-07-05") %>% # Filter out guys from 7/5/18  -- random european teen kids
   filter(name != "Curt Haywood") %>%
-  filter(name != "TJ Howard") %>%
   filter(name != "Filip Novotny") %>%
   filter(name != "Devonte Bandoo") %>%
   filter(name != "Anonymous Athlete") %>%
