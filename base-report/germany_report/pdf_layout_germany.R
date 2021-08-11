@@ -1,7 +1,7 @@
-
 library(ggplot2)
 library(dplyr)
 library(civis)
+print("hi")
 library(extrafont)
 library(gridExtra)
 library(grid)
