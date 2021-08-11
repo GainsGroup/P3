@@ -1,18 +1,17 @@
 library(ggplot2)
 library(dplyr)
 library(civis)
-print("hi")
 library(extrafont)
 library(gridExtra)
 library(grid)
 library(cowplot)
-library(ReporteRs)
 library(stringr)
 library(grImport)
 library(RGraphics)
 source('germany_report/themes_germany.R')
 source('germany_report/draw_objects_germany.R')
 source('germany_report/plotting_germany.R')
+Sys.setenv(CIVIS_API_KEY = 'cdd57e940062ebda689520c4882a3024de788987e77709ab94f88c2f0883919c')   
 
 extrafont::font_import(prompt=FALSE,pattern='Abel')
 
@@ -138,7 +137,7 @@ print(drawtext(intro, 'P3 ATHLETICISM SUMMARY', header = TRUE), vp = vplayout(2,
 print(get_logo(), vp = vplayout(2, 22:24))
 
 ## ROW 3-6: Table
-drop_jump <- percentiles_page2 %>% filter(test_type=="SL Drop Stance") %>% select(metric, Percentile)
+drop_jump <- percentiles_page2 %>% filter(test_type=="SL Drop Stance") %>% select(metric, Percentile) %>% mutate(Percentile = ifelse(Percentile == 0,1,Percentile))
 print(drawtable(drop_jump %>% dplyr::rename("SL Drop Stance"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(3:7, 2:11), newpage=FALSE)
 drop_jump <- percentiles_page2 %>% filter(test_type=="SL Drop Kick") %>% select(metric, Percentile)
 print(drawtable(drop_jump %>% dplyr::rename("SL Drop Kick"=metric), fill_col = 'Percentile', fill = dkgrey, width='fill'), vp = vplayout(8:12, 2:11), newpage=FALSE)
