@@ -218,8 +218,8 @@ scatter_viz <- master %>%
          vert.maxankleplantarflexionaccelerationavg,vert.maxkneeextensionaccelerationavg,
          bodyweightkg,Average_LateralForceBW) %>%
   mutate(position = ifelse(height <= 75, "Guard",
-                           ifelse(height > 75 & master$height <= 81 , "Wing",
-                                  ifelse(height > 81, "Big", "Error")))) %>%
+                           ifelse(height > 75 & master$height < 81 , "Wing",
+                                  ifelse(height >= 81, "Big", "Error")))) %>%
   na.omit() %>%
   select(-height) %>% 
   #filter(assessmentdate != "2018-10-04") %>%  # Filter out guys from 10/4/18 - that was the USA testing date in Colorado    
