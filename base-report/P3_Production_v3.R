@@ -94,8 +94,8 @@ drop_jump$ankleactivedecelerationleft <- -1 * drop_jump$ankleactivedecelerationl
 drop_jump$ankleactivedecelerationright <- -1 * drop_jump$ankleactivedecelerationright #### 10/2/18 this needs to inverse, so just changed sign
 master$Average_LateralForceBW <-  (master$LateralForceLeftBW + master$LateralForceRightBW)/2
 master$position = ifelse(master$height <= 75, "Guard",
-                         ifelse(master$height > 75 & master$height <= 81 , "Wing",
-                                ifelse(master$height > 81, "Big", "Error")))
+                         ifelse(master$height > 75 & master$height < 81 , "Wing",
+                                ifelse(master$height >= 81, "Big", "Error")))
 
 ### Aggregation  #####
 
